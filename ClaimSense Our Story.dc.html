@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Built by DataSentics. AI expertise applied to insurance. Agentic architecture proven in enterprise deployments. Part of Bull group.">
+<title>Our Story – ClaimSense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Black.woff2') format('woff2'); font-weight:900; font-display:swap; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Roboto',sans-serif; font-weight:400; color:#1a1a1a; line-height:1.6; -webkit-font-smoothing:antialiased; background:#ffffff; }
+::selection { background:#FFADA0; }
+a { text-decoration:none; color:inherit; }
+input, textarea, select, button { font-family:inherit; }
+
+
+
+/* ── CTA & Nav hover system v3 (Bull brand, all 7 fixes) ───────────────── */
+header a:not([data-nav-cta]), header button { outline:none !important; box-shadow:none !important; border:none !important; }
+header a:not([data-nav-cta]) { border:none !important; }
+footer a { border:none !important; outline:none !important; }
+header a:not([data-nav-cta]):hover { color:#FF5539 !important; transition:color .2s ease; }
+header a[style*="padding:10px"]:hover { background:#f5f0ee !important; color:#FF5539 !important; }
+[data-nav-cta] { transition:background .2s ease, color .2s ease; cursor:pointer; }
+[data-nav-cta]:hover { background:#ffffff !important; color:#000000 !important; border:3px solid #FF5539 !important; }
+[data-cta="primary"] { border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="primary"]:hover { background:#ffffff !important; color:#000000 !important; box-shadow:none !important; }
+[data-cta="secondary"] { border:3px solid #002870 !important; transition:border-color .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="secondary"]:hover { border-color:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+[data-cta="pricing"] { border:3px solid #002870 !important; transition:border-color .2s ease, background .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="pricing"]:hover { border-color:#FF5539 !important; box-shadow:none !important; }
+[data-cta="quickstart"] { background:#ffffff; color:#FF5539; border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="quickstart"]:hover { background:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+[data-pill]:hover [data-pill-badge] { background-color:#FF5539 !important; color:#ffffff !important; }
+[data-footer-active] { color:#FF5539 !important; }
+footer a:hover { color:#FF5539 !important; transition:color .2s ease; }
+
+/* Decorative monogram: shrink + fade on tablet/mobile so it stays a quiet texture, contained in-section (section already has overflow:hidden) */
+@media (max-width:768px){ img[src*="Bull_symbol"]{ width:120px !important; opacity:0.07 !important; } }
+
+/* Mobile: fit-to-screen — no page-level horizontal scroll, so the sticky header (hamburger) is always fully visible. overflow-x:clip is sticky-safe (unlike hidden). */
+@media (max-width:900px){
+  html, body { overflow-x:clip !important; max-width:100% !important; }
+  /* Tighter header padding on mobile so logo + “built by Bull” + hamburger all fit. */
+  header > nav { padding-left:14px !important; padding-right:14px !important; }
+  header > nav > div:first-child { gap:8px !important; }
+  /* Card grids: auto-fit minmax() forces a fixed min column (280–340px) that overflows the
+     narrow mobile content area and gets clipped. Collapse to one shrinkable column so headings
+     and cards always fit the viewport. */
+  [style*="repeat(auto-fit,minmax"],
+  [style*="repeat(auto-fit, minmax"],
+  [style*="repeat(auto-fill,minmax"],
+  [style*="repeat(auto-fill, minmax"] { grid-template-columns:1fr !important; }
+}
+</style>
+</helmet>
+
+<!-- ================================================================ -->
+<!-- ClaimSense Our story page — /our-story/                           -->
+<!-- Content preserved verbatim from content/pages/content_our-story.md -->
+<!-- status: content-ready | approval_required: bio, LinkedIn URL, DataSentics metrics -->
+<!-- primary_conversion: Book a Demo                                   -->
+<!-- ================================================================ -->
+
+<!-- ===================== HEADER (shared chrome) ===================== -->
+<header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(14px); border-bottom:1px solid #f0e6e3;">
+  <nav style="max-width:1280px; margin:0 auto; padding:14px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <div style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
+      <a href="ClaimSense%20Homepage.dc.html" style="display:flex; align-items:center;">
+        <img src="assets/logos/ClaimSense_logo_black.svg" alt="ClaimSense" style="height:32px; width:auto; transform:translateY(1.1px);">
+      </a>
+      <span data-mobile-badge="" style="display:none; align-items:center; gap:6px; padding-left:8px; border-left:1px solid #e5e7eb;">
+        <span style="font:400 10px/1.2 'Tosh A',sans-serif; color:#8a827d; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:22px; width:auto; transform:translateY(-0.5px);">
+      </span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:34px; flex:1 1 auto;" data-nav="">
+      <a href="ClaimSense%20Homepage.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Home</a>
+      <div style="position:relative;" onMouseEnter="{{ openProduct }}" onMouseLeave="{{ closeProduct }}">
+        <button onClick="{{ toggleProduct }}" aria-haspopup="true" aria-expanded="{{ productOpen }}" style="display:inline-flex; align-items:center; gap:6px; background:none; cursor:pointer; font:500 14px 'Tosh A',sans-serif; color:#33302e; padding:0;" style-hover="color:#FF5539;">
+          Product
+          <svg width="11" height="7" viewBox="0 0 11 7" aria-hidden="true" style="transition:transform .2s; transform:{{ chevronRotate }};"><path d="M1 1L5.5 5.5L10 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+        <sc-if value="{{ productOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; z-index:60;">
+            <div style="background:#fff; border:1px solid #ece3df; border-radius:12px; padding:8px; min-width:220px;">
+              <a href="ClaimSense%20Features.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+              <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+              <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+              <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <a href="ClaimSense%20Our%20Story.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#FF5539; border-bottom:2px solid #FF5539; padding-bottom:2px;">Our story</a>
+      <a href="ClaimSense%20Pricing.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Pricing</a>
+      <a href="ClaimSense%20Business%20Case.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Business case</a>
+    </div>
+    <div style="display:flex; align-items:center; flex:0 0 auto;" data-nav-right="">
+      <span style="display:flex; align-items:center; gap:8px;" data-trust-badge="">
+        <span style="font:400 14px/1.2 'Tosh A',sans-serif; color:#6b7280; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:26px; width:auto;">
+      </span>
+      <span style="width:1px; align-self:stretch; min-height:26px; background:#e5e7eb; margin-left:24px;" data-nav-divider=""></span>
+      <button onClick="{{ scrollToDemo }}" style="margin-left:24px; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:8px; padding:11px 22px; font:500 15px 'Roboto',sans-serif; cursor:pointer; white-space:nowrap;" data-nav-cta="">Book a walkthrough</button>
+      <button data-nav-burger="" type="button" aria-label="Open menu" aria-expanded="false" style="display:none; align-items:center; justify-content:center; width:44px; height:44px; padding:0; background:none; border:none; cursor:pointer; color:#0d0d0d; margin-left:12px;">
+        <svg data-burger-icon="" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </div>
+  </nav>
+  <div data-mobile-menu="" style="display:none; position:absolute; top:100%; right:16px; margin-top:8px; width:min(300px,calc(100vw - 32px)); background:#fff; border:1px solid #ece3df; border-radius:14px; box-shadow:0 24px 60px -18px rgba(0,40,112,0.3); padding:10px; z-index:70;">
+    <a href="ClaimSense%20Homepage.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Home</a>
+    <div style="font:600 11px 'Roboto',sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#a89f9a; padding:10px 12px 4px;">Product</div>
+    <a href="ClaimSense%20Features.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+    <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+    <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+    <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+    <div style="height:1px; background:#f0e6e3; margin:8px 6px;"></div>
+    <a href="ClaimSense%20Our%20Story.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Our story</a>
+    <a href="ClaimSense%20Pricing.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Pricing</a>
+    <a href="ClaimSense%20Business%20Case.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Business case</a>
+    <a href="ClaimSense%20Homepage.dc.html#demo" style="display:block; text-align:center; margin-top:10px; background:#FF5539; color:#000; border:2px solid #FF5539; border-radius:9px; padding:13px; font:500 15px 'Roboto',sans-serif; text-decoration:none;">Book a walkthrough</a>
+  </div>
+</header>
+
+<!-- ===================== STORY (2/3 text left, expert card right) ===================== -->
+<section style="padding:84px 32px; background:linear-gradient(180deg,#FFF7F5 0%,#ffffff 55%); position:relative; overflow:hidden;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; gap:56px; align-items:center; position:relative;" data-story-grid="">
+    <!-- LEFT: ~two thirds — narrative -->
+    <div data-reveal="">
+      <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF5539; margin-bottom:18px;">Our story</div>
+      <h1 style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(34px,4.6vw,56px); line-height:1.04; letter-spacing:-0.02em; margin:0 0 28px; color:#0d0d0d;">Why we built AI for claims</h1>
+      <div style="max-width:640px; display:flex; flex-direction:column; gap:20px;">
+        <p style="font-size:18px; line-height:1.65; color:#33302e; margin:0;">I didn't start in AI — I started in claims. And for more than 15 years, I've worked closely with claims teams trying to fix processes that were becoming more complex and expensive every year.</p>
+        <p style="font-size:17px; line-height:1.65; color:#4a4340; margin:0;">What always frustrated me was how much expert time was wasted on manual work — reading documents, chasing missing information, rechecking data — instead of actually solving cases and helping customers. Everyone talked about automation, but the hardest parts of claims handling could never really be automated because the data was too messy and unstructured.</p>
+        <p style="font-size:17px; line-height:1.65; color:#4a4340; margin:0;">When I joined DataSentics four years ago, I finally saw technology catching up with reality. With modern LLM and generative AI, we can now automate parts of claims processing that always required human review before.</p>
+        <p style="font-size:17px; line-height:1.65; color:#4a4340; margin:0;">My motivation today is simple: help organizations finally make claims handling faster, cheaper, and less painful — without forcing them to build risky AI capabilities themselves. Let technology handle repetitive complexity so experts can focus on decisions that really matter.</p>
+        <p style="font-size:17px; line-height:1.65; color:#4a4340; margin:0;">After years of seeing claims teams struggle with tools that almost worked, it's rewarding to finally have technology that truly does.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: ~one third — expert card, vertically centered -->
+    <aside data-reveal="" style="display:flex; justify-content:center;">
+      
+    <div style="background:#fff; border:1px solid #ecdcd6; border-radius:20px; padding:32px; max-width:360px; width:100%; text-align:center;">
+        <!-- Portrait: Jakub Zanka -->
+        <img src="assets/jakub-zanka.jpg" alt="Jakub Zanka" style="width:160px; height:160px; border-radius:50%; object-fit:cover; object-position:center top; margin:0 auto 22px; display:block; border:3px solid #ecdcd6;">
+        <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:24px; margin:0 0 6px; color:#0d0d0d;">Jakub Zanka</h2>
+        <div style="font:500 15px 'Roboto',sans-serif; color:#FF5539; margin-bottom:14px;">Product Lead, ClaimSense</div>
+        <p style="font-size:14px; line-height:1.55; color:#54504d; margin:0 0 22px;">15+ years improving and transforming claims operations</p>
+        <!-- FUNCTIONAL-SPEC NEEDED: LinkedIn target URL required -->
+        <a href="https://www.linkedin.com/in/jakub-za%C5%88ka-8b49a6235/" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:9px; background:#002870; color:#fff; border-radius:9px; padding:12px 22px; font:600 15px 'Roboto',sans-serif;" style-hover="background:#001a52;">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="#fff"><path d="M3.4 5.6H.9V14h2.5V5.6zM2.15 1.2a1.45 1.45 0 100 2.9 1.45 1.45 0 000-2.9zM14 9.1c0-2.2-1.18-3.23-2.75-3.23-1.27 0-1.83.7-2.15 1.19V5.6H6.6V14h2.5V9.5c0-.24.02-.48.09-.65.19-.48.62-.97 1.35-.97.95 0 1.33.72 1.33 1.79V14H14V9.1z"></path></svg>
+          Connect on LinkedIn
+        </a>
+      </div></aside>
+  </div>
+</section>
+
+<!-- ===================== BUILT & BACKED BY ===================== -->
+<section style="padding:80px 32px; background:#0a1b3d; color:#fff; position:relative; overflow:hidden;">
+  <img src="assets/bull/Bull_symbol_white.svg" alt="" aria-hidden="true" style="position:absolute; right:40px; bottom:40px; width:240px; opacity:0.12; pointer-events:none;">
+  <div style="max-width:1080px; margin:0 auto; position:relative;" data-reveal="">
+    <div style="font:500 12px/1 'Roboto',sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#A4AFFB; margin-bottom:28px;">Built &amp; Backed by</div>
+    <div style="display:grid; gap:44px; align-items:center;" data-backed-grid="">
+      <div>
+        <img src="assets/bull/Bull_symbol_white.svg" alt="" aria-hidden="true" style="display:none;">
+        <!-- DataSentics, a Bull company logo (white) -->
+        <img src="assets/ds/DataSentics_a_Bull_company_white.svg" alt="DataSentics, a Bull company" style="height:40px; width:auto; margin-bottom:22px;">
+        <!-- NEEDS-APPROVAL: DataSentics metrics & company claims -->
+        <p style="font-size:17px; line-height:1.65; color:#c3cbe0; margin:0 0 18px; max-width:560px;">DataSentics delivers real-impact AI solutions to enterprises across various industries. With over 8 years of experience, the team has grown to 300+ AI experts and implemented more than 500 AI solutions for leading EU enterprise clients.</p>
+        <!-- FUNCTIONAL-SPEC NEEDED: external link to www.datasentics.com -->
+        <a href="https://www.datasentics.com" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; font:600 15px 'Roboto',sans-serif; color:#FF7761;">See our clients at datasentics.com <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px;" data-ds-metrics="">
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.25); border-radius:14px; padding:24px 18px; text-align:center;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:34px; line-height:1; color:#FF7761;">300+</div><div style="font-size:13px; color:#9aa6c8; margin-top:8px;">AI experts</div></div>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.25); border-radius:14px; padding:24px 18px; text-align:center;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:34px; line-height:1; color:#FFB600;">500+</div><div style="font-size:13px; color:#9aa6c8; margin-top:8px;">AI solutions delivered</div></div>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.25); border-radius:14px; padding:24px 18px; text-align:center;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:34px; line-height:1; color:#00B290;">8+</div><div style="font-size:13px; color:#9aa6c8; margin-top:8px;">Years of experience</div></div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:#7e8ab0; margin:32px 0 0;">Trusted by leading enterprises</p>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<a id="demo"></a>
+<section style="padding:80px 32px; background:#FFF7F5; position:relative; overflow:hidden;">
+  <div style="max-width:680px; margin:0 auto; text-align:center; position:relative;" data-reveal="">
+    <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,44px); line-height:1.08; margin:0 0 18px; color:#0d0d0d;">Ready to transform your claims?</h2>
+    <p style="font-size:18px; line-height:1.6; color:#5a514d; margin:0 0 32px;">Let's discuss how ClaimSense can help your organization process claims faster and more efficiently.</p>
+    <!-- FUNCTIONAL-SPEC NEEDED: Book a Demo routing -->
+    <button onClick="{{ scrollToDemo }}" style="display:inline-flex; align-items:center; gap:11px; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:10px; padding:16px 34px; font:600 18px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Book a walkthrough <span aria-hidden="true">→</span></button>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#06122b; color:#c3cbe0; padding:64px 32px 36px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="display:grid; gap:40px;" data-footer-grid="">
+      <div>
+        <img src="assets/logos/ClaimSense_logo_white.svg" alt="ClaimSense" style="height:26px; width:auto; margin-bottom:18px;">
+        <p style="font-size:14px; line-height:1.6; color:#9aa6c8; margin:0 0 22px; max-width:280px;">AI-first workflow for your claim team. Transform complex claims processing with intelligent automation.</p>
+        <div style="display:flex; align-items:center; gap:12px; padding-top:18px; border-top:1px solid #1a2c54;">
+          <img src="assets/bull/BULL_LOGO_WHITE_RGB.png" alt="Bull" style="height:26px; width:auto;">
+        </div>
+        <p style="font-size:12px; color:#7e8ab0; margin:12px 0 0;">ClaimSense is built by DataSentics, <br>part of the Bull.</p>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Product</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Features.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Features</a></li>
+          <li><a href="ClaimSense%20Pricing.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Pricing</a></li>
+          <li><a href="ClaimSense%20Use%20Cases.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Use cases</a></li>
+          <li><a href="ClaimSense%20Implementation.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Implementation</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Company</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Our%20Story.dc.html" style="color:#FF5539;">Our story</a></li>
+          <li><a href="ClaimSense%20Partners.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Partners</a></li>
+          <li><a href="https://careers.datasentics.com/?utm_source=slaimsense&amp;utm_medium=webfooter&amp;utm_campaign=1" target="_blank" rel="noopener noreferrer" style="color:#9aa6c8;" style-hover="color:#FF7761;">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Resources</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20FAQ.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">FAQ</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Help Center</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Documentation</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">API Reference</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-top:48px; padding-top:24px; border-top:1px solid #1a2c54; font-size:13px; color:#7e8ab0;">
+      <div style="display:flex; gap:22px; align-items:center;">
+        <a href="ClaimSense%20Privacy.dc.html" style="color:#9aa6c8;">Privacy Policy</a>
+        <a href="javascript: Cookiebot.renew()" style="color:#9aa6c8;">Cookie consent</a>
+        <span>© 2026 ClaimSense. All rights reserved.</span>
+      </div>
+      <span>Built with ❤ for claims teams worldwide</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { productOpen: false };
+  }
+
+  componentDidMount() {
+    this._applyResponsive();
+    this._onResize = () => this._applyResponsive();
+    window.addEventListener('resize', this._onResize);
+    this._setupReveal();
+  }
+
+  _setupReveal() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (reduce || !els.length) return;
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.__shown = true; };
+    const belowFold = (el) => { const r = el.getBoundingClientRect(); return r.top > (window.innerHeight || 768) * 0.92; };
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        el.style.transition = 'opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)';
+        if (belowFold(el)) { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; }
+        else { el.__shown = true; }
+      });
+      const check = () => els.forEach((el) => { if (!el.__shown && !belowFold(el)) reveal(el); });
+      this._onScroll = check;
+      window.addEventListener('scroll', check, { passive: true });
+      this._revealSafety = setTimeout(() => els.forEach((el) => { if (!el.__shown) reveal(el); }), 2200);
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }); }, { threshold: 0.04 });
+        els.forEach((el) => { if (!el.__shown) io.observe(el); });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._revealSafety);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
+  }
+
+  _setupMobileMenu() {
+    if (this._mmInit) return;
+    const burger = document.querySelector('[data-nav-burger]');
+    const menu = document.querySelector('[data-mobile-menu]');
+    if (!burger || !menu) return;
+    this._mmInit = true;
+    const icon = burger.querySelector('[data-burger-icon] path');
+    const PATH_OPEN = 'M3 6h18M3 12h18M3 18h18';
+    const PATH_CLOSE = 'M5 5l14 14M19 5L5 19';
+    const setOpen = (open) => {
+      menu.style.display = open ? 'block' : 'none';
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (icon) icon.setAttribute('d', open ? PATH_CLOSE : PATH_OPEN);
+    };
+    burger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(menu.style.display !== 'block'); });
+    menu.addEventListener('click', (e) => e.stopPropagation());
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  _applyResponsive() {
+    const w = window.innerWidth;
+    const sg = document.querySelector('[data-story-grid]');
+    if (sg) sg.style.gridTemplateColumns = w >= 900 ? '2fr 1fr' : '1fr';
+    const bg = document.querySelector('[data-backed-grid]');
+    if (bg) bg.style.gridTemplateColumns = w >= 820 ? '1.4fr 1fr' : '1fr';
+    const dm = document.querySelector('[data-ds-metrics]');
+    if (dm) dm.style.gridTemplateColumns = w >= 420 ? '1fr 1fr 1fr' : '1fr';
+    const fg = document.querySelector('[data-footer-grid]');
+    if (fg) fg.style.gridTemplateColumns = w >= 860 ? '1.5fr 1fr 1fr 1fr' : (w >= 560 ? '1fr 1fr' : '1fr');
+    const nav = document.querySelector('[data-nav]');
+    if (nav) nav.style.display = w >= 900 ? 'flex' : 'none';
+    const badge = document.querySelector('[data-trust-badge]');
+    const divider = document.querySelector('[data-nav-divider]');
+    if (badge) badge.style.display = w >= 1040 ? 'flex' : 'none';
+    if (divider) divider.style.display = w >= 1040 ? 'block' : 'none';
+    const burger = document.querySelector('[data-nav-burger]');
+    const navCta = document.querySelector('[data-nav-cta]');
+    const mobileNav = w < 900;
+    if (burger) burger.style.display = mobileNav ? 'flex' : 'none';
+    if (navCta) navCta.style.display = mobileNav ? 'none' : '';
+    const mobileBadge = document.querySelector('[data-mobile-badge]');
+    if (mobileBadge) mobileBadge.style.display = (mobileNav && w >= 340) ? 'flex' : 'none';
+    if (!mobileNav) { const mm = document.querySelector('[data-mobile-menu]'); if (mm) mm.style.display = 'none'; if (burger) burger.setAttribute('aria-expanded', 'false'); }
+    this._setupMobileMenu();
+  }
+
+  _scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) { const y = el.getBoundingClientRect().top + window.pageYOffset - 72; window.scrollTo({ top: y, behavior: 'smooth' }); }
+  }
+
+  renderVals() {
+    return {
+      scrollToDemo: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('demo'); },
+      productOpen: this.state.productOpen,
+      chevronRotate: this.state.productOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      openProduct: () => this.setState({ productOpen: true }),
+      closeProduct: () => this.setState({ productOpen: false }),
+      toggleProduct: () => this.setState((s) => ({ productOpen: !s.productOpen }))
+    };
+  }
+}
+</script>
+</body>
+</html>

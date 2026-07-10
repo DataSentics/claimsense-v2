@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Partner program. Resellers, integrators, consultants. Revenue-sharing model, support, co-marketing. Grow your claims automation business.">
+<title>Partners – ClaimSense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Black.woff2') format('woff2'); font-weight:900; font-display:swap; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Roboto',sans-serif; font-weight:400; color:#1a1a1a; line-height:1.6; -webkit-font-smoothing:antialiased; background:#ffffff; }
+::selection { background:#FFADA0; }
+a { text-decoration:none; color:inherit; }
+input, textarea, select, button { font-family:inherit; }
+
+
+
+/* ── CTA & Nav hover system v3 (Bull brand, all 7 fixes) ───────────────── */
+header a:not([data-nav-cta]), header button { outline:none !important; box-shadow:none !important; border:none !important; }
+header a:not([data-nav-cta]) { border:none !important; }
+footer a { border:none !important; outline:none !important; }
+header a:not([data-nav-cta]):hover { color:#FF5539 !important; transition:color .2s ease; }
+header a[style*="padding:10px"]:hover { background:#f5f0ee !important; color:#FF5539 !important; }
+[data-nav-cta] { transition:background .2s ease, color .2s ease; cursor:pointer; }
+[data-nav-cta]:hover { background:#ffffff !important; color:#000000 !important; border:3px solid #FF5539 !important; }
+[data-cta="primary"] { border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="primary"]:hover { background:#ffffff !important; color:#000000 !important; box-shadow:none !important; }
+[data-cta="secondary"] { border:3px solid #002870 !important; transition:border-color .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="secondary"]:hover { border-color:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+[data-cta="pricing"] { border:3px solid #002870 !important; transition:border-color .2s ease, background .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="pricing"]:hover { border-color:#FF5539 !important; box-shadow:none !important; }
+[data-cta="quickstart"] { background:#ffffff; color:#FF5539; border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="quickstart"]:hover { background:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+[data-pill]:hover [data-pill-badge] { background-color:#FF5539 !important; color:#ffffff !important; }
+[data-footer-active] { color:#FF5539 !important; }
+footer a:hover { color:#FF5539 !important; transition:color .2s ease; }
+
+/* Decorative monogram: shrink + fade on tablet/mobile so it stays a quiet texture, contained in-section (section already has overflow:hidden) */
+@media (max-width:768px){ img[src*="Bull_symbol"]{ width:120px !important; opacity:0.07 !important; } }
+
+/* Mobile header: shrink CTA + tighten nav padding so nothing clips on narrow phones */
+@media (max-width:600px){
+  header nav{ padding:12px 16px !important; gap:12px !important; }
+  [data-nav-cta]{ margin-left:0 !important; padding:9px 15px !important; font-size:13px !important; border-width:2px !important; }
+  header nav > a img[alt="ClaimSense"]{ height:28px !important; }
+}
+
+/* Mobile: fit-to-screen — no page-level horizontal scroll, so the sticky header (hamburger) is always fully visible. overflow-x:clip is sticky-safe (unlike hidden). */
+@media (max-width:900px){
+  html, body { overflow-x:clip !important; max-width:100% !important; }
+  /* Tighter header padding on mobile so logo + “built by Bull” + hamburger all fit. */
+  header > nav { padding-left:14px !important; padding-right:14px !important; }
+  header > nav > div:first-child { gap:8px !important; }
+  /* Card grids: auto-fit minmax() forces a fixed min column (280–340px) that overflows the
+     narrow mobile content area and gets clipped. Collapse to one shrinkable column so headings
+     and cards always fit the viewport. */
+  [style*="repeat(auto-fit,minmax"],
+  [style*="repeat(auto-fit, minmax"],
+  [style*="repeat(auto-fill,minmax"],
+  [style*="repeat(auto-fill, minmax"] { grid-template-columns:1fr !important; }
+}
+</style>
+</helmet>
+
+<!-- ================================================================ -->
+<!-- ClaimSense Partners page — /partners/                             -->
+<!-- Content preserved verbatim from content/pages/content_partners.md -->
+<!-- status: needs-functional-spec                                     -->
+<!-- approval_required: commission, revenue and market claims; tier obligations; form workflow -->
+<!-- primary_conversion: Submit Partner Application                    -->
+<!-- ================================================================ -->
+
+<!-- ===================== HEADER (shared chrome) ===================== -->
+<header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(14px); border-bottom:1px solid #f0e6e3;">
+  <nav style="max-width:1280px; margin:0 auto; padding:14px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <div style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
+      <a href="ClaimSense%20Homepage.dc.html" style="display:flex; align-items:center;">
+        <img src="assets/logos/ClaimSense_logo_black.svg" alt="ClaimSense" style="height:32px; width:auto; transform:translateY(1.1px);">
+      </a>
+      <span data-mobile-badge="" style="display:none; align-items:center; gap:6px; padding-left:8px; border-left:1px solid #e5e7eb;">
+        <span style="font:400 10px/1.2 'Tosh A',sans-serif; color:#8a827d; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:22px; width:auto; transform:translateY(-0.5px);">
+      </span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:34px; flex:1 1 auto;" data-nav>
+      <a href="ClaimSense%20Homepage.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Home</a>
+      <div style="position:relative;" onMouseEnter="{{ openProduct }}" onMouseLeave="{{ closeProduct }}">
+        <button onClick="{{ toggleProduct }}" aria-haspopup="true" aria-expanded="{{ productOpen }}" style="display:inline-flex; align-items:center; gap:6px; background:none; cursor:pointer; font:500 14px 'Tosh A',sans-serif; color:#33302e; padding:0;" style-hover="color:#FF5539;">
+          Product
+          <svg width="11" height="7" viewBox="0 0 11 7" aria-hidden="true" style="transition:transform .2s; transform:{{ chevronRotate }};"><path d="M1 1L5.5 5.5L10 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <sc-if value="{{ productOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; z-index:60;">
+            <div style="background:#fff; border:1px solid #ece3df; border-radius:12px; padding:8px; min-width:220px;">
+              <a href="ClaimSense%20Features.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+              <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+              <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+              <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <a href="ClaimSense%20Our%20Story.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Our story</a>
+      <a href="ClaimSense%20Pricing.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Pricing</a>
+      <a href="ClaimSense%20Business%20Case.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Business case</a>
+    </div>
+    <div style="display:flex; align-items:center; flex:0 0 auto;" data-nav-right>
+      <span style="display:flex; align-items:center; gap:8px;" data-trust-badge>
+        <span style="font:400 14px/1.2 'Tosh A',sans-serif; color:#6b7280; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:26px; width:auto;">
+      </span>
+      <span style="width:1px; align-self:stretch; min-height:26px; background:#e5e7eb; margin-left:24px;" data-nav-divider></span>
+      <button onClick="{{ scrollToForm }}" style="margin-left:24px; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:8px; padding:11px 22px; font:500 15px 'Roboto',sans-serif; cursor:pointer; white-space:nowrap;" data-nav-cta="">Become a partner</button>
+      <button data-nav-burger="" type="button" aria-label="Open menu" aria-expanded="false" style="display:none; align-items:center; justify-content:center; width:44px; height:44px; padding:0; background:none; border:none; cursor:pointer; color:#0d0d0d; margin-left:12px;">
+        <svg data-burger-icon="" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </div>
+  </nav>
+  <div data-mobile-menu="" style="display:none; position:absolute; top:100%; right:16px; margin-top:8px; width:min(300px,calc(100vw - 32px)); background:#fff; border:1px solid #ece3df; border-radius:14px; box-shadow:0 24px 60px -18px rgba(0,40,112,0.3); padding:10px; z-index:70;">
+    <a href="ClaimSense%20Homepage.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Home</a>
+    <div style="font:600 11px 'Roboto',sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#a89f9a; padding:10px 12px 4px;">Product</div>
+    <a href="ClaimSense%20Features.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+    <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+    <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+    <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+    <div style="height:1px; background:#f0e6e3; margin:8px 6px;"></div>
+    <a href="ClaimSense%20Our%20Story.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Our story</a>
+    <a href="ClaimSense%20Pricing.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Pricing</a>
+    <a href="ClaimSense%20Business%20Case.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Business case</a>
+    <a href="ClaimSense%20Homepage.dc.html#demo" style="display:block; text-align:center; margin-top:10px; background:#FF5539; color:#000; border:2px solid #FF5539; border-radius:9px; padding:13px; font:500 15px 'Roboto',sans-serif; text-decoration:none;">Book a walkthrough</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section style="background:#0a1b3d; color:#fff; padding:84px 32px 72px; position:relative; overflow:hidden;">
+  <img src="assets/bull/Bull_symbol_white.svg" alt="" aria-hidden="true" style="position:absolute; right:40px; bottom:40px; width:240px; opacity:0.12; pointer-events:none;">
+  <div style="max-width:1140px; margin:0 auto; position:relative;">
+    <div style="max-width:780px;" data-reveal>
+      <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF9280; margin-bottom:18px;">Partner Program</div>
+      <h1 style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(36px,5vw,64px); line-height:1.02; letter-spacing:-0.02em; margin:0 0 22px; color:#fff;">Unlock massive revenue with AI claims automation</h1>
+      <!-- NEEDS-APPROVAL: commission & revenue claims — "up to 50% commission", "10x more on implementation services" -->
+      <p style="font-size:20px; line-height:1.55; color:#c3cbe0; max-width:660px; margin:0 0 36px;">Partner with ClaimSense to tap into the claims process automation market. Earn up to 50% commission on licence fees and 10x more on implementation services.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
+        <button onClick="{{ scrollToForm }}" style="background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:10px; padding:16px 32px; font:600 18px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Become a partner</button>
+        <a href="#tiers" onClick="{{ navTiers }}" style="display:inline-flex; align-items:center; gap:8px; font:500 16px 'Roboto',sans-serif; color:#fff; border-bottom:2px solid #FF5539; padding-bottom:2px;">View Partner Tiers <span style="color:#FF5539;">→</span></a>
+      </div>
+    </div>
+
+    <!-- Hero metrics -->
+    <!-- NEEDS-APPROVAL: hero metrics — 50% / 10x / €400k+ / 25+ -->
+    <div style="display:grid; gap:0; margin-top:56px; background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.25); border-radius:16px; overflow:hidden;" data-hero-metrics data-reveal>
+      <div style="padding:26px 28px;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:38px; line-height:1; color:#FF7761;">Up to 50%</div><div style="font-size:14px; color:#9aa6c8; margin-top:8px;">Licence Fee Share</div></div>
+      <div style="padding:26px 28px;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:38px; line-height:1; color:#FFB600;">10x</div><div style="font-size:14px; color:#9aa6c8; margin-top:8px;">Implementation Revenue</div></div>
+      <div style="padding:26px 28px;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:38px; line-height:1; color:#00B290;">€400k+</div><div style="font-size:14px; color:#9aa6c8; margin-top:8px;">Avg Deal Value</div></div>
+      <div style="padding:26px 28px;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:38px; line-height:1; color:#A4AFFB;">25+</div><div style="font-size:14px; color:#9aa6c8; margin-top:8px;">Active Partners</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTNER TIERS ===================== -->
+<a id="tiers"></a>
+<section style="padding:80px 32px; background:#ffffff;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; max-width:680px; margin:0 auto 48px;" data-reveal>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(26px,3.2vw,40px); margin:0 0 12px; color:#0d0d0d;">Partner tiers</h2>
+      <p style="font-size:18px; color:#5a514d; margin:0;">Choose your partnership level. Progress through tiers as you grow. Higher tiers unlock better margins, more support, and exclusive opportunities.</p>
+    </div>
+    <!-- NEEDS-APPROVAL: every tier commission %, requirement, benefit and typical deals/year -->
+    <div style="display:grid; gap:22px; align-items:stretch;" data-tiers-grid data-reveal>
+      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="4">
+        <article style="{{ t.cardStyle }}">
+          <sc-if value="{{ t.popular }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:#FF5539; color:#000; font:600 10px 'Roboto',sans-serif; letter-spacing:0.08em; text-transform:uppercase; border-radius:20px; padding:5px 14px; white-space:nowrap;; border:3px solid #FF5539;">Most Popular</span>
+          </sc-if>
+          <div style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:22px; color:{{ t.nameColor }}; margin-bottom:14px;">{{ t.name }}</div>
+          <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:6px;"><span style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:40px; line-height:1; color:{{ t.nameColor }};">{{ t.commission }}</span></div>
+          <div style="font-size:13px; color:#7a716d; margin-bottom:20px;">Commission on licence fees</div>
+
+          <div style="font:600 11px 'Roboto',sans-serif; letter-spacing:0.08em; text-transform:uppercase; color:#9ca3af; margin-bottom:10px;">Requirements</div>
+          <ul style="list-style:none; padding:0; margin:0 0 20px; display:flex; flex-direction:column; gap:8px;">
+            <sc-for list="{{ t.requirements }}" as="r" hint-placeholder-count="3">
+              <li style="display:flex; gap:9px; font-size:13.5px; line-height:1.45; color:#54504d;"><span style="flex:none; color:#9ca3af; font-weight:700;">·</span>{{ r }}</li>
+            </sc-for>
+          </ul>
+
+          <div style="font:600 11px 'Roboto',sans-serif; letter-spacing:0.08em; text-transform:uppercase; color:#00765f; margin-bottom:10px;">Benefits</div>
+          <ul style="list-style:none; padding:0; margin:0 0 20px; display:flex; flex-direction:column; gap:8px;">
+            <sc-for list="{{ t.benefits }}" as="b" hint-placeholder-count="4">
+              <li style="display:flex; gap:9px; font-size:13.5px; line-height:1.45; color:#374151;"><span style="flex:none; color:#00B290; font-weight:700;">✓</span>{{ b }}</li>
+            </sc-for>
+          </ul>
+
+          <div style="margin-top:auto; padding-top:16px; border-top:1px solid #f1ebe8; font-size:13px; color:#54504d;">Typical deals/year: <strong style="color:#0d0d0d;">{{ t.deals }}</strong></div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTNER BENEFITS ===================== -->
+<section style="padding:80px 32px; background:#FFF7F5;">
+  <div style="max-width:1140px; margin:0 auto;">
+    <div style="text-align:center; max-width:700px; margin:0 auto 48px;" data-reveal>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(26px,3.2vw,40px); margin:0 0 12px; color:#0d0d0d;">Partner benefits</h2>
+      <p style="font-size:18px; color:#5a514d; margin:0;">The real opportunity is in services. While licence commissions are attractive, the real revenue potential lies in implementation and professional services.</p>
+    </div>
+    <!-- NEEDS-APPROVAL: "10x", "€10B+ market", "6-12 weeks sales cycles", "top priority 2024-2025", deal protection -->
+    <div style="display:grid; gap:22px;" data-benefits-grid data-reveal>
+      <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="6">
+        <article style="background:#fff; border:1px solid #ecdcd6; border-radius:16px; padding:28px;">
+          <div style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:19px; margin:0 0 10px; color:#0d0d0d;">{{ b.title }}</div>
+          <p style="font-size:15px; line-height:1.55; color:#54504d; margin:0;">{{ b.desc }}</p>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REVENUE ILLUSTRATION ===================== -->
+<section style="padding:80px 32px; background:#ffffff;">
+  <div style="max-width:1080px; margin:0 auto;">
+    <!-- NEEDS-APPROVAL: all revenue figures are illustrative estimates — require commercial sign-off -->
+    <div style="display:grid; gap:28px; align-items:start;" data-revenue-grid data-reveal>
+      <!-- Services Revenue Breakdown -->
+      <div style="background:#FAFAF9; border:1px solid #f1efed; border-radius:18px; padding:32px;">
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:22px; margin:0 0 20px; color:#0d0d0d;">Services Revenue Breakdown</h3>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:14px; border-bottom:1px solid #ece8e5;"><span style="font-size:15px; color:#374151;">Implementation</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:17px; color:#FF5539;">€50-150k</span></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:14px; border-bottom:1px solid #ece8e5;"><span style="font-size:15px; color:#374151;">Custom Development</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:17px; color:#FF5539;">€30-80k</span></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:14px; border-bottom:1px solid #ece8e5;"><span style="font-size:15px; color:#374151;">Training &amp; Enablement</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:17px; color:#FF5539;">€20-50k</span></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px;"><span style="font-size:15px; color:#374151;">Managed Services</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:17px; color:#FF5539;">€5-15k/mo <span style="font-size:12px; color:#9ca3af; font-family:'Roboto',sans-serif;">(recurring)</span></span></div>
+        </div>
+      </div>
+      <!-- Business generated by average partner -->
+      <div style="background:#0a1b3d; border-radius:18px; padding:32px; color:#fff;">
+        <div style="font:500 12px 'Roboto',sans-serif; letter-spacing:0.1em; text-transform:uppercase; color:#A4AFFB; margin-bottom:6px;">Business generated by average partner</div>
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:22px; margin:0 0 22px; color:#fff;">In 12 months</h3>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:16px; border-bottom:1px solid rgba(124,150,230,0.25);"><span style="font-size:15px; color:#c3cbe0;">Licence Commissions</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:18px; color:#fff;">€80-120k</span></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:16px; border-bottom:1px solid rgba(124,150,230,0.25);"><span style="font-size:15px; color:#c3cbe0;">Services Revenue</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:18px; color:#fff;">€400-800k</span></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px;"><span style="font-size:16px; color:#fff; font-weight:500;">Total Partner Revenue</span><span style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:24px; color:#00B290;">€500k - €920k</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APPLY NOW (form) ===================== -->
+<a id="apply"></a>
+<section style="padding:80px 32px; background:#FFF7F5; position:relative; overflow:hidden;">
+  <div style="max-width:760px; margin:0 auto; position:relative;">
+    <div style="text-align:center; margin-bottom:36px;" data-reveal>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(26px,3.2vw,40px); margin:0 0 12px; color:#0d0d0d;">Apply now</h2>
+      <p style="font-size:18px; line-height:1.55; color:#5a514d; margin:0;">Start your partnership journey. Fill out the form below and our partner team will reach out within 48 hours.</p>
+    </div>
+    <!-- Partner application form — per content/global/forms.md (Partner application form) -->
+    <!-- FUNCTIONAL-SPEC NEEDED: endpoint/CRM, validation, success/error, consent, anti-spam, analytics, 48h SLA owner -->
+    <!-- NEEDS-APPROVAL: "within 48 hours" response-time claim -->
+    <div data-reveal style="background:#fff; border-radius:18px; padding:34px;">
+      <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center; padding:40px 10px;">
+          <div style="width:56px; height:56px; border-radius:50%; background:#dcf5ee; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13L11 19L21 7" fill="none" stroke="#00B290" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:22px; margin:0 0 8px; color:#0d0d0d;">Thank you.</h3>
+          <p style="font-size:14px; color:#7a716d; margin:0;">We'll be in touch.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submitForm }}" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="bb676465-962f-4e10-a53b-5d2145f13460">
+          <input type="hidden" name="subject" value="New partner application — ClaimSense Partners">
+          <input type="hidden" name="from_name" value="ClaimSense Website">
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none;">
+          <div style="display:grid; gap:14px;" data-form-grid>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">First Name *</span><input type="text" name="first_name" required placeholder="Jane" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Last Name *</span><input type="text" name="last_name" required placeholder="Doe" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Work Email *</span><input type="email" name="email" required placeholder="jane@company.com" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Company *</span><input type="text" name="company" required placeholder="Company" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Website</span><input type="text" name="website" placeholder="https://" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Partner Type *</span>
+              <select name="partner_type" required style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px; background:#fff;">
+                <option value="">Select type</option>
+                <option>System Integrator</option>
+                <option>Consulting Firm</option>
+                <option>Technology Partner</option>
+                <option>Reseller</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Country *</span><input type="text" name="country" required placeholder="Country" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+          </div>
+          <label style="display:block; margin-top:14px;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Tell us about your business</span><textarea name="message" rows="4" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px; resize:vertical;"></textarea></label>
+          <p data-form-error style="display:none; font:500 13px 'Roboto',sans-serif; color:#c02617; background:#fdecea; border:1px solid #f5c6c0; border-radius:8px; padding:10px 12px; margin:16px 0 0;"></p>
+          <button type="submit" style="margin-top:18px; width:100%; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:9px; padding:14px; font:600 16px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Submit partner application</button>
+        </form>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#06122b; color:#c3cbe0; padding:64px 32px 36px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="display:grid; gap:40px;" data-footer-grid>
+      <div>
+        <img src="assets/logos/ClaimSense_logo_white.svg" alt="ClaimSense" style="height:26px; width:auto; margin-bottom:18px;">
+        <p style="font-size:14px; line-height:1.6; color:#9aa6c8; margin:0 0 22px; max-width:280px;">AI-first workflow for your claim team. Transform complex claims processing with intelligent automation.</p>
+        <div style="display:flex; align-items:center; gap:12px; padding-top:18px; border-top:1px solid #1a2c54;">
+          <img src="assets/bull/BULL_LOGO_WHITE_RGB.png" alt="Bull" style="height:26px; width:auto;">
+        </div>
+        <p style="font-size:12px; color:#7e8ab0; margin:12px 0 0;">ClaimSense is built by DataSentics, <br>part of the Bull.</p>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Product</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Features.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Features</a></li>
+          <li><a href="ClaimSense%20Pricing.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Pricing</a></li>
+          <li><a href="ClaimSense%20Use%20Cases.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Use cases</a></li>
+          <li><a href="ClaimSense%20Implementation.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Implementation</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Company</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Our%20Story.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Our story</a></li>
+          <li><a href="ClaimSense%20Partners.dc.html" style="color:#FF5539;">Partners</a></li>
+          <li><a href="https://careers.datasentics.com/?utm_source=slaimsense&amp;utm_medium=webfooter&amp;utm_campaign=1" target="_blank" rel="noopener noreferrer" style="color:#9aa6c8;" style-hover="color:#FF7761;">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Resources</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20FAQ.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">FAQ</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Help Center</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Documentation</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">API Reference</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-top:48px; padding-top:24px; border-top:1px solid #1a2c54; font-size:13px; color:#7e8ab0;">
+      <div style="display:flex; gap:22px; align-items:center;">
+        <a href="ClaimSense%20Privacy.dc.html" style="color:#9aa6c8;">Privacy Policy</a>
+        <a href="javascript: Cookiebot.renew()" style="color:#9aa6c8;">Cookie consent</a>
+        <span>© 2026 ClaimSense. All rights reserved.</span>
+      </div>
+      <span>Built with ❤ for claims teams worldwide</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { productOpen: false, formDone: false };
+
+    // Partner tiers — verbatim from content_partners.md
+    this._tiers = [
+      { name:'Registered', commission:'20%', popular:false, deals:'1-2',
+        requirements:['Complete partner onboarding','Pass product certification','Assign dedicated resource'],
+        benefits:['Partner portal access','Sales enablement materials','Basic technical support','Lead registration'] },
+      { name:'Silver', commission:'35%', popular:false, deals:'3-5',
+        requirements:['All Registered requirements','2+ certified consultants','Joint marketing commitment'],
+        benefits:['Everything in Registered','Priority lead sharing','Co-marketing funds','Quarterly business reviews'] },
+      { name:'Gold', commission:'45%', popular:true, deals:'6-10',
+        requirements:['All Silver requirements','5+ certified consultants','Dedicated partner manager','Case study participation'],
+        benefits:['Everything in Silver','First-look at new features','Joint solution development','Executive sponsorship','Premium support SLA'] },
+      { name:'Platinum', commission:'50%', popular:false, deals:'10+',
+        requirements:['All Gold requirements','10+ certified consultants','Strategic account alignment','Annual planning commitment'],
+        benefits:['Everything in Gold','Product roadmap influence','White-label options','Exclusive territory rights','Revenue guarantees','Executive advisory board'] }
+    ];
+
+    this._benefits = [
+      { title:'10x Implementation Revenue', desc:'For every €1 in licence fees, partners earn €10+ in implementation and services revenue.' },
+      { title:'Easy Upsell & Cross-sell', desc:'ClaimSense opens doors to additional AI, data, and transformation projects with existing clients.' },
+      { title:'Diversify Your Practice', desc:'Add a differentiated AI solution to your portfolio that addresses a €10B+ market opportunity.' },
+      { title:'Fast Sales Cycles', desc:'Typical sales cycles of 6-12 weeks. Quick wins that lead to long-term relationships.' },
+      { title:'Deal Protection', desc:'Registered deals are protected. Your investment in the opportunity is secured.' },
+      { title:'Proven Demand', desc:'Claims process transformation is a top priority for enterprise buyers in 2024-2025.' }
+    ];
+  }
+
+  componentDidMount() {
+    this._applyResponsive();
+    this._onResize = () => this._applyResponsive();
+    window.addEventListener('resize', this._onResize);
+    this._setupReveal();
+  }
+
+  _setupReveal() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (reduce || !els.length) return;
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.__shown = true; };
+    const belowFold = (el) => { const r = el.getBoundingClientRect(); return r.top > (window.innerHeight || 768) * 0.92; };
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        el.style.transition = 'opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)';
+        if (belowFold(el)) { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; }
+        else { el.__shown = true; }
+      });
+      const check = () => els.forEach((el) => { if (!el.__shown && !belowFold(el)) reveal(el); });
+      this._onScroll = check;
+      window.addEventListener('scroll', check, { passive: true });
+      this._revealSafety = setTimeout(() => els.forEach((el) => { if (!el.__shown) reveal(el); }), 2200);
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }); }, { threshold: 0.04 });
+        els.forEach((el) => { if (!el.__shown) io.observe(el); });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._revealSafety);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
+  }
+
+  _setupMobileMenu() {
+    if (this._mmInit) return;
+    const burger = document.querySelector('[data-nav-burger]');
+    const menu = document.querySelector('[data-mobile-menu]');
+    if (!burger || !menu) return;
+    this._mmInit = true;
+    const icon = burger.querySelector('[data-burger-icon] path');
+    const PATH_OPEN = 'M3 6h18M3 12h18M3 18h18';
+    const PATH_CLOSE = 'M5 5l14 14M19 5L5 19';
+    const setOpen = (open) => {
+      menu.style.display = open ? 'block' : 'none';
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (icon) icon.setAttribute('d', open ? PATH_CLOSE : PATH_OPEN);
+    };
+    burger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(menu.style.display !== 'block'); });
+    menu.addEventListener('click', (e) => e.stopPropagation());
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  _applyResponsive() {
+    const w = window.innerWidth;
+    const hm = document.querySelector('[data-hero-metrics]');
+    if (hm) hm.style.gridTemplateColumns = w >= 760 ? '1fr 1fr 1fr 1fr' : (w >= 460 ? '1fr 1fr' : '1fr');
+    const tg = document.querySelector('[data-tiers-grid]');
+    if (tg) tg.style.gridTemplateColumns = w >= 1000 ? '1fr 1fr 1fr 1fr' : (w >= 620 ? '1fr 1fr' : '1fr');
+    const bg = document.querySelector('[data-benefits-grid]');
+    if (bg) bg.style.gridTemplateColumns = w >= 880 ? '1fr 1fr 1fr' : (w >= 560 ? '1fr 1fr' : '1fr');
+    const rg = document.querySelector('[data-revenue-grid]');
+    if (rg) rg.style.gridTemplateColumns = w >= 800 ? '1fr 1fr' : '1fr';
+    const fmg = document.querySelector('[data-form-grid]');
+    if (fmg) fmg.style.gridTemplateColumns = w >= 560 ? '1fr 1fr' : '1fr';
+    const fg = document.querySelector('[data-footer-grid]');
+    if (fg) fg.style.gridTemplateColumns = w >= 860 ? '1.5fr 1fr 1fr 1fr' : (w >= 560 ? '1fr 1fr' : '1fr');
+    const nav = document.querySelector('[data-nav]');
+    if (nav) nav.style.display = w >= 900 ? 'flex' : 'none';
+    const badge = document.querySelector('[data-trust-badge]');
+    const divider = document.querySelector('[data-nav-divider]');
+    if (badge) badge.style.display = w >= 1040 ? 'flex' : 'none';
+    if (divider) divider.style.display = w >= 1040 ? 'block' : 'none';
+    const burger = document.querySelector('[data-nav-burger]');
+    const navCta = document.querySelector('[data-nav-cta]');
+    const mobileNav = w < 900;
+    if (burger) burger.style.display = mobileNav ? 'flex' : 'none';
+    if (navCta) navCta.style.display = mobileNav ? 'none' : '';
+    const mobileBadge = document.querySelector('[data-mobile-badge]');
+    if (mobileBadge) mobileBadge.style.display = (mobileNav && w >= 340) ? 'flex' : 'none';
+    if (!mobileNav) { const mm = document.querySelector('[data-mobile-menu]'); if (mm) mm.style.display = 'none'; if (burger) burger.setAttribute('aria-expanded', 'false'); }
+    this._setupMobileMenu();
+  }
+
+  _scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) { const y = el.getBoundingClientRect().top + window.pageYOffset - 72; window.scrollTo({ top: y, behavior: 'smooth' }); }
+  }
+
+  submitForm(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const form = e.target;
+    if (this._submitting) return;
+    const btn = form.querySelector('button[type="submit"]');
+    const errEl = form.querySelector('[data-form-error]');
+    this._submitting = true;
+    const label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; btn.style.cursor = 'wait'; btn.textContent = 'Sending…'; }
+    if (errEl) errEl.style.display = 'none';
+    const restore = (msg) => {
+      this._submitting = false;
+      if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = 'pointer'; btn.textContent = label; }
+      if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+    };
+    // Web3Forms client-side POST — works from any static host (Cloudflare Pages), no backend.
+    fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+      .then((r) => r.json())
+      .then((json) => {
+        if (json && json.success) { this._submitting = false; this.setState({ formDone: true }); }
+        else { restore((json && json.message) || 'Something went wrong. Please try again.'); }
+      })
+      .catch(() => restore('Network error — please check your connection and try again.'));
+  }
+
+  renderVals() {
+    const tiers = this._tiers.map((t) => {
+      const base = 'position:relative; display:flex; flex-direction:column; border-radius:16px; padding:28px; ';
+      const cardStyle = t.popular
+        ? base + 'background:#fff; border:3px solid #FF5539;'
+        : base + 'background:#fff; border:1px solid #ecdcd6;';
+      return Object.assign({}, t, { cardStyle: cardStyle, nameColor: t.popular ? '#FF5539' : '#002870' });
+    });
+    return {
+      tiers: tiers,
+      benefits: this._benefits.map((b) => Object.assign({}, b)),
+      scrollToForm: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('apply'); },
+      navTiers: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('tiers'); },
+      formOpen: !this.state.formDone,
+      formDone: this.state.formDone,
+      submitForm: (e) => this.submitForm(e),
+      productOpen: this.state.productOpen,
+      chevronRotate: this.state.productOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      openProduct: () => this.setState({ productOpen: true }),
+      closeProduct: () => this.setState({ productOpen: false }),
+      toggleProduct: () => this.setState((s) => ({ productOpen: !s.productOpen }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#06080f">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#06080f"/>
+    <rect x="470" y="318" width="260" height="70" rx="14" fill="#FF5539"/>
+    <text x="600" y="368" font-family="Arial, sans-serif" font-weight="900" font-size="46" fill="#ffffff" text-anchor="middle">ClaimSense</text>
+    <text x="600" y="430" font-family="Arial, sans-serif" font-size="20" letter-spacing="6" fill="#FF9280" text-anchor="middle">PART OF BULL</text>
+  </svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="AI claims processing platform reducing cycle times up to 10x. Automate intake, case handling, and approvals with predictable per-claim pricing.">
+<title>ClaimSense – AI Claims Processing Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Black.woff2') format('woff2'); font-weight:900; font-display:swap; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Roboto',sans-serif; font-weight:400; color:#1a1a1a; line-height:1.6; -webkit-font-smoothing:antialiased; background:#ffffff; }
+::selection { background:#FFADA0; }
+@keyframes csFloat { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
+input, textarea, select, button { font-family:inherit; }
+a { text-decoration:none; color:inherit; }
+
+/* Global no-shadow on all interactive elements */
+button, a { box-shadow:none !important; }
+/* ── CTA & Nav hover system v3 (Bull brand, all 7 fixes) ───────────────── */
+header a:not([data-nav-cta]), header button[onClick] { outline:none !important; box-shadow:none !important; border:none !important; }
+header a:not([data-nav-cta]):hover { color:#FF5539 !important; transition:color .2s ease; }
+header a[style*="padding:10px"]:hover { background:#f5f0ee !important; color:#FF5539 !important; }
+[data-nav-cta] { transition:background .2s ease, color .2s ease; cursor:pointer; }
+[data-nav-cta]:hover { background:#ffffff !important; color:#000000 !important; border:3px solid #FF5539 !important; }
+[data-cta="primary"] { border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="primary"]:hover { background:#ffffff !important; color:#000000 !important; box-shadow:none !important; }
+[data-cta="secondary"] { border:3px solid #002870 !important; transition:border-color .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="secondary"]:hover { border-color:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+[data-cta="pricing"] { border:3px solid #002870 !important; transition:border-color .2s ease, background .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="pricing"]:hover { border-color:#FF5539 !important; box-shadow:none !important; }
+[data-cta="quickstart"] { background:#ffffff; color:#FF5539; border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="quickstart"]:hover { background:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+[data-pill]:hover [data-pill-badge] { background-color:#FF5539 !important; color:#ffffff !important; }
+[data-footer-active] { color:#FF5539 !important; }
+footer a:hover { color:#FF5539 !important; transition:color .2s ease; }
+/* ── Product video player ─────────────────────────────────── */
+/* base positioning moved off inline so [data-vid-started] state rules can override */
+[data-vid-chrome] { display:flex; flex:0 0 auto; }
+[data-vid-stage] { position:relative; flex:1 1 auto; min-height:0; }
+/* Frame is locked to the video's native 16:9 in EVERY state, so hiding the chrome bar on
+   playback grows the stage to fill the SAME frame box — zero section layout shift on play. */
+[data-vid-frame] { aspect-ratio:16 / 9; display:flex; flex-direction:column; }
+/* video hidden until playback starts; contain->cover once playing */
+[data-vid-el] { opacity:0; pointer-events:none; transition:opacity .18s ease; object-fit:contain; }
+[data-vid-frame][data-vid-started] [data-vid-el] { opacity:1; pointer-events:auto; object-fit:cover; }
+/* once started: reclaim the chrome bar and hide the poster — stage flexes to fill the frame */
+[data-vid-frame][data-vid-started] [data-vid-chrome] { display:none; }
+[data-vid-frame][data-vid-started] [data-vid-poster] { display:none; }
+/* dim layer: hover/focus cosmetic only, forced off during playback */
+[data-vid-dim] { opacity:0; transition:opacity .18s ease; pointer-events:none; }
+[data-vid-frame]:hover [data-vid-dim], [data-vid-frame]:focus-within [data-vid-dim] { opacity:1; }
+[data-vid-frame][data-vid-playing] [data-vid-dim] { opacity:0 !important; }
+/* Center play button + control-bar VISIBILITY are owned by JS via inline display
+   (see _setupProductVideo render()). Reason: opacity-to-0 transitions do not settle
+   in this runtime, so a CSS-cascade toggle left the play button stuck visible. Inline
+   display:none/flex is deterministic and can't be beaten by a non-important rule. */
+[data-vid-play] { transition:transform .18s ease, background .18s ease; }
+[data-vid-frame]:hover [data-vid-play], [data-vid-frame]:focus-within [data-vid-play] { transform:scale(1.06); }
+[data-vid-stage] button:focus-visible, [data-vid-play]:focus-visible { outline:2px solid #7788F9; outline-offset:2px; }
+[data-vid-play]:focus-visible { outline:3px solid #7788F9; outline-offset:3px; }
+[data-vid-stage]:fullscreen { display:flex; align-items:center; justify-content:center; width:100vw; height:100vh; background:#000; }
+[data-vid-stage]:-webkit-full-screen { display:flex; align-items:center; justify-content:center; width:100vw; height:100vh; background:#000; }
+[data-vid-stage]:fullscreen [data-vid-poster], [data-vid-stage]:-webkit-full-screen [data-vid-poster] { display:none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-vid-el], [data-vid-dim], [data-vid-play] { transition:none; }
+}
+
+/* Decorative monogram: shrink + fade on tablet/mobile so it stays a quiet texture, contained in-section (section already has overflow:hidden) */
+@media (max-width:768px){ img[src*="Bull_symbol"]{ width:120px !important; opacity:0.07 !important; } }
+
+/* Mobile header: shrink CTA + tighten nav padding so nothing clips on narrow phones */
+@media (max-width:600px){
+  header nav{ padding:12px 16px !important; gap:12px !important; }
+  [data-nav-cta]{ margin-left:0 !important; padding:9px 15px !important; font-size:13px !important; border-width:2px !important; }
+  header nav > a img[alt="ClaimSense"]{ height:28px !important; }
+}
+
+/* Mobile: fit-to-screen — no page-level horizontal scroll, so the sticky header (hamburger) is always fully visible. overflow-x:clip is sticky-safe (unlike hidden). */
+@media (max-width:900px){
+  html, body { overflow-x:clip !important; max-width:100% !important; }
+  /* Tighter header padding on mobile so logo + “built by Bull” + hamburger all fit. */
+  header > nav { padding-left:14px !important; padding-right:14px !important; }
+  header > nav > div:first-child { gap:8px !important; }
+  /* Card grids: auto-fit minmax() forces a fixed min column (280–340px) that overflows the
+     narrow mobile content area and gets clipped. Collapse to one shrinkable column so headings
+     and cards always fit the viewport. */
+  [style*="repeat(auto-fit,minmax"],
+  [style*="repeat(auto-fit, minmax"],
+  [style*="repeat(auto-fill,minmax"],
+  [style*="repeat(auto-fill, minmax"] { grid-template-columns:1fr !important; }
+  /* Industry filter pills: the longest label ("Consumer electronics & appliance warranty")
+     is wider than a phone viewport with white-space:nowrap. Let pills wrap their text and
+     cap at the container width so no pill spills off-screen. */
+  [data-iuc-tabs] > button { white-space:normal !important; max-width:100% !important; }
+  /* Testimonial photo/badge: keep desktop at the enlarged 125px/50px, but roll mobile back
+     to the pre-enlargement 100px/40px so the byline row doesn't crowd the narrow column. */
+  [data-testi-photo] { width:100px !important; height:100px !important; }
+  [data-testi-photo] > img { width:100px !important; height:100px !important; }
+  [data-testi-badge] { width:40px !important; height:40px !important; }
+  /* Mobile: anchor the photo to the top of the text block (next to name/title) instead of
+     centering against the full block, since the description wraps to many lines here. */
+  [data-testi-row] { align-items:flex-start !important; }
+}
+</style>
+<script src="industry-use-cases.js"></script>
+</helmet>
+
+<!-- ========================================================= -->
+<!-- ClaimSense Homepage redesign — Bull brand system          -->
+<!-- Content preserved verbatim from content/pages/home.md.    -->
+<!-- Inline styles used in place of Tailwind (Design Component  -->
+<!-- environment). See notes.md for the flag inventory.         -->
+<!-- ========================================================= -->
+
+
+
+<div style="overflow-x:clip;">
+
+<!-- ===================== HEADER ===================== -->
+<header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.88); backdrop-filter:blur(14px); border-bottom:1px solid #f0e6e3;">
+  <nav style="max-width:1280px; margin:0 auto; padding:14px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <!-- LEFT zone: ClaimSense logo (+ mobile-only “built by Bull”) -->
+    <div style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
+      <a href="#top" onClick="{{ goTop }}" style="display:flex; align-items:center;">
+        <img src="assets/logos/ClaimSense_logo_black.svg" alt="ClaimSense" style="height:32px; width:auto; transform:translateY(1.1px);">
+      </a>
+      <span data-mobile-badge="" style="display:none; align-items:center; gap:6px; padding-left:8px; border-left:1px solid #e5e7eb;">
+        <span style="font:400 10px/1.2 'Tosh A',sans-serif; color:#8a827d; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:22px; width:auto; transform:translateY(-0.5px);">
+      </span>
+    </div>
+    <!-- CENTER zone: nav links -->
+    <div style="display:flex; align-items:center; justify-content:center; gap:34px; flex:1 1 auto;" data-nav="">
+      <!-- Product dropdown: Features → Architecture → Use cases → Implementation -->
+      <div style="position:relative;" onMouseEnter="{{ openProduct }}" onMouseLeave="{{ closeProduct }}">
+        <button onClick="{{ toggleProduct }}" aria-haspopup="true" aria-expanded="{{ productOpen }}" style="display:inline-flex; align-items:center; gap:6px; background:none; border:none; cursor:pointer; font:500 14px 'Tosh A',sans-serif; color:#33302e; padding:0;" style-hover="color:#FF5539;">
+          Product
+          <svg width="11" height="7" viewBox="0 0 11 7" aria-hidden="true" style="transition:transform .2s; transform:{{ chevronRotate }};"><path d="M1 1L5.5 5.5L10 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+        <sc-if value="{{ productOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; z-index:60;">
+            <div style="background:#fff; border:1px solid #ece3df; border-radius:12px; box-shadow:0 20px 50px -16px rgba(0,40,112,0.25); padding:8px; min-width:220px;">
+              <a href="ClaimSense%20Features.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+              <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+              <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+              <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <!-- FUNCTIONAL-SPEC NEEDED: Our story routes to /our-story/ (separate page) -->
+      <a href="ClaimSense%20Our%20Story.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Our story</a>
+      <a href="ClaimSense%20Pricing.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Pricing</a>
+      <a href="ClaimSense%20Business%20Case.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Business case</a>
+    </div>
+    <!-- RIGHT zone: trust badge + divider + CTA -->
+    <div style="display:flex; align-items:center; flex:0 0 auto;" data-nav-right="">
+      <!-- Compact Bull endorsement / lockup (global chrome requirement) -->
+      <span style="display:flex; align-items:center; gap:8px;" data-trust-badge="">
+        <span style="font:400 14px/1.2 'Tosh A',sans-serif; color:#6b7280; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:26px; width:auto;">
+      </span>
+      <span style="width:1px; align-self:stretch; min-height:26px; background:#e5e7eb; margin-left:24px;"></span>
+      <button onClick="{{ scrollToDemo }}" data-nav-cta="" style="margin-left:24px; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:8px; padding:11px 22px; font:500 15px 'Roboto',sans-serif; cursor:pointer; box-shadow:0 2px 10px rgba(255,85,57,0.28); white-space:nowrap;">Book a walkthrough</button>
+      <button data-nav-burger="" type="button" aria-label="Open menu" aria-expanded="false" style="display:none; align-items:center; justify-content:center; width:44px; height:44px; padding:0; background:none; border:none; cursor:pointer; color:#0d0d0d;">
+        <svg data-burger-icon="" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </div>
+  </nav>
+  <!-- Mobile menu panel (toggled by hamburger ≤900px) -->
+  <div data-mobile-menu="" style="display:none; position:absolute; top:100%; right:16px; margin-top:8px; width:min(300px,calc(100vw - 32px)); background:#fff; border:1px solid #ece3df; border-radius:14px; box-shadow:0 24px 60px -18px rgba(0,40,112,0.3); padding:10px; z-index:70;">
+    <div style="font:600 11px 'Roboto',sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#a89f9a; padding:10px 12px 4px;">Product</div>
+    <a href="ClaimSense%20Features.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+    <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+    <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+    <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+    <div style="height:1px; background:#f0e6e3; margin:8px 6px;"></div>
+    <a href="ClaimSense%20Our%20Story.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Our story</a>
+    <a href="ClaimSense%20Pricing.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Pricing</a>
+    <a href="ClaimSense%20Business%20Case.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Business case</a>
+    <button data-mm-cta="" type="button" style="width:100%; margin-top:10px; background:#FF5539; color:#000; border:2px solid #FF5539; border-radius:9px; padding:13px; font:500 15px 'Roboto',sans-serif; cursor:pointer;">Book a walkthrough</button>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ===================== HERO ===================== -->
+<section style="position:relative; background:linear-gradient(180deg,#FFF7F5 0%,#ffffff 70%); padding:88px 32px 36px;">
+  <div style="max-width:1240px; margin:0 auto; position:relative;">
+    <div style="max-width:900px;" data-reveal="">
+      <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF5539; margin-bottom:22px;">Managed AI for Claims Operations</div>
+      <h1 style="font-family: 'Tosh A',sans-serif; font-weight: 900; font-size: clamp(40px,5.4vw,68px); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 48px; color: #0d0d0d; width: 930px; max-width: 100%">Put AI into claims without unpredictable<br>costs or operational risk</h1>
+      <p style="font-size:20px; line-height:1.55; color:#4a4340; max-width:740px; margin:0 0 32px;">Let AI take on the repetitive work that slows claims down, while your team focuses on judgement, customers, and exceptions.</p>
+      <p style="font-size:20px; line-height:1.55; color:#4a4340; max-width:740px; margin:0 0 32px;">ClaimSense gets it live and keeps it working. We manage implementation, adoption, AI costs, performance, and agreed service levels through one predictable per claim commercial model.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
+        <button onClick="{{ scrollToDemo }}" style="background:#FF5539; color:#000; border:none; border-radius:10px; padding:16px 32px; font:600 18px 'Roboto',sans-serif; cursor:pointer; box-shadow:0 4px 16px rgba(255,85,57,0.3);" data-cta="primary">Book a walkthrough</button>
+        <!-- FUNCTIONAL-SPEC NEEDED: Watch Demo Video — confirm asset/provider, modal vs inline, poster, captions, autoplay policy -->
+        
+      </div>
+    </div>
+
+    <!-- Hero proof points — grouped trust banner card -->
+    <!-- NEEDS-APPROVAL: hero performance metrics (10x, 90%, 100+) pending content/legal sign-off -->
+    <!-- Count-up hook: `data-countup-group` (NOT `data-hero-stats`) — see note in _setupReveal. -->
+    <div style="display:flex; flex-wrap:wrap; gap:0; margin-top:64px; background:#FAFAF9; border:1px solid #f1efed; border-radius:16px; padding:32px;" data-reveal="" data-countup-group="">
+      <div style="flex:1 1 200px; padding:0 28px;">
+        <!-- stopwatch / clock -->
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" style="display:block; margin-bottom:6px;">
+          <path d="M11.5 4h7" stroke="#002870" stroke-width="1.9" stroke-linecap="round"></path>
+          <path d="M15 4v3" stroke="#002870" stroke-width="1.9" stroke-linecap="round"></path>
+          <circle cx="15" cy="17" r="9" stroke="#002870" stroke-width="1.9"></circle>
+          <path d="M15 17v-5" stroke="#002870" stroke-width="1.9" stroke-linecap="round"></path>
+          <path d="M15 17l3.6 2.1" stroke="#002870" stroke-width="1.9" stroke-linecap="round"></path>
+        </svg>
+        <div aria-hidden="true" style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:42px; line-height:1; color:#002870;">Up to <span data-countup="" data-to="10" data-step="1" style="display:inline-block; text-align:left; min-width:2.4ch;">10</span>x</div>
+        <div aria-hidden="true" style="font-size:16px; color:#4b5563; margin-top:8px;">faster processing</div>
+        <span style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;">Up to 10x faster processing</span>
+      </div>
+      <div style="width:1px; background:#ebe8e5;"></div>
+      <div style="flex:1 1 200px; padding:0 28px;">
+        <!-- upward trend arrow -->
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" style="display:block; margin-bottom:6px;">
+          <path d="M4 21l7-7 4.5 4.5L26 7" stroke="#002870" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M19.5 7H26v6.5" stroke="#002870" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <div aria-hidden="true" style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:42px; line-height:1; color:#002870;">Up to <span data-countup="" data-to="90" data-step="10" style="display:inline-block; text-align:left; min-width:2.4ch;">90</span>%</div>
+        <div aria-hidden="true" style="font-size:16px; color:#4b5563; margin-top:8px;">automation rate</div>
+        <span style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;">Up to 90% automation rate</span>
+      </div>
+      <div style="width:1px; background:#ebe8e5;"></div>
+      <div style="flex:1 1 200px; padding:0 28px;">
+        <!-- two people -->
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" style="display:block; margin-bottom:6px;">
+          <circle cx="11" cy="10" r="3.4" stroke="#002870" stroke-width="1.9"></circle>
+          <circle cx="20" cy="10" r="3.4" stroke="#002870" stroke-width="1.9"></circle>
+          <path d="M4.5 23c0-3.7 2.9-6.3 6.5-6.3 1.5 0 2.9.5 4 1.3" stroke="#002870" stroke-width="1.9" stroke-linecap="round"></path>
+          <path d="M16.5 18c1.1-.8 2.5-1.3 4-1.3 3.6 0 5 2.6 5 6.3" stroke="#002870" stroke-width="1.9" stroke-linecap="round"></path>
+        </svg>
+        <div aria-hidden="true" style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:42px; line-height:1; color:#002870;"><span data-countup="" data-to="100" data-step="10" style="display:inline-block; text-align:left; min-width:3.2ch;">100</span>+</div>
+        <div aria-hidden="true" style="font-size:16px; color:#4b5563; margin-top:8px;">transformed into experts with AI</div>
+        <span style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;">100+ transformed into experts with AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INDUSTRY USE CASES ===================== -->
+<!-- Data: industry-use-cases.js (single source of truth). Variant per `confidence`. -->
+<section style="padding:72px 32px; background:#FFF7F5;">
+  <div style="max-width:1140px; margin:0 auto;">
+    <div style="max-width:820px; margin:0 0 34px;" data-reveal="">
+      <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF5539; margin-bottom:16px;">Across industries</div>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,44px); line-height:1.1; margin:0; color:#0d0d0d;">ClaimSense is not only for insurance. Explore use cases across industries.</h2>
+    </div>
+    <!-- Tabs — one per industry, horizontal scroll on mobile -->
+    <div data-iuc-tabs="" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px;" data-reveal="">
+      <sc-for list="{{ iucTabs }}" as="t" hint-placeholder-count="6">
+        <button type="button" onClick="{{ t.select }}" aria-pressed="{{ t.active }}" style="{{ t.style }}" style-hover="{{ t.hoverStyle }}">{{ t.label }}</button>
+      </sc-for>
+    </div>
+    <!-- Active panel -->
+    <div style="opacity:{{ iucOpacity }}; transition:opacity .18s ease;">
+      <div data-iuc-grid="" style="display:grid; gap:18px;">
+        <sc-for list="{{ iucItems }}" as="it" hint-placeholder-count="3">
+          <div style="{{ it.cardStyle }}">
+            <div style="{{ it.titleStyle }}">{{ it.title }}</div>
+            <sc-if value="{{ it.hasDesc }}" hint-placeholder-val="{{ false }}">
+              <p style="font:400 15px/1.55 'Roboto',sans-serif; color:#54504d; margin:8px 0 0;">{{ it.desc }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <!-- Secondary CTA: text link, bottom-right -->
+      <div style="display:flex; justify-content:flex-end; margin-top:32px; padding-bottom:8px;">
+        <a href="ClaimSense%20Use%20Cases.dc.html" style="font:500 17px 'Roboto',sans-serif; color:#002870; display:inline-flex; align-items:center; gap:6px;" style-hover="color:#FF5539;">Explore all use cases →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<a id="product"></a>
+<section style="padding:64px 40px 72px; background:#002870;">
+  <div style="max-width:1140px; margin:0 auto;" data-reveal="">
+    <!-- NEEDS-APPROVAL: product dashboard screenshot, client.claimsense.app, Claims Processed 24,847, AI Accuracy 96.8% — supply approved asset; do not carry the old "/public/product-screenshot.png" placeholder -->
+    <sc-if value="{{ useScreenshot }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:22px;">
+        <div style="background:#0f244d; border:1px solid #20356b; border-radius:14px; padding:16px 24px; text-align:center;">
+          <div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:34px; line-height:1; color:#ffffff;">Up to 10x</div>
+          <div style="font:500 12px 'Roboto',sans-serif; letter-spacing:0.03em; color:#9aa6c8; margin-top:8px;">faster processing</div>
+        </div>
+        <div data-vid-frame style="width:100%; border:1px solid #eadfdb; border-radius:16px; overflow:hidden; box-shadow:0 30px 70px -30px rgba(0,40,112,0.28); background:#fff;">
+          <div data-vid-chrome style="align-items:center; gap:8px; padding:12px 16px; background:#f7f2f0; border-bottom:1px solid #eadfdb;">
+            <span style="width:11px; height:11px; border-radius:50%; background:#ff5f57;"></span>
+            <span style="width:11px; height:11px; border-radius:50%; background:#febc2e;"></span>
+            <span style="width:11px; height:11px; border-radius:50%; background:#28c840;"></span>
+            <span style="margin-left:14px; background:#fff; border:1px solid #e8ddd8; border-radius:7px; padding:5px 16px; font:400 13px 'Roboto',sans-serif; color:#8a7f7b;">client.claimsense.app</span>
+          </div>
+          <div data-vid-stage style="background:#000; line-height:0;">
+            <img data-vid-poster src="assets/screenshots/feature-01-preprocessing-dashboard.png" alt="ClaimSense Dashboard — AI-powered claims processing interface" style="display:block; width:100%; height:100%; object-fit:cover;">
+            <video data-vid-el preload="none" playsinline crossorigin="anonymous" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" style="position:absolute; inset:0; width:100%; height:100%; background:#000;">
+              <source src="assets/video/claimsense-video-intro.mp4" type="video/mp4">
+              <track kind="captions" srclang="en" label="English">
+            </video>
+            <div data-vid-dim style="position:absolute; inset:0; background:rgba(0,40,112,0.34);"></div>
+            <div data-vid-playbtn style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+              <button data-vid-play type="button" aria-label="Play product video" style="width:76px; height:76px; border-radius:50%; border:2px solid #002870; background:#ffffff; color:#002870; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 10px 30px -8px rgba(0,0,0,0.5);" style-hover="background:#eef1f8;">
+                <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" style="margin-left:3px;"><path d="M8 5v14l11-7z"></path></svg>
+              </button>
+            </div>
+            <div data-vid-controls style="position:absolute; left:0; right:0; bottom:0; display:flex; align-items:center; gap:12px; padding:14px 16px; background:linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));">
+              <button data-vid-toggle type="button" aria-label="Pause" style="flex:0 0 auto; width:38px; height:38px; padding:0; display:flex; align-items:center; justify-content:center; background:none; border:none; border-radius:8px; color:#fff; cursor:pointer;" style-hover="background:rgba(255,255,255,0.16);"></button>
+              <input data-vid-seek type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek" style="flex:1 1 auto; accent-color:#7788F9; cursor:pointer; height:4px;">
+              <span data-vid-time style="flex:0 0 auto; font:500 12px 'Roboto',sans-serif; color:#fff; min-width:88px; text-align:right; line-height:1; font-variant-numeric:tabular-nums;">0:00 / 0:00</span>
+              <button data-vid-mute type="button" aria-label="Mute" style="flex:0 0 auto; width:38px; height:38px; padding:0; display:flex; align-items:center; justify-content:center; background:none; border:none; border-radius:8px; color:#fff; cursor:pointer;" style-hover="background:rgba(255,255,255,0.16);"></button>
+              <button data-vid-fs type="button" aria-label="Enter fullscreen" style="flex:0 0 auto; width:38px; height:38px; padding:0; display:flex; align-items:center; justify-content:center; background:none; border:none; border-radius:8px; color:#fff; cursor:pointer;" style-hover="background:rgba(255,255,255,0.16);">
+                <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg>
+              </button>
+              <div style="flex:0 0 auto; position:relative;">
+                <button data-vid-kebab type="button" aria-haspopup="menu" aria-expanded="false" aria-label="More options" style="width:38px; height:38px; padding:0; display:flex; align-items:center; justify-content:center; background:none; border:none; border-radius:8px; color:#fff; cursor:pointer;" style-hover="background:rgba(255,255,255,0.16);">
+                  <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><circle cx="12" cy="19" r="1.7"></circle></svg>
+                </button>
+                <div data-vid-menu role="menu" style="display:none; position:absolute; right:0; bottom:calc(100% + 8px); background:#0f244d; border:1px solid #20356b; border-radius:10px; padding:6px; min-width:186px; box-shadow:0 16px 40px -12px rgba(0,0,0,0.6);">
+                  <button data-vid-pip type="button" role="menuitem" style="display:flex; align-items:center; gap:10px; width:100%; background:none; border:none; color:#fff; font:500 14px 'Roboto',sans-serif; padding:9px 12px; border-radius:7px; cursor:pointer; text-align:left;" style-hover="background:#1a2c54;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"></rect><rect x="12" y="11" width="7" height="5.5" rx="1" fill="currentColor" stroke="none"></rect></svg>
+                    Picture-in-Picture
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0f244d; border:1px solid #20356b; border-radius:14px; padding:16px 24px; text-align:center;">
+          <div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:34px; line-height:1; color:#7788F9;">96%</div>
+          <div style="font:500 12px 'Roboto',sans-serif; letter-spacing:0.03em; color:#9aa6c8; margin-top:8px;">AI accuracy</div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ usePlaceholder }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1.5px dashed #d9cfca; border-radius:16px; aspect-ratio:16/8; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; background:repeating-linear-gradient(135deg,#fbf5f3,#fbf5f3 12px,#f7efec 12px,#f7efec 24px);">
+        <span style="font:500 14px 'Roboto Mono',monospace; color:#a9988f;">[ approved product screenshot — client.claimsense.app ]</span>
+        <span style="font:400 13px 'Roboto',sans-serif; color:#b7a89f;">AI-powered claims processing interface</span>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<!-- ===================== BULL TRUST BAR ===================== -->
+<!-- Placement per brief: after product/dashboard proof, before customer testimonials -->
+<sc-if value="{{ showTrustBar }}" hint-placeholder-val="{{ true }}">
+<section style="background:#FFE4DF; padding:36px 32px;">
+  <div style="max-width:1240px; margin:0 auto; min-height:150px; display:flex; flex-wrap:wrap; align-items:center; gap:0;" data-trustbar="">
+    <!-- Column 1: Bull credibility block -->
+    <div style="flex:1 1 360px; min-width:300px; display:flex; flex-direction:column; gap:12px; padding:0 40px;" data-tb-cred="">
+      <div style="font:500 11px/1 'Roboto',sans-serif; letter-spacing:0.12em; text-transform:uppercase; color:#9a4434; white-space:nowrap;">BUILT BY</div>
+      <img src="assets/bull/BULL_LOGO_NAVY_RGB.svg" alt="Bull" style="height:46px; width:auto; align-self:flex-start;" data-tb-logo="">
+      <div style="font:400 14px/1.45 'Roboto',sans-serif; color:#6b7280; max-width:340px;" data-tb-desc="">Leading European technology group focused on sovereign AI and data.</div>
+    </div>
+    <div style="width:1px; align-self:stretch; min-height:110px; background:rgba(154,68,52,0.22);" data-tb-div=""></div>
+    <!-- Column 2 -->
+    <div style="flex:1 1 140px; text-align:center; padding:0 24px;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:40px; line-height:1; color:#002870;">5K+</div><div style="font:400 14px 'Roboto',sans-serif; color:#6b7280; margin-top:10px;">engineers and experts</div></div>
+    <div style="width:1px; align-self:stretch; min-height:110px; background:rgba(154,68,52,0.22);" data-tb-div=""></div>
+    <!-- Column 3 -->
+    <div style="flex:1 1 140px; text-align:center; padding:0 24px;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:40px; line-height:1; color:#002870;">28</div><div style="font:400 14px 'Roboto',sans-serif; color:#6b7280; margin-top:10px;">countries served</div></div>
+    <div style="width:1px; align-self:stretch; min-height:110px; background:rgba(154,68,52,0.22);" data-tb-div=""></div>
+    <!-- Column 4 -->
+    <div style="flex:1 1 140px; text-align:center; padding:0 24px;"><div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:40px; line-height:1; color:#002870;">14%</div><div style="font:400 14px 'Roboto',sans-serif; color:#6b7280; margin-top:10px;">of revenue invested in R&amp;D</div></div>
+  </div>
+</section>
+</sc-if>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section style="padding:80px 32px; background:#fff;">
+  <div style="max-width:1140px; margin:0 auto;">
+    <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,42px); text-align:center; margin:0 0 48px; color:#0d0d0d;" data-reveal="">Trusted by industry leaders</h2>
+    <!-- NEEDS-APPROVAL: testimonial text, attributed names/titles, and customer logos (Tuito, Pillow) — include as-is, pending client sign-off -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:28px;" data-reveal="">
+      <article style="background:#FFF7F5; border:1px solid #f3e4df; border-radius:16px; padding:32px;">
+        <svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true" style="margin-bottom:18px;"><path d="M0 26V14C0 6 5 1 14 0L15 5C9 6 7 9 7 13H14V26H0ZM20 26V14C20 6 25 1 34 0L35 5C29 6 27 9 27 13H34V26H20Z" fill="#FFADA0"></path></svg>
+        <p style="font-size:17px; line-height:1.6; color:#33302e; margin:0 0 24px;">In my decades leading major European insurers, I've watched companies drown in headcount, technical debt, and IT costs just to keep up. When we started Tuito, I knew we had to do it differently. ClaimSense gave us an AI-first foundation that lets my team scale without the bloat. For me, that's a real game-changer.</p>
+        <div style="display:flex; align-items:center; gap:18px; padding-top:20px; border-top:1px solid #f0ddd7;" data-testi-row="">
+          <div style="position:relative; flex:none; width:125px; height:125px;" data-testi-photo="">
+            <img src="assets/testimonials/petr-zapletal.jpg" alt="Petr Zepletal" style="width:125px; height:125px; border-radius:50%; object-fit:cover; display:block;">
+            <div style="position:absolute; left:-12px; bottom:-12px; width:50px; height:50px; border-radius:50%; background:#fff; border:2px solid #FFF7F5; box-shadow:0 1px 3px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; overflow:hidden;" data-testi-badge="">
+              <img src="assets/logos/tuito_logo.png" alt="" aria-hidden="true" style="width:82%; height:82%; object-fit:contain;">
+            </div>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="font:500 15px 'Roboto',sans-serif; color:#0d0d0d;">Petr Zepletal</div>
+            <div style="font-size:13px; color:#7a716d;">Co-Founder, Tuito</div>
+            <p style="font-size:13px; line-height:1.5; color:#8a807c; margin:12px 0 0;"><i><b>Tuito</b>: A Czech insurtech pioneer bringing embedded insurance to 100+ e-commerce platforms and partners, letting customers get covered right at checkout.</i></p>
+          </div>
+        </div>
+      </article>
+      <article style="background:#FFF7F5; border:1px solid #f3e4df; border-radius:16px; padding:32px;">
+        <svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true" style="margin-bottom:18px;"><path d="M0 26V14C0 6 5 1 14 0L15 5C9 6 7 9 7 13H14V26H0ZM20 26V14C20 6 25 1 34 0L35 5C29 6 27 9 27 13H34V26H20Z" fill="#FFADA0"></path></svg>
+        <p style="font-size:17px; line-height:1.6; color:#33302e; margin:0 0 24px;">We hit the point where external claim handlers just weren't cutting it anymore. ClaimSense gave us a real kickstart — building this internally would have cost us time we don't have. It's been key in scaling my team and delivering a better customer experience. Speed is everything, and this AI-first approach keeps us ahead instead of drowning in legacy systems like our competitors.</p>
+        <div style="display:flex; align-items:center; gap:18px; padding-top:20px; border-top:1px solid #f0ddd7;" data-testi-row="">
+          <div style="position:relative; flex:none; width:125px; height:125px;" data-testi-photo="">
+            <img src="assets/testimonials/marcel-beno.png" alt="Marcel Beno" style="width:125px; height:125px; border-radius:50%; object-fit:cover; display:block;">
+            <div style="position:absolute; left:-12px; bottom:-12px; width:50px; height:50px; border-radius:50%; background:#fff; border:2px solid #FFF7F5; box-shadow:0 1px 3px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; overflow:hidden;" data-testi-badge="">
+              <img src="assets/logos/pillow_logo.png" alt="" aria-hidden="true" style="width:82%; height:82%; object-fit:contain;">
+            </div>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="font:500 15px 'Roboto',sans-serif; color:#0d0d0d;">Marcel Beno</div>
+            <div style="font-size:13px; color:#7a716d;">COO, Pillow</div>
+            <p style="font-size:13px; line-height:1.5; color:#8a807c; margin:12px 0 0;"><i><b>Pillow</b>: A fast-growing digital insurer disrupting the Central European market with 250,000+ customers across Czech Republic and Slovakia.</i></p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BEFORE / AFTER ===================== -->
+<section style="padding:80px 32px; background:#FFF7F5;">
+  <div style="max-width:1140px; margin:0 auto;">
+    <!-- Left-aligned editorial header -->
+    <header style="max-width:680px; margin-bottom:48px;" data-reveal="">
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,42px); line-height:1.1; margin:0 0 18px; color:#002870; text-align:left;">From manual chaos<br>to AI-powered efficiency</h2>
+      <p style="font-size:22px; line-height:1.45; font-weight:500; color:#374151; margin:0; text-align:left;">See the dramatic difference ClaimSense makes<br>in your claims operation.</p>
+    </header>
+
+    <!-- Asymmetric 40/60 comparison: BEFORE = 40%, AFTER = 60% (25% wider) -->
+    <div style="display:grid; grid-template-columns:2fr 3fr; gap:24px; align-items:stretch;" data-chaos-grid="" data-reveal="">
+      <!-- BEFORE — white card, muted, dark X marks -->
+      <div style="background:#fff; border:1px solid #e5e7eb; border-radius:18px; padding:34px;">
+        <div style="display:inline-flex; align-items:center; gap:9px; font:600 12px 'Roboto',sans-serif; letter-spacing:0.1em; text-transform:uppercase; color:#6b7280; background:#f3f4f6; border-radius:20px; padding:6px 14px; margin-bottom:24px;">Before</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:15px;">
+          <li style="display:flex; gap:12px; font-size:15px; color:#4b5563;"><span style="color:#1f2937; flex:none; font-weight:700;">✕</span>Manual data gathering across systems</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#4b5563;"><span style="color:#1f2937; flex:none; font-weight:700;">✕</span>Reading documents &amp; replaying calls</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#4b5563;"><span style="color:#1f2937; flex:none; font-weight:700;">✕</span>Time lost searching for information</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#4b5563;"><span style="color:#1f2937; flex:none; font-weight:700;">✕</span>Rebuilding case context from scratch</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#4b5563;"><span style="color:#1f2937; flex:none; font-weight:700;">✕</span>High cognitive load &amp; task switching</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#4b5563;"><span style="color:#1f2937; flex:none; font-weight:700;">✕</span>Uncertainty in decision-making</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#4b5563;"><span style="color:#1f2937; flex:none; font-weight:700;">✕</span>Work pressure increases with volume</li>
+        </ul>
+      </div>
+      <!-- AFTER — Dream-in-Blue card, dominant, white text + white checkmarks -->
+      <div style="background:#002870; border-radius:18px; padding:40px; color:#fff; box-shadow:0 24px 60px -28px rgba(0,40,112,0.6); position:relative; overflow:hidden;">
+        <div style="display:inline-flex; align-items:center; gap:9px; font:600 12px 'Roboto',sans-serif; letter-spacing:0.1em; text-transform:uppercase; color:#002870; background:#fff; border-radius:20px; padding:6px 14px; margin-bottom:24px; position:relative;">After</div>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:16px 32px; position:relative;" data-after-list="">
+          <li style="display:flex; gap:12px; font-size:16px; color:#fff;"><span style="flex:none;"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5L8.5 15L16 5.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Pre-structured claims ready to review</li>
+          <li style="display:flex; gap:12px; font-size:16px; color:#fff;"><span style="flex:none;"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5L8.5 15L16 5.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>AI summaries instead of raw materials</li>
+          <li style="display:flex; gap:12px; font-size:16px; color:#fff;"><span style="flex:none;"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5L8.5 15L16 5.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Instant answers via AI chat &amp; search</li>
+          <li style="display:flex; gap:12px; font-size:16px; color:#fff;"><span style="flex:none;"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5L8.5 15L16 5.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Clear, complete case context upfront</li>
+          <li style="display:flex; gap:12px; font-size:16px; color:#fff;"><span style="flex:none;"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5L8.5 15L16 5.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Lower cognitive load &amp; focused work</li>
+          <li style="display:flex; gap:12px; font-size:16px; color:#fff;"><span style="flex:none;"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5L8.5 15L16 5.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Confident decisions with AI support</li>
+          <li style="display:flex; gap:12px; font-size:16px; color:#fff;"><span style="flex:none;"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5L8.5 15L16 5.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Stable workload despite volume growth</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CTA below the AFTER card, right-aligned. Symmetric spacing: top gap == section bottom padding (80px) -->
+    <div style="display:flex; justify-content:flex-end; margin-top:80px;" data-reveal="">
+      <button onClick="{{ scrollToDemo }}" style="display:inline-flex; align-items:center; gap:11px; background:#FF5539; color:#000; border:none; border-radius:10px; padding:16px 32px; font:600 18px 'Roboto',sans-serif; cursor:pointer; box-shadow:0 6px 20px rgba(255,85,57,0.3); white-space:nowrap;" data-cta="primary">See your after state <span style="font-size:20px; line-height:1;" aria-hidden="true">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY CLAIMSENSE (BUILD VS BUY) ===================== -->
+<a id="why"></a>
+<section style="padding:80px 32px; background:#fff;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:48px;" data-reveal="">
+      <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5A514D; margin-bottom:14px;">BUILD VS. <span style="color:#FF5539;">PARTNER</span> VS. BUY</div>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,42px); margin:0 0 12px; color:#0d0d0d;">Why partner with ClaimSense</h2>
+      <p style="font-size:18px; color:#5a514d; margin:0;">Choose the speed of SaaS without taking on the cost and operational burden of building and running AI yourself.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:24px; align-items:start;" data-reveal="">
+      <!-- Build -->
+      <div style="background:#fafafa; border:1px solid #ececec; border-radius:16px; padding:30px;">
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:24px; margin:0 0 6px; color:#0d0d0d;">Build</h3>
+        <p style="font-size:14px; color:#7a716d; margin:0 0 22px; min-height:42px;">Develop a custom AI solution in-house with your own engineering team.</p>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px; color:#54504d;">
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Slow time to market</li>
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Expensive — no economy of scale + overhead costs</li>
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Risky investment — what if an ideal solution already exists?</li>
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Need to manage IT costs on your own</li>
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>Tailored to your needs</li>
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>No lock-in — you own the IP</li>
+        </ul>
+      </div>
+      <!-- ClaimSense (recommended) -->
+      <div style="background:#fff; border:3px solid #FF5539; border-radius:16px; padding:30px; position:relative; box-shadow:0 20px 50px -24px rgba(255,85,57,0.45);">
+        <span style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:#FF5539; color:#000; font:500 11px 'Roboto',sans-serif; letter-spacing:0.08em; text-transform:uppercase; border-radius:20px; padding:5px 16px;; border:3px solid #FF5539;">our way</span>
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:24px; margin:6px 0 6px; color:#FF5539;">ClaimSense</h3>
+        <p style="font-size:14px; color:#5a514d; margin:0 0 22px; min-height:42px;">Leverage our proven AI products and pay only for results. Zero risk, maximum speed.</p>
+        <ul style="list-style:none; padding:0; margin:0 0 20px; display:flex; flex-direction:column; gap:11px; font-size:14px; color:#33302e;">
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>Quick time to market</li>
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>No risk from product development</li>
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>Pay according to business impact</li>
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>Tailored to your needs — product adapted for you</li>
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>No lock-in — you own the IP</li>
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>All costs included — implementation, IT, adoption</li>
+        </ul>
+        <!-- NEEDS-APPROVAL: "backed by the French State (APE)" claim — pending legal/product sign-off -->
+        <div style="background:#FFF7F5; border-radius:10px; padding:14px 16px; font-size:13px; line-height:1.5; color:#7a3b2c;"><strong style="color:#9a4434;">Why can we offer this?</strong> We are backed by the French State (APE) and we are on a mission to create something impactful on an entire European level. No quick-ROI pressure, no squeezing gains before the product can truly shape Europe's competitiveness.</div>
+      </div>
+      <!-- Buy SaaS -->
+      <div style="background:#fafafa; border:1px solid #ececec; border-radius:16px; padding:30px;">
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:24px; margin:0 0 6px; color:#0d0d0d;">Buy SaaS</h3>
+        <p style="font-size:14px; color:#7a716d; margin:0 0 22px; min-height:42px;">Subscribe to an off-the-shelf AI platform from a third-party vendor.</p>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px; color:#54504d;">
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>Quick time to market</li>
+          <li style="display:flex; gap:10px;"><span style="color:#00B290;">✓</span>No risk from product development</li>
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Pay for usage</li>
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Vendor lock-in — you can't buy it, it's their IP</li>
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Business outcome not guaranteed</li>
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Extra costs for implementation services (consulting / IT partners)</li>
+          <li style="display:flex; gap:10px;"><span style="color:#bbb;">—</span>Duplicating IT investments — your IT already built data platforms</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY CLAIMSENSE CAN TAKE ON MORE ===================== -->
+<section style="padding:128px 32px; background:#fff;">
+  <div style="max-width:820px; margin:0 auto; text-align:center;" data-reveal="">
+    <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF5539; margin-bottom:20px;">Why ClaimSense can take on more</div>
+    <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,42px); line-height:1.12; margin:0 0 24px; color:#002870;">Built by Bull. Designed to take operational risk off your team.</h2>
+    <p style="font-size:18px; line-height:1.65; color:#4a4340; margin:0;">Bull gives ClaimSense the engineering depth, infrastructure, and long-term backing to do more than sell software. We can help you get live faster, support adoption, manage AI costs, and run the operation to agreed service levels.</p>
+  </div>
+</section>
+
+<!-- ===================== REAL OUTCOMES ===================== -->
+<section style="padding:80px 32px; background:#0a1b3d; color:#fff;">
+  <div style="max-width:1140px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:48px;" data-reveal="">
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,42px); margin:0 0 12px;">What better claims operations look like</h2>
+      <p style="font-size:18px; color:#c3cbe0; margin:0;">Faster handling, lower operating cost, and more consistent decisions, without asking your team to build and run an AI operation.</p>
+    </div>
+    <!-- NEEDS-APPROVAL: outcome metrics (10x, 70%, 100+, 96%) -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px;" data-reveal="" data-countup-group="">
+      <div style="background:#0f244d; border:1px solid #20356b; border-radius:14px; padding:26px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" style="flex:none;">
+            <path d="M11.5 4h7" stroke="#FF7761" stroke-width="1.9" stroke-linecap="round"></path>
+            <path d="M15 4v3" stroke="#FF7761" stroke-width="1.9" stroke-linecap="round"></path>
+            <circle cx="15" cy="17" r="9" stroke="#FF7761" stroke-width="1.9"></circle>
+            <path d="M15 17v-5" stroke="#FF7761" stroke-width="1.9" stroke-linecap="round"></path>
+            <path d="M15 17l3.6 2.1" stroke="#FF7761" stroke-width="1.9" stroke-linecap="round"></path>
+          </svg>
+          <div aria-hidden="true" style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:46px; line-height:1; color:#FF7761;"><span data-countup="" data-to="10" style="display:inline-block; text-align:right; min-width:2.1ch;">10</span>x</div>
+          <span style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;">10x</span>
+        </div>
+        <div style="font:500 15px 'Roboto',sans-serif; color:#fff; margin:10px 0 5px;">Faster Processing</div><p style="font-size:13px; color:#9aa6c8; margin:0;">Reduce claim processing time from days to hours with AI automation.</p></div>
+      <div style="background:#0f244d; border:1px solid #20356b; border-radius:14px; padding:26px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" style="flex:none;">
+            <path d="M4 21l7-7 4.5 4.5L26 7" stroke="#FFB600" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M19.5 7H26v6.5" stroke="#FFB600" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <div aria-hidden="true" style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:46px; line-height:1; color:#FFB600;"><span data-countup="" data-to="70" style="display:inline-block; text-align:right; min-width:2.1ch;">70</span>%</div>
+          <span style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;">70%</span>
+        </div>
+        <div style="font:500 15px 'Roboto',sans-serif; color:#fff; margin:10px 0 5px;">Cost Reduction</div><p style="font-size:13px; color:#9aa6c8; margin:0;">Lower operational costs through automated workflows and reduced manual effort.</p></div>
+      <div style="background:#0f244d; border:1px solid #20356b; border-radius:14px; padding:26px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" style="flex:none;">
+            <circle cx="11" cy="10" r="3.4" stroke="#00B290" stroke-width="1.9"></circle>
+            <circle cx="20" cy="10" r="3.4" stroke="#00B290" stroke-width="1.9"></circle>
+            <path d="M4.5 23c0-3.7 2.9-6.3 6.5-6.3 1.5 0 2.9.5 4 1.3" stroke="#00B290" stroke-width="1.9" stroke-linecap="round"></path>
+            <path d="M16.5 18c1.1-.8 2.5-1.3 4-1.3 3.6 0 5 2.6 5 6.3" stroke="#00B290" stroke-width="1.9" stroke-linecap="round"></path>
+          </svg>
+          <div aria-hidden="true" style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:46px; line-height:1; color:#00B290;"><span data-countup="" data-to="100" style="display:inline-block; text-align:right; min-width:3ch;">100</span>+</div>
+          <span style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;">100+</span>
+        </div>
+        <div style="font:500 15px 'Roboto',sans-serif; color:#fff; margin:10px 0 5px;">Happy Users</div><p style="font-size:13px; color:#9aa6c8; margin:0;">Transformed into Experts with AI.</p></div>
+      <div style="background:#0f244d; border:1px solid #20356b; border-radius:14px; padding:26px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" style="flex:none;">
+            <circle cx="15" cy="15" r="11" stroke="#7788F9" stroke-width="1.9"></circle>
+            <circle cx="15" cy="15" r="7.3" stroke="#7788F9" stroke-width="1.9"></circle>
+            <circle cx="15" cy="15" r="3.7" stroke="#7788F9" stroke-width="1.9"></circle>
+            <circle cx="15" cy="15" r="1.5" fill="#7788F9"></circle>
+          </svg>
+          <div aria-hidden="true" style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:46px; line-height:1; color:#7788F9;"><span data-countup="" data-to="96" style="display:inline-block; text-align:right; min-width:2.1ch;">96</span>%</div>
+          <span style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;">96%</span>
+        </div>
+        <div style="font:500 15px 'Roboto',sans-serif; color:#fff; margin:10px 0 5px;">AI Accuracy</div><p style="font-size:13px; color:#9aa6c8; margin:0;">High-precision decisions backed by transparent reasoning and audit trails.</p></div>
+    </div>
+    <div style="text-align:center; margin-top:40px;" data-reveal="">
+      <p style="font-size:14px; color:#9aa6c8; margin:0;">Trusted across Insurance · Pharma &amp; Health · Banking &amp; Lending · Telecommunications · Logistics · Energy &amp; Utilities</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING TEASER ===================== -->
+<a id="pricing"></a>
+<section style="padding:80px 32px; background:#fff;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:44px;" data-reveal="">
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,42px); margin:0 0 12px; color:#0d0d0d;">Finally a transparent price of AI</h2>
+      <p style="font-size:18px; color:#5a514d; margin:0; max-width:680px; margin-left:auto; margin-right:auto;">Our pricing includes everything — cloud infrastructure, AI model tokens, updates, and security. No hidden fees. What you see is what you pay.</p>
+    </div>
+    <!-- NEEDS-APPROVAL: price & package facts (€3/claim, €5/claim, user counts, SLAs, delivery time) -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px;" data-reveal="">
+      <div style="border:1px solid #ecdcd6; border-radius:16px; padding:32px; background:#fff;">
+        <div style="font:500 12px 'Roboto',sans-serif; letter-spacing:0.1em; text-transform:uppercase; color:#7a716d; margin-bottom:8px;">Quick Start</div>
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:26px; margin:0 0 16px; color:#0d0d0d;">Analytical Agent</h3>
+        <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:22px;"><span style="font-family: 'Tosh A',sans-serif; font-weight: 900; font-size: 40px; color: #002870">from €3</span><span style="font-size:15px; color:#7a716d;">/claim</span></div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px; color:#54504d;">
+          <li style="display:flex; gap:10px;"><span style="color:#FF5539;">›</span>Setup in 1–2 weeks</li>
+          <li style="display:flex; gap:10px;"><span style="color:#FF5539;">›</span>Batch analysis</li>
+          <li style="display:flex; gap:10px;"><span style="color:#FF5539;">›</span>Basic SLA</li>
+          <li style="display:flex; gap:10px;"><span style="color:#FF5539;">›</span>Up to 10 users</li>
+        </ul>
+      </div>
+      <div style="border:3px solid #002870; border-radius:16px; padding:32px; background:#fff;">
+        <div style="font:500 12px 'Roboto',sans-serif; letter-spacing:0.1em; text-transform:uppercase; color:#002870; margin-bottom:8px;">Full Scale</div>
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:26px; margin:0 0 16px; color:#0d0d0d;">AI-native Platform</h3>
+        <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:22px;"><span style="font-family: 'Tosh A',sans-serif; font-weight: 900; font-size: 40px; color: #FF5539">from €5</span><span style="font-size:15px; color:#7a716d;">/claim</span></div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px; color:#54504d;">
+          <li style="display:flex; gap:10px;"><span style="color:#002870;">›</span>Full integration</li>
+          <li style="display:flex; gap:10px;"><span style="color:#002870;">›</span>Real-time processing; chat with cases; operational platform</li>
+          <li style="display:flex; gap:10px;"><span style="color:#002870;">›</span>24/7 SLA</li>
+          <li style="display:flex; gap:10px;"><span style="color:#002870;">›</span>Up to 20 users</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:36px;" data-reveal="">
+      <a href="ClaimSense%20Pricing.dc.html" data-cta="pricing" style="display:inline-block; background:#002870; color:#fff; border-radius:10px; padding:14px 30px; font:500 16px 'Roboto',sans-serif;">See full pricing &amp; packages</a>
+      <p style="font-size:14px; color:#7a716d; margin:16px 0 0;">Compare packages, optional add-ons, and request a custom quote.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section style="padding:80px 32px; background:#FFF7F5;">
+  <div style="max-width:820px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:44px;" data-reveal="">
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,42px); margin:0 0 12px; color:#0d0d0d;">Common questions</h2>
+      <p style="font-size:18px; color:#5a514d; margin:0;">Quick answers to the questions we hear most from claims teams evaluating ClaimSense.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px;" data-reveal="">
+      <sc-for list="{{ faqs }}" as="faq" hint-placeholder-count="4">
+        <div style="background:#fff; border:1px solid #f0e0da; border-radius:12px; overflow:hidden;">
+          <button onClick="{{ faq.toggle }}" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px 24px; background:none; border:none; cursor:pointer; text-align:left;">
+            <span style="font:500 17px 'Roboto',sans-serif; color:#0d0d0d;">{{ faq.q }}</span>
+            <span style="font-family:'Tosh A',sans-serif; font-weight:300; font-size:26px; color:#FF5539; flex:none; line-height:1; transform:{{ faq.iconRotate }};">+</span>
+          </button>
+          <sc-if value="{{ faq.open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 24px 22px; font-size:15px; line-height:1.6; color:#54504d;">{{ faq.a }}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div style="text-align:center; margin-top:32px;" data-reveal="">
+      <a href="ClaimSense%20FAQ.dc.html" style="display:inline-flex; align-items:center; gap:8px; font:500 16px 'Roboto',sans-serif; color:#FF5539;">View all frequently asked questions <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DEMO CONVERSION ===================== -->
+<a id="demo"></a>
+<section style="padding:80px 32px; background:#0a1b3d; color:#fff; position:relative; overflow:hidden;">
+  <img src="assets/bull/Bull_symbol_white.svg" alt="" aria-hidden="true" style="position:absolute; right:40px; bottom:40px; width:240px; opacity:0.12; pointer-events:none;">
+  <div style="max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:56px; align-items:start; position:relative;">
+    <div data-reveal="">
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(26px,3vw,38px); line-height:1.1; margin:0 0 20px;">You have bigger priorities than building your own AI agentic platform for claims &amp; ops</h2>
+      <p style="font-size:18px; line-height:1.6; color:#c3cbe0; margin:0 0 32px;">Leave the AI-heavy lifting to us. Book a 30-minute call and see how your team can benefit from client intelligence right away — no internal build required.</p>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; gap:15px;"><span style="flex:none; width:30px; height:30px; border-radius:8px; background:#FF5539; display:flex; align-items:center; justify-content:center; font:500 15px 'Roboto',sans-serif;; border:3px solid #FF5539;">1</span><div><div style="font:500 16px 'Roboto',sans-serif; color:#fff;">Walk through your claims workflow</div><p style="font-size:14px; color:#9aa6c8; margin:3px 0 0;">See how ClaimSense would handle representative cases from intake to resolution.</p></div></div>
+        <div style="display:flex; gap:15px;"><span style="flex:none; width:30px; height:30px; border-radius:8px; background:#FF5539; display:flex; align-items:center; justify-content:center; font:500 15px 'Roboto',sans-serif;; border:3px solid #FF5539;">2</span><div><div style="font:500 16px 'Roboto',sans-serif; color:#fff;">Assess your route to live operations</div><p style="font-size:14px; color:#9aa6c8; margin:3px 0 0;">Review the data sources, workflow scope, adoption needs, and likely rollout path.</p></div></div>
+        <div style="display:flex; gap:15px;"><span style="flex:none; width:30px; height:30px; border-radius:8px; background:#FF5539; display:flex; align-items:center; justify-content:center; font:500 15px 'Roboto',sans-serif;; border:3px solid #FF5539;">3</span><div><div style="font:500 16px 'Roboto',sans-serif; color:#fff;">Early-adopter pricing</div><p style="font-size:14px; color:#9aa6c8; margin:3px 0 0;">Pilot customers get meaningful discounts as we bring ClaimSense to market.</p></div></div>
+      </div>
+      <!-- NEEDS-APPROVAL: "Trusted by 25+ companies" claim & DataSentics relationship statement -->
+      <p style="font-size:13px; line-height:1.5; color:#7e8ab0; margin:32px 0 0; border-top:1px solid #20356b; padding-top:24px;">Join leading organizations in insurance, healthcare, banking, and more who have already transformed their processes with Bull, creators of ClaimSense.</p>
+    </div>
+
+    <!-- Demo request form -->
+    <!-- FUNCTIONAL-SPEC NEEDED: endpoint/CRM destination, validation, success/error states, spam prevention, consent timestamp, analytics events. Field set & labels per content/global/forms.md (Demo request form) — preserved verbatim. -->
+    <div data-reveal="" style="background:#fff; border-radius:18px; padding:32px; color:#1a1a1a; box-shadow:0 30px 70px -30px rgba(0,0,0,0.5);">
+      <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center; padding:40px 10px;">
+          <div style="width:56px; height:56px; border-radius:50%; background:#dcf5ee; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13L11 19L21 7" fill="none" stroke="#00B290" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:22px; margin:0 0 8px;">Thank you.</h3>
+          <p style="font-size:14px; color:#7a716d; margin:0;">We'll be in touch.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submitForm }}" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="bb676465-962f-4e10-a53b-5d2145f13460">
+        <input type="hidden" name="subject" value="New walkthrough request — ClaimSense website">
+        <input type="hidden" name="from_name" value="ClaimSense Website">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none;">
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:22px; margin:0 0 20px; color:#0d0d0d;">Book a walkthrough</h3>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Full Name *</span><input type="text" name="name" required="" placeholder="Jane Doe" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+          <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Work Email *</span><input type="email" name="email" required="" placeholder="jane@company.com" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+          <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Company Name *</span><input type="text" name="company" required="" placeholder="Company" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+          <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Your Role *</span>
+            <select name="role" required="" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px; background:#fff;">
+              <option value="">Select a role</option>
+              <option>Claims Manager</option>
+              <option>Operations Director</option>
+              <option>CTO / IT Leader</option>
+              <option>CEO / Founder</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Monthly Claims Volume</span><input type="text" name="claims_volume" placeholder="e.g. 5,000" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+          <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Anything else you'd like us to know?</span><textarea name="message" rows="3" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px; resize:vertical;"></textarea></label>
+        </div>
+        <p data-form-error style="display:none; font:500 13px 'Roboto',sans-serif; color:#c02617; background:#fdecea; border:1px solid #f5c6c0; border-radius:8px; padding:10px 12px; margin:16px 0 0;"></p>
+        <button type="submit" style="margin-top:18px; width:100%; background:#FF5539; color:#000; border:none; border-radius:9px; padding:14px; font:500 16px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Book my walkthrough</button>
+        <p style="font-size:12px; line-height:1.5; color:#9a908b; margin:14px 0 0;">By submitting this form, you agree to our Privacy Policy. We'll never share your information.</p>
+      </form>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#06122b; color:#c3cbe0; padding:64px 32px 36px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:40px;" data-footer="">
+      <div>
+        <img src="assets/logos/ClaimSense_logo_white.svg" alt="ClaimSense" style="height:26px; width:auto; margin-bottom:18px;">
+        <p style="font-size:14px; line-height:1.6; color:#9aa6c8; margin:0 0 22px; max-width:280px;">AI-first workflow for your claim team. Transform complex claims processing with intelligent automation.</p>
+        <!-- Full Bull endorsement (footer requirement) -->
+        <div style="display:flex; align-items:center; gap:12px; padding-top:18px; border-top:1px solid #1a2c54;">
+          <img src="assets/bull/BULL_LOGO_WHITE_RGB.png" alt="Bull" style="height:26px; width:auto;">
+        </div>
+        <p style="font-size:12px; color:#7e8ab0; margin:12px 0 0;">ClaimSense is built by DataSentics, <br>part of the Bull.</p>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Product</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Features.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Features</a></li>
+          <li><a href="ClaimSense%20Pricing.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Pricing</a></li>
+          <li><a href="ClaimSense%20Use%20Cases.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Use cases</a></li>
+          <li><a href="ClaimSense%20Implementation.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Implementation</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Company</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Our%20Story.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">About Us</a></li>
+          <li><a href="ClaimSense%20Partners.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Partners</a></li>
+          <li><a href="https://careers.datasentics.com/?utm_source=slaimsense&amp;utm_medium=webfooter&amp;utm_campaign=1" target="_blank" rel="noopener noreferrer" style="color:#9aa6c8;" style-hover="color:#FF7761;">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Resources</div>
+        <!-- Rebuild note: Documentation, API Reference, Case Studies, Help Center all route to /help/ — behaviour preserved -->
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20FAQ.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">FAQ</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Documentation</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">API Reference</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Case Studies</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Help Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-top:48px; padding-top:24px; border-top:1px solid #1a2c54; font-size:13px; color:#7e8ab0;">
+      <div style="display:flex; gap:22px; align-items:center;">
+        <a href="ClaimSense%20Privacy.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Privacy Policy</a>
+        <a href="javascript: Cookiebot.renew()" style="color:#9aa6c8;" style-hover="color:#FF7761;">Cookie consent</a>
+        <span>© 2026 ClaimSense. All rights reserved.</span>
+      </div>
+      <span>Built with ❤ for claims teams worldwide</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+// Fix 6: footer active link highlight
+(function(){
+  var href = (window.location.href || '').split('/').pop().split('?')[0].replace(/%20/g,' ');
+  var links = document.querySelectorAll('footer a');
+  links.forEach(function(a){
+    var ah = (a.getAttribute('href')||'').split('/').pop().replace(/%20/g,' ');
+    if(ah && href && ah === href) a.setAttribute('data-footer-active','');
+  });
+})();
+</script>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}, &quot;showIntro&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;showTrustBar&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;proofVisual&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;screenshot&quot;, &quot;options&quot;: [&quot;screenshot&quot;, &quot;placeholder&quot;], &quot;tsType&quot;: &quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      introVisible: false,
+      introOpacity: 1,
+      openFaq: 0,
+      formDone: false,
+      productOpen: false,
+      iucActive: 0,
+      iucFade: false
+    };
+    this._iuc = (typeof window !== 'undefined' && window.CLAIMSENSE_INDUSTRY_USE_CASES) || [];
+    this._faqData = [
+      { q: 'What exactly does ClaimSense do?', a: 'ClaimSense is an AI-native platform that runs the full claim lifecycle — from intake to resolution. AI reads all documents, extracts key data, creates a case summary, and proposes a decision with reasoning. Your handler reviews and decides in minutes instead of hours.' },
+      { q: 'Does AI make decisions for us?', a: 'No. AI pre-processes the case, creates a summary, and proposes a decision with transparent reasoning. The final decision always stays with your handler. We monitor AI accuracy in real time — if it drops, the system flags it and you adjust the rules.' },
+      { q: 'Is it secure? Where does our data live?', a: 'Your data stays in your environment. ClaimSense runs on your own cloud infrastructure — Azure, GCP, or AWS — via a Databricks-based deployment. Full audit trail, role-based access control, and enterprise-grade security.' },
+      { q: 'How much does it cost and how do we start?', a: 'Pricing is per claim, not per licence. Analytical Agent starts at €3/claim, Full Operational Platform at €5/claim. Cloud infrastructure, AI tokens, updates, and security are included — no hidden fees.' }
+    ];
+  }
+
+  _scrollToHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const id = hash.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Retry once after a short delay (DC render may not be complete yet)
+      setTimeout(() => {
+        const el2 = document.getElementById(id);
+        if (el2) el2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    }
+  }
+
+  componentDidMount() {
+    // Scroll to hash anchor if navigated from another page (e.g. #demo)
+    this._scrollToHash();
+
+    const showIntro = this.props.showIntro ?? true;
+    let seen = false;
+    try { seen = sessionStorage.getItem('cs_intro_seen') === '1'; } catch (e) {}
+    if (showIntro && !seen) {
+      this.setState({ introVisible: true });
+      this._t1 = setTimeout(() => this.dismissIntro(), 2600);
+    }
+    this._setupReveal();
+    this._setupCountUp();
+    this._setupProductVideo();
+    this._setupMobileMenu();
+    // Responsive: two-up master grid + footer columns on wide screens
+    this._applyResponsive();
+    this._onResize = () => this._applyResponsive();
+    window.addEventListener('resize', this._onResize);
+  }
+
+  // Reveal-on-scroll that can NEVER leave content hidden:
+  // elements are visible by default; we only hide ones below the fold, then animate in.
+  _setupReveal() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (reduce || !els.length) return;
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.__shown = true; };
+    const belowFold = (el) => { const r = el.getBoundingClientRect(); return r.top > (window.innerHeight || document.documentElement.clientHeight || 768) * 0.92; };
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        el.style.transition = 'opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)';
+        if (belowFold(el)) { el.style.opacity = '0'; el.style.transform = 'translateY(26px)'; }
+        else { el.__shown = true; }
+      });
+      const check = () => els.forEach((el) => { if (!el.__shown && !belowFold(el)) reveal(el); });
+      this._onScroll = check;
+      window.addEventListener('scroll', check, { passive: true });
+      this._revealSafety = setTimeout(() => els.forEach((el) => { if (!el.__shown) reveal(el); }), 2200);
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }); }, { threshold: 0.04 });
+        els.forEach((el) => { if (!el.__shown) io.observe(el); });
+      }
+    });
+  }
+
+  // Count-up trigger — INDEPENDENT of the reveal safety net. The reveal path has a 2200ms blanket
+  // timeout that shows every below-fold element regardless of scroll position; driving count-up off
+  // that fired the animation off-screen (numbers were static by the time you scrolled to them).
+  // This observer only counts a group when it actually enters the viewport, with a scroll fallback.
+  _setupCountUp() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const groups = Array.prototype.slice.call(document.querySelectorAll('[data-countup-group]'));
+    if (!groups.length) return;
+    if (reduce) return; // reduced motion: leave the authored final values in place
+    const inView = (el) => { const r = el.getBoundingClientRect(); const h = window.innerHeight || document.documentElement.clientHeight || 768; return r.top < h * 0.85 && r.bottom > 0; };
+    const maybe = (el) => { if (!el.__counted && inView(el)) this._maybeCountUp(el); };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { this._maybeCountUp(e.target); io.unobserve(e.target); } });
+      }, { threshold: 0.25 });
+      groups.forEach((g) => io.observe(g));
+    } else {
+      groups.forEach(maybe);
+      this._onCountScroll = () => groups.forEach(maybe);
+      window.addEventListener('scroll', this._onCountScroll, { passive: true });
+    }
+  }
+
+  // easeOutCubic — cubic-bezier(0.33,1,0.68,1). Deliberately gentler than the old (0.16,1,0.3,1):
+  // that curve dumped ~60% of the change into the first frame (a visible flash). This distributes
+  // change far more evenly across the run, so early values live long enough to be painted.
+  _ease(x) {
+    const u = 1 - x;
+    return 1 - u * u * u;
+  }
+
+  // Count-up: triggered once when a [data-countup-group] container reveals (reused from _setupReveal
+  // for both the hero band and the Real Outcomes cards). NOTE: does NOT use [data-hero-stats] — that
+  // selector in _applyResponsive is dead (the card only carries [data-reveal]); left unpatched per
+  // scope. Reduced-motion is handled upstream: _setupReveal returns early, so this never runs and the
+  // final values authored in the DOM stay put.
+  _maybeCountUp(el) {
+    if (!el || el.__counted || !el.getAttribute || el.getAttribute('data-countup-group') === null) return;
+    const nodes = el.querySelectorAll('[data-countup]');
+    if (!nodes.length) return;
+    el.__counted = true;
+    const DURATION = 1200; // target ~1200ms; hard ceiling 2000ms (the skip-guard tail stays well inside it)
+    // Frames one run can afford at 60fps, minus a safety margin. maxStep derives from this so the
+    // counter always lands by ~DURATION even while the guard is throttling early frames.
+    const budgetFrames = Math.max(1, Math.floor((DURATION / (1000 / 60)) * 0.9));
+    const items = Array.prototype.map.call(nodes, (n) => {
+      const to = parseInt(n.getAttribute('data-to'), 10) || 0;
+      return { n: n, to: to, shown: 0, maxStep: Math.max(1, Math.ceil(to / budgetFrames)) };
+    });
+    // Count by 1 (no per-value step) — smoothness comes from the gentler curve + the skip-guard below,
+    // not from special-casing round numbers.
+    items.forEach((it) => { it.n.textContent = '0'; });
+    const start = (window.performance && performance.now) ? performance.now() : Date.now();
+    const tick = (now) => {
+      const p = Math.min(1, ((now || Date.now()) - start) / DURATION);
+      const e = this._ease(p);
+      let allLanded = true;
+      items.forEach((it) => {
+        let target = Math.round(it.to * e);
+        if (target > it.to) target = it.to;
+        // SKIP-GUARD: advance at most maxStep per frame so the display never jumps straight past a run
+        // of intermediate values in one painted frame — every value gets ≥1 frame on screen.
+        if (target - it.shown > it.maxStep) it.shown += it.maxStep;
+        else if (target > it.shown) it.shown = target;
+        if (it.shown < it.to) allLanded = false;
+        it.n.textContent = String(it.shown);
+      });
+      // Keep ticking while the curve is still running OR the guard is still catching up.
+      if (p < 1 || !allLanded) this._countRaf = requestAnimationFrame(tick);
+      else items.forEach((it) => { it.n.textContent = String(it.to); });
+    };
+    this._countRaf = requestAnimationFrame(tick);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._t1);
+    clearTimeout(this._revealSafety);
+    if (this._countRaf) cancelAnimationFrame(this._countRaf);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
+
+    if (this._onCountScroll) window.removeEventListener('scroll', this._onCountScroll);
+    if (this._onVidDocClick) document.removeEventListener('click', this._onVidDocClick);
+    if (this._onVidKey) document.removeEventListener('keydown', this._onVidKey);
+  }
+
+  selectIuc(i) {
+    if (i === this.state.iucActive) return;
+    this.setState({ iucActive: i, iucFade: true });
+    clearTimeout(this._iucT);
+    this._iucT = setTimeout(() => this.setState({ iucFade: false }), 30);
+  }
+
+  _setupMobileMenu() {
+    const burger = document.querySelector('[data-nav-burger]');
+    const menu = document.querySelector('[data-mobile-menu]');
+    if (!burger || !menu) return;
+    const icon = burger.querySelector('[data-burger-icon] path');
+    const PATH_OPEN = 'M3 6h18M3 12h18M3 18h18';
+    const PATH_CLOSE = 'M5 5l14 14M19 5L5 19';
+    const setOpen = (open) => {
+      menu.style.display = open ? 'block' : 'none';
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (icon) icon.setAttribute('d', open ? PATH_CLOSE : PATH_OPEN);
+    };
+    burger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(menu.style.display !== 'block'); });
+    menu.addEventListener('click', (e) => e.stopPropagation());
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    const cta = menu.querySelector('[data-mm-cta]');
+    if (cta) cta.addEventListener('click', () => { setOpen(false); this.scrollTo('demo'); });
+    document.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  _setupProductVideo() {
+    const stage = document.querySelector('[data-vid-stage]');
+    if (!stage) return; // placeholder mode — no player
+    const video = stage.querySelector('[data-vid-el]');
+    const playBtn = stage.querySelector('[data-vid-play]');
+    const toggle = stage.querySelector('[data-vid-toggle]');
+    const seek = stage.querySelector('[data-vid-seek]');
+    const timeEl = stage.querySelector('[data-vid-time]');
+    const fsBtn = stage.querySelector('[data-vid-fs]');
+    const kebab = stage.querySelector('[data-vid-kebab]');
+    const menu = stage.querySelector('[data-vid-menu]');
+    const pip = stage.querySelector('[data-vid-pip]');
+    const muteBtn = stage.querySelector('[data-vid-mute]');
+    const playbtnLayer = stage.querySelector('[data-vid-playbtn]');
+    const controls = stage.querySelector('[data-vid-controls]');
+    if (!video) return;
+    const frame = stage.closest('[data-vid-frame]') || stage;
+    const ICON_PLAY = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>';
+    const ICON_PAUSE = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>';
+    const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); const m = Math.floor(s / 60); const ss = String(s % 60).padStart(2, '0'); return m + ':' + ss; };
+    const syncToggle = () => { toggle.innerHTML = video.paused ? ICON_PLAY : ICON_PAUSE; toggle.setAttribute('aria-label', video.paused ? 'Play' : 'Pause'); };
+
+    // ---- Volume (mute/unmute) -------------------------------------------------
+    const ICON_VOL = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"></path><path d="M16.5 8.5a5 5 0 0 1 0 7"></path><path d="M19 6a8 8 0 0 1 0 12"></path></svg>';
+    const ICON_MUTE = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"></path><path d="M22 9l-5 5M17 9l5 5"></path></svg>';
+    const syncMute = () => { if (!muteBtn) return; muteBtn.innerHTML = video.muted ? ICON_MUTE : ICON_VOL; muteBtn.setAttribute('aria-label', video.muted ? 'Unmute' : 'Mute'); };
+    if (muteBtn) { muteBtn.addEventListener('click', () => { video.muted = !video.muted; }); }
+    video.addEventListener('volumechange', syncMute);
+
+    // ---- Visibility owned by JS (inline display) ------------------------------
+    // The center play button is shown whenever NOT actively playing (idle, paused,
+    // ended) and hidden only during active playback. The control bar shows once
+    // playback has started. Driven by inline display in render() on real media
+    // events — NOT CSS opacity, which does not settle in this runtime.
+    const render = () => {
+      const started = frame.hasAttribute('data-vid-started');
+      const active = started && !video.paused && !video.ended; // truly playing
+      if (active) { frame.setAttribute('data-vid-playing', ''); } else { frame.removeAttribute('data-vid-playing'); }
+      // play button: hidden only while actively playing
+      playbtnLayer.style.display = active ? 'none' : 'flex';
+      playBtn.style.pointerEvents = active ? 'none' : 'auto';
+      playBtn.setAttribute('aria-hidden', active ? 'true' : 'false');
+      playBtn.tabIndex = active ? -1 : 0;
+      // control bar: visible once started, otherwise hidden
+      controls.style.display = started ? 'flex' : 'none';
+      syncToggle();
+    };
+
+    // Explicit-click playback only — never autoplay. data-vid-started (set once, never
+    // removed) drives the permanent LAYOUT change (hide chrome bar, lock frame to 16:9,
+    // reveal video). render() then owns the transient show/hide of the play button and
+    // control bar via inline display, keyed off the real paused/ended state.
+    //
+    // AUDIO-RACE GUARD: video.play() returns a promise that resolves only when playback
+    // has actually begun. Calling video.pause() synchronously before it resolves can let
+    // the play proceed anyway → audio keeps going while the UI shows "paused". We track a
+    // single `wantPlay` intent + the pending promise: whenever play() settles we re-assert
+    // the LATEST intent, so a pause issued mid-resolution reliably wins and audio stops.
+    let wantPlay = false;
+    let playPromise = null;
+    const reconcile = () => {
+      // Force the media element to match the current intent (called after play() resolves).
+      if (wantPlay && video.paused) { const p = video.play(); if (p && p.catch) p.catch(() => {}); }
+      else if (!wantPlay && !video.paused) { video.pause(); }
+    };
+    const playVideo = () => {
+      frame.setAttribute('data-vid-started', '');
+      if (video.ended || (video.duration && video.currentTime >= video.duration - 0.05)) video.currentTime = 0;
+      wantPlay = true;
+      const p = video.play();
+      playPromise = (p && p.then) ? p : null;
+      if (playPromise) {
+        playPromise.then(() => { playPromise = null; reconcile(); }, () => { playPromise = null; reconcile(); });
+      }
+      render();
+    };
+    const pauseVideo = () => {
+      wantPlay = false;
+      if (playPromise) {
+        // Defer the actual pause until play() settles, so audio never starts unattended.
+        playPromise.then(reconcile, reconcile);
+      } else {
+        video.pause();
+      }
+      render();
+    };
+    const toggleVideo = () => { if (wantPlay) pauseVideo(); else playVideo(); };
+
+    playBtn.addEventListener('click', playVideo);
+    toggle.addEventListener('click', toggleVideo);
+
+    // Click anywhere on the stage toggles play/pause via the SAME intent machine — but not
+    // when the click originates in the control bar (seek/mute/fullscreen/kebab) or on the
+    // center play button (which has its own handler; letting it also bubble would double-toggle).
+    stage.addEventListener('click', (e) => {
+      if (e.target.closest('[data-vid-controls]') || e.target.closest('[data-vid-play]')) return;
+      if (!frame.hasAttribute('data-vid-started')) { playVideo(); return; }
+      toggleVideo();
+    });
+
+    // Every stop path (pause click, stage click, scrub-to-stop, natural end) re-runs render(),
+    // which re-displays the same center play button used at idle. Media events also keep
+    // `wantPlay` honest if playback stops for any external reason.
+    video.addEventListener('play', render);
+    video.addEventListener('playing', render);
+    video.addEventListener('pause', () => { wantPlay = false; render(); });
+    video.addEventListener('ended', () => { wantPlay = false; render(); });
+    video.addEventListener('loadedmetadata', () => { timeEl.textContent = fmt(0) + ' / ' + fmt(video.duration); });
+    video.addEventListener('timeupdate', () => {
+      if (video.duration) seek.value = (video.currentTime / video.duration) * 100;
+      timeEl.textContent = fmt(video.currentTime) + ' / ' + fmt(video.duration);
+    });
+    seek.addEventListener('input', () => { if (video.duration) video.currentTime = (seek.value / 100) * video.duration; });
+
+    // Fullscreen on the stage (keeps our custom controls visible), via native Fullscreen API.
+    fsBtn.addEventListener('click', () => {
+      const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+      if (fsEl) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); }
+      else { (stage.requestFullscreen || stage.webkitRequestFullscreen).call(stage); }
+    });
+    const onFsChange = () => {
+      const on = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      fsBtn.setAttribute('aria-label', on ? 'Exit fullscreen' : 'Enter fullscreen');
+    };
+    document.addEventListener('fullscreenchange', onFsChange);
+    document.addEventListener('webkitfullscreenchange', onFsChange);
+
+    // Kebab menu — single item: Picture-in-Picture.
+    const closeMenu = () => { menu.style.display = 'none'; kebab.setAttribute('aria-expanded', 'false'); };
+    kebab.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (kebab.getAttribute('aria-expanded') === 'true') { closeMenu(); }
+      else { menu.style.display = 'block'; kebab.setAttribute('aria-expanded', 'true'); }
+    });
+    this._onVidDocClick = (e) => { if (!menu.contains(e.target) && !kebab.contains(e.target)) closeMenu(); };
+    this._onVidKey = (e) => { if (e.key === 'Escape') closeMenu(); };
+    document.addEventListener('click', this._onVidDocClick);
+    document.addEventListener('keydown', this._onVidKey);
+
+    // Picture-in-Picture via our own kebab entry (native Web API).
+    // disablePictureInPicture is set on the <video> so the BROWSER's built-in PiP entry
+    // points (native-controls button + Edge/Chromium hover flyout) are suppressed. That
+    // same flag would also block our own requestPictureInPicture(), so we momentarily lift
+    // it for the duration of the request, then restore it when PiP closes.
+    const pipApiOk = ('pictureInPictureEnabled' in document) && document.pictureInPictureEnabled;
+    if (!pipApiOk) { if (pip) pip.style.display = 'none'; }
+    else if (pip) {
+      video.addEventListener('leavepictureinpicture', () => { video.disablePictureInPicture = true; });
+      pip.addEventListener('click', () => {
+        closeMenu();
+        if (document.pictureInPictureElement) { document.exitPictureInPicture().catch(() => {}); }
+        else {
+          video.disablePictureInPicture = false; // lift just-in-time so our own call is allowed
+          const r = video.requestPictureInPicture();
+          if (r && r.catch) r.catch(() => { video.disablePictureInPicture = true; });
+        }
+      });
+    }
+    syncToggle();
+    syncMute();
+    render(); // initial: idle — play button shown, control bar hidden
+  }
+
+  _applyResponsive() {
+    const w = window.innerWidth;
+    // Industry tabs: always wrap into rows (no horizontal-scroll slider on mobile).
+    const iucTabs = document.querySelector('[data-iuc-tabs]');
+    if (iucTabs) {
+      iucTabs.style.flexWrap = 'wrap';
+      iucTabs.style.overflowX = 'visible';
+      iucTabs.style.paddingBottom = '0';
+    }
+    const iucGrid = document.querySelector('[data-iuc-grid]');
+    if (iucGrid) iucGrid.style.gridTemplateColumns = w >= 820 ? '1fr 1fr 1fr' : (w >= 540 ? '1fr 1fr' : '1fr');
+    // Hero stats row: horizontal on desktop, stacked on mobile
+    const heroStats = document.querySelector('[data-hero-stats]');
+    if (heroStats) {
+      const narrow = w < 768;
+      heroStats.style.flexDirection = narrow ? 'column' : 'row';
+      heroStats.style.alignItems = narrow ? 'center' : 'flex-start';
+      [...heroStats.children].forEach((item, i) => {
+        item.style.borderRight = (!narrow && i < 2) ? '1px solid rgba(255,255,255,0.15)' : 'none';
+        item.style.borderBottom = (narrow && i < 2) ? '1px solid rgba(255,255,255,0.15)' : 'none';
+        item.style.paddingBottom = narrow ? '32px' : '0';
+        item.style.maxWidth = narrow ? '100%' : '280px';
+        item.style.width = narrow ? '100%' : '';
+      });
+    }
+    const grid = document.querySelector('[data-master-grid]');
+    if (grid) grid.style.gridTemplateColumns = w >= 960 ? '1.05fr 0.95fr' : '1fr';
+    const footer = document.querySelector('[data-footer]');
+    if (footer) footer.style.gridTemplateColumns = w >= 860 ? '1.5fr 1fr 1fr 1fr' : (w >= 560 ? '1fr 1fr' : '1fr');
+    // Before/After asymmetric grid: 4/8 on desktop, stacked on mobile.
+    const chaos = document.querySelector('[data-chaos-grid]');
+    if (chaos) chaos.style.gridTemplateColumns = w >= 820 ? '2fr 3fr' : '1fr';
+    const afterList = document.querySelector('[data-after-list]');
+    if (afterList) afterList.style.gridTemplateColumns = w >= 560 ? '1fr 1fr' : '1fr';
+    const tb = document.querySelector('[data-trustbar]');
+    if (tb) {
+      const wide = w >= 860;
+      tb.style.textAlign = wide ? 'left' : 'center';
+      // Mobile: add breathing room between the stat values (desktop keeps gap:0 + dividers).
+      tb.style.gap = wide ? '0px' : '34px 28px';
+      tb.querySelectorAll('[data-tb-div]').forEach((d) => { d.style.display = wide ? 'block' : 'none'; });
+      // Mobile: center the whole credibility block (logo + description), not just the label.
+      const cred = tb.querySelector('[data-tb-cred]');
+      const tbLogo = tb.querySelector('[data-tb-logo]');
+      const tbDesc = tb.querySelector('[data-tb-desc]');
+      if (cred) cred.style.alignItems = wide ? 'stretch' : 'center';
+      if (tbLogo) tbLogo.style.alignSelf = wide ? 'flex-start' : 'center';
+      if (tbDesc) { tbDesc.style.marginLeft = wide ? '0' : 'auto'; tbDesc.style.marginRight = wide ? '0' : 'auto'; }
+    }
+    // Header: collapse center nav + trust badge so the CTA never clips on narrow widths.
+    const nav = document.querySelector('[data-nav]');
+    if (nav) nav.style.display = w >= 900 ? 'flex' : 'none';
+    // Mobile (<900): hide the desktop CTA, show the hamburger. Desktop: reverse + close menu.
+    const burger = document.querySelector('[data-nav-burger]');
+    const navCta = document.querySelector('[data-nav-cta]');
+    const mobileNav = w < 900;
+    if (burger) burger.style.display = mobileNav ? 'flex' : 'none';
+    if (navCta) navCta.style.display = mobileNav ? 'none' : '';
+    const mobileBadge = document.querySelector('[data-mobile-badge]');
+    if (mobileBadge) mobileBadge.style.display = (mobileNav && w >= 340) ? 'flex' : 'none';
+    if (!mobileNav) {
+      const mm = document.querySelector('[data-mobile-menu]');
+      if (mm) mm.style.display = 'none';
+      if (burger) burger.setAttribute('aria-expanded', 'false');
+    }
+    const badge = document.querySelector('[data-trust-badge]');
+    if (badge) {
+      const divider = badge.nextElementSibling;
+      if (w >= 1040) { badge.style.display = 'flex'; if (divider) divider.style.display = 'block'; }
+      else { badge.style.display = 'none'; if (divider) divider.style.display = 'none'; }
+    }
+  }
+
+  dismissIntro() {
+    if (this._closing) return;
+    this._closing = true;
+    try { sessionStorage.setItem('cs_intro_seen', '1'); } catch (e) {}
+    this.setState({ introOpacity: 0 });
+    setTimeout(() => this.setState({ introVisible: false }), 560);
+  }
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
+  toggleFaq(i) {
+    this.setState((s) => ({ openFaq: s.openFaq === i ? -1 : i }));
+  }
+
+  submitForm(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const form = e.target;
+    if (this._submitting) return;
+    const btn = form.querySelector('button[type="submit"]');
+    const errEl = form.querySelector('[data-form-error]');
+    this._submitting = true;
+    const label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; btn.style.cursor = 'wait'; btn.textContent = 'Sending…'; }
+    if (errEl) errEl.style.display = 'none';
+    const restore = (msg) => {
+      this._submitting = false;
+      if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = 'pointer'; btn.textContent = label; }
+      if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+    };
+    // Web3Forms: client-side POST (access_key + fields via hidden inputs). No backend needed —
+    // works from any static host including Cloudflare Pages. Keeps the inline success screen.
+    fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+      .then((r) => r.json())
+      .then((json) => {
+        if (json && json.success) { this._submitting = false; this.setState({ formDone: true }); }
+        else { restore((json && json.message) || 'Something went wrong. Please try again.'); }
+      })
+      .catch(() => restore('Network error — please check your connection and try again.'));
+  }
+
+  renderVals() {
+    const open = this.state.openFaq;
+    const faqs = this._faqData.map((f, i) => ({
+      q: f.q,
+      a: f.a,
+      open: open === i,
+      iconRotate: open === i ? 'rotate(45deg)' : 'rotate(0deg)',
+      toggle: () => this.toggleFaq(i)
+    }));
+    const proof = this.props.proofVisual ?? 'screenshot';
+
+    // ---- Industry Use cases ----
+    const iucActive = this.state.iucActive;
+    const tabBase = "flex:0 0 auto; cursor:pointer; white-space:nowrap; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; transition:background-color .18s, color .18s, border-color .18s;";
+    const iucTabs = this._iuc.map((d, i) => ({
+      label: d.label,
+      active: i === iucActive,
+      select: () => this.selectIuc(i),
+      style: tabBase + (i === iucActive
+        ? " background:#002870; color:#ffffff; border:1.8px solid #002870;"
+        : " background:transparent; color:#002870; border:1.8px solid #002870;"),
+      hoverStyle: i === iucActive
+        ? "border-color:#FF5539;"
+        : "color:#FF5539; border-color:#FF5539;"
+    }));
+    const activeInd = this._iuc[iucActive] || { confidence: 'Certain', variantA: [], variantB: [] };
+    const isVariantA = activeInd.confidence === 'Likely';
+    const iucCard = "background:#fff; border:1px solid #ecdcd6; border-radius:14px; padding:24px; box-shadow:0 10px 30px -24px rgba(0,40,112,0.25);";
+    // Unified title style across both variants — only difference is presence/absence of description.
+    const titleStyle = "font-family:'Tosh A',sans-serif; font-weight:500; font-size:19px; line-height:1.25; color:#002870;";
+    const iucItems = isVariantA
+      ? activeInd.variantA.map((t) => ({ title: t, desc: '', hasDesc: false, titleStyle: titleStyle, cardStyle: iucCard }))
+      : activeInd.variantB.map((o) => ({ title: o.title, desc: o.description, hasDesc: !!o.description, titleStyle: titleStyle, cardStyle: iucCard }));
+    // variantANote: shown above cards for Likely tabs, null for Certain tabs.
+    const iucNote = isVariantA && activeInd.variantANote ? activeInd.variantANote : '';
+
+    return {
+      iucTabs: iucTabs,
+      iucItems: iucItems,
+      iucNote: iucNote,
+      iucNoteVisible: !!iucNote,
+      iucOpacity: this.state.iucFade ? 0 : 1,
+      introVisible: this.state.introVisible,
+      introStyle: {
+        position: 'fixed', inset: 0, zIndex: 9999,
+        background: '#06080f',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        opacity: this.state.introOpacity,
+        transition: 'opacity 0.55s ease',
+        pointerEvents: this.state.introOpacity === 0 ? 'none' : 'auto'
+      },
+      dismissIntro: () => this.dismissIntro(),
+      goTop: (e) => { if (e && e.preventDefault) e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      navProduct: (e) => { if (e && e.preventDefault) e.preventDefault(); this.scrollTo('product'); },
+      productOpen: this.state.productOpen,
+      chevronRotate: this.state.productOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      openProduct: () => this.setState({ productOpen: true }),
+      closeProduct: () => this.setState({ productOpen: false }),
+      toggleProduct: () => this.setState((s) => ({ productOpen: !s.productOpen })),
+      navPricing: (e) => { if (e && e.preventDefault) e.preventDefault(); this.scrollTo('pricing'); },
+      navWhy: (e) => { if (e && e.preventDefault) e.preventDefault(); this.scrollTo('why'); },
+      scrollToDemo: (e) => { if (e && e.preventDefault) e.preventDefault(); this.scrollTo('demo'); },
+      showTrustBar: this.props.showTrustBar ?? true,
+      useScreenshot: proof === 'screenshot',
+      usePlaceholder: proof === 'placeholder',
+      faqs: faqs,
+      formOpen: !this.state.formDone,
+      formDone: this.state.formDone,
+      submitForm: (e) => this.submitForm(e)
+    };
+  }
+}
+</script>
+</body>
+</html>

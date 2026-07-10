@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style data-omelette-print-defaults>
+@media print {
+  @page { margin: 0.5in; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+  figure, table, pre, blockquote, img, svg, tr, [class~="card" i] { break-inside: avoid; }
+  img, svg { max-width: 100%; }
+  p { orphans: 3; widows: 3; }
+}
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Black.woff2') format('woff2'); font-weight:900; font-display:swap; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Roboto',sans-serif; font-weight:400; color:#1a1a1a; line-height:1.6; -webkit-font-smoothing:antialiased; background:#ffffff; }
+::selection { background:#FFADA0; }
+a { text-decoration:none; color:inherit; }
+input, textarea, select, button { font-family:inherit; }
+</style>
+</helmet>
+
+<!-- ================================================================ -->
+<!-- ClaimSense Features page — /features/  (v5 corrections)           -->
+<!-- Order: 01 AI · 02 Master Claims · 03 placeholder · 04 Analytics · 05 Core -->
+<!-- Colors: white → warm → dark → white → warm                       -->
+<!-- ================================================================ -->
+
+<!-- ===================== HEADER (shared chrome) ===================== -->
+<header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(14px); border-bottom:1px solid #f0e6e3;">
+  <nav style="max-width:1280px; margin:0 auto; padding:14px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <a href="ClaimSense%20Homepage.dc.html" style="display:flex; align-items:center; flex:0 0 auto;">
+      <img src="assets/logos/ClaimSense_logo_black.svg" alt="ClaimSense" style="height:22px; width:auto; transform:translateY(0.75px);">
+    </a>
+    <div style="display:flex; align-items:center; justify-content:center; gap:34px; flex:1 1 auto;" data-nav>
+      <a href="ClaimSense%20Homepage.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Home</a>
+      <div style="position:relative;" onMouseEnter="{{ openProduct }}" onMouseLeave="{{ closeProduct }}">
+        <button onClick="{{ toggleProduct }}" aria-haspopup="true" aria-expanded="{{ productOpen }}" style="display:inline-flex; align-items:center; gap:6px; background:none; border:none; cursor:pointer; font:500 14px 'Tosh A',sans-serif; color:#FF5539; border-bottom:2px solid #FF5539; padding:0 0 2px;">
+          Product
+          <svg width="11" height="7" viewBox="0 0 11 7" aria-hidden="true" style="transition:transform .2s; transform:{{ chevronRotate }};"><path d="M1 1L5.5 5.5L10 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <sc-if value="{{ productOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; z-index:60;">
+            <div style="background:#fff; border:1px solid #ece3df; border-radius:12px; box-shadow:0 20px 50px -16px rgba(0,40,112,0.25); padding:8px; min-width:220px;">
+              <a href="ClaimSense%20Features.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#FF5539; background:#FFF4F1;">Features</a>
+              <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+              <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Use Cases</a>
+              <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <a href="ClaimSense%20Our%20Story.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Our Story</a>
+      <a href="ClaimSense%20Pricing.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Pricing</a>
+      <a href="ClaimSense%20Business%20Case.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Business Case</a>
+    </div>
+    <div style="display:flex; align-items:center; flex:0 0 auto;" data-nav-right>
+      <span style="display:flex; align-items:center; gap:8px;" data-trust-badge>
+        <span style="font:400 14px/1.2 'Tosh A',sans-serif; color:#6b7280; white-space:nowrap;">built by DataSentics, part of</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:18px; width:auto;">
+      </span>
+      <span style="width:1px; align-self:stretch; min-height:26px; background:#e5e7eb; margin-left:24px;" data-nav-divider></span>
+      <button onClick="{{ scrollToDemo }}" style="margin-left:24px; background:#FF5539; color:#fff; border:none; border-radius:8px; padding:11px 22px; font:500 15px 'Tosh A',sans-serif; cursor:pointer; box-shadow:0 2px 10px rgba(255,85,57,0.28); white-space:nowrap;" style-hover="background:#e8472d;">Book a Demo</button>
+    </div>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section style="background:linear-gradient(180deg,#FFF7F5 0%,#ffffff 60%); padding:80px 32px 56px;">
+  <div style="max-width:1140px; margin:0 auto;">
+    <div style="max-width:760px;" data-reveal>
+      <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF5539; margin-bottom:18px;">Platform Features</div>
+      <h1 style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(36px,5vw,62px); line-height:1.03; letter-spacing:-0.02em; margin:0 0 22px; color:#0d0d0d;">ClaimSense Platform Features</h1>
+      <p style="font-size:20px; line-height:1.55; color:#4a4340; max-width:640px; margin:0;">Five pillars of an AI-native claims platform — from automated case handling to enterprise-grade infrastructure.</p>
+    </div>
+    <!-- Feature nav pills — hover only -->
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:40px;" data-reveal>
+      <a href="#ai-preprocessing" onClick="{{ navAI }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#002870; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#002870; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;"><span style="width:26px; height:26px; border-radius:6px; background:#002870; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;">01</span>AI Pre-processing</a>
+      <a href="#master-claims" onClick="{{ navMaster }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#002870; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#002870; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;"><span style="width:26px; height:26px; border-radius:6px; background:#002870; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;">02</span>Master Claims</a>
+      <a href="#feature-03" onClick="{{ navF03 }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#d9cfca; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#9ca3af; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;"><span style="width:26px; height:26px; border-radius:6px; background:#9ca3af; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;">03</span>Coming soon</a>
+      <a href="#analytics-chat" onClick="{{ navAnalytics }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#002870; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#002870; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;"><span style="width:26px; height:26px; border-radius:6px; background:#002870; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;">04</span>Analytics &amp; Chat</a>
+      <a href="#claim-core" onClick="{{ navCore }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#002870; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#002870; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;"><span style="width:26px; height:26px; border-radius:6px; background:#002870; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;">05</span>Claim Core System</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 01 — AI PRE-PROCESSING (white) ===================== -->
+<a id="ai-preprocessing"></a>
+<section style="padding:80px 40px; background:#ffffff;">
+  <div style="max-width:1140px; margin:0 auto;" data-reveal>
+    <div style="display:flow-root; margin-bottom:64px;">
+      <span style="float:left; font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(80px,12vw,140px); line-height:0.85; color:#FF5539; margin-right:20px; margin-bottom:8px;">01</span>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(24px,3vw,36px); color:#002870; margin:0 0 16px; overflow:hidden;">Automated Case Pre-processing by AI Agents</h2>
+      <p style="font:400 16px/1.6 'Roboto',sans-serif; color:#000000; overflow:hidden; margin:0; max-width:760px;">Every incoming claim is picked up by AI agents that analyze, structure, and enrich the case before it reaches a human handler. The agents extract key information from all documents and communications, build a complete case summary with suggested outcomes, and log every step of their reasoning.</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:48px;" data-feat-content data-reverse="0">
+      <div style="flex:1;">
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Automatic document extraction &amp; structuring</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>AI-generated case summaries with suggested outcomes</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full reasoning log &amp; transparent decision trail</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Complete data historization &amp; version tracking</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Built-in audit trail for every agent action</li>
+        </ul>
+      </div>
+      <div style="flex:1;">
+        <!-- NEEDS-APPROVAL: product screenshot feature-01 -->
+        <button type="button" onClick="{{ openAI }}" aria-label="Enlarge: Claims dashboard with AI-proposed case statuses" style="position:relative; display:block; width:100%; padding:0; border:none; background:none; border-radius:14px; overflow:hidden; cursor:zoom-in; box-shadow:0 20px 50px -28px rgba(0,40,112,0.4);">
+          <img src="assets/screenshots/feature-01-preprocessing-dashboard.png" alt="Claims dashboard with AI-proposed case statuses" style="display:block; width:100%;">
+          <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(15,23,42,0.30); opacity:0; transition:opacity .2s ease;" style-hover="opacity:1"><span style="width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,0.95); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.28);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="#002870" stroke-width="2"/><path d="M15.5 15.5L21 21" stroke="#002870" stroke-width="2" stroke-linecap="round"/><path d="M10.5 7.5v6M7.5 10.5h6" stroke="#002870" stroke-width="2" stroke-linecap="round"/></svg></span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 — MASTER CLAIMS & AGENTIC WORKFLOWS (warm, reverse) ===================== -->
+<a id="master-claims"></a>
+<section style="padding:80px 40px; background:#FFE4DF;">
+  <div style="max-width:1140px; margin:0 auto;" data-reveal>
+    <div style="display:flow-root; margin-bottom:64px;">
+      <span style="float:left; font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(80px,12vw,140px); line-height:0.85; color:#FF5539; margin-right:20px; margin-bottom:8px;">02</span>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(24px,3vw,36px); color:#002870; margin:0 0 16px; overflow:hidden;">Master Claims, Specialist Workstreams &amp; Agentic Workflows</h2>
+      <p style="font:400 16px/1.6 'Roboto',sans-serif; color:#3a2a26; overflow:hidden; margin:0; max-width:760px;">Complex claims rarely belong to one person or one department. ClaimSense connects specialist workstreams to one master claim, so the customer context remains complete while every team has a clear, focused responsibility — and configurable agentic workflows drive each case forward.</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:48px;" data-feat-content data-reverse="1">
+      <div style="flex:1;">
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>One master claim as the shared customer-centric record</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Linked specialist workstreams for legal, finance, assessment and other functions</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Shared documents, facts, correspondence and decision history</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>One accountable end-to-end task with linked process subtasks</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Configurable approval chains, escalation rules and workflow versioning</li>
+        </ul>
+      </div>
+      <div style="flex:1;">
+        <!-- NEEDS-APPROVAL: workflow configuration screenshots (single thumb → 5-image carousel) -->
+        <button type="button" onClick="{{ openMasterGallery }}" aria-label="View all 5 workflow screens" style="position:relative; display:block; width:100%; padding:0; border:none; background:none; border-radius:14px; overflow:hidden; cursor:zoom-in; box-shadow:0 20px 50px -28px rgba(0,40,112,0.4);">
+          <img src="assets/screenshots/feature-02-a-workflow-definitions.png" alt="Workflow definitions with version history" style="display:block; width:100%;">
+          <span style="position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:flex-end; padding:14px; opacity:0; transition:opacity .2s ease;" style-hover="opacity:1; background:linear-gradient(transparent 55%, rgba(0,40,112,0.55))"><span style="background:rgba(0,40,112,0.85); color:#fff; font:500 12px 'Roboto',sans-serif; padding:6px 12px; border-radius:20px;">Click to view full size · 5 workflow screens</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 — PLACEHOLDER (dark) ===================== -->
+<!-- CONTENT-FLAG: needs-approval — section 03 title, copy & visual to be supplied -->
+<a id="feature-03"></a>
+<section style="padding:80px 40px; background:#002870; color:#fff;">
+  <div style="max-width:1140px; margin:0 auto;" data-reveal>
+    <div style="display:flow-root; margin-bottom:64px;">
+      <span style="float:left; font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(80px,12vw,140px); line-height:0.85; color:#FF5539; margin-right:20px; margin-bottom:8px;">03</span>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(24px,3vw,36px); color:#ffffff; margin:0 0 16px; overflow:hidden;">More to come</h2>
+      <p style="font:400 16px/1.6 'Roboto',sans-serif; color:rgba(255,255,255,0.85); overflow:hidden; margin:0; max-width:760px;">This section is reserved for an upcoming capability. Title, copy and visuals will be added in the next step.</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:48px;" data-feat-content data-reverse="0">
+      <div style="flex:1;">
+        <div style="border:1.5px dashed rgba(255,255,255,0.3); border-radius:12px; padding:28px; color:rgba(255,255,255,0.6); font:500 14px 'Roboto',sans-serif;">Content placeholder — to be defined.</div>
+      </div>
+      <div style="flex:1;">
+        <div style="border:1.5px dashed rgba(255,255,255,0.25); border-radius:14px; aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.04); color:rgba(255,255,255,0.45); font:500 13px 'Roboto',sans-serif;">[ visual to be added ]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 — ANALYTICS & CHAT (white, reverse) ===================== -->
+<a id="analytics-chat"></a>
+<section style="padding:80px 40px; background:#ffffff;">
+  <div style="max-width:1140px; margin:0 auto;" data-reveal>
+    <div style="display:flow-root; margin-bottom:64px;">
+      <span style="float:left; font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(80px,12vw,140px); line-height:0.85; color:#FF5539; margin-right:20px; margin-bottom:8px;">04</span>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(24px,3vw,36px); color:#002870; margin:0 0 16px; overflow:hidden;">Chat Across All Cases &amp; Interactive Claim Analytics</h2>
+      <p style="font:400 16px/1.6 'Roboto',sans-serif; color:#000000; overflow:hidden; margin:0; max-width:760px;">Ask questions across your entire claim portfolio in natural language. Instantly search documents, emails, call recordings, and notes — then drill into analytics dashboards that reveal patterns, bottlenecks, and satisfaction drivers. Management gets real-time interactive insights to steer operations.</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:48px;" data-feat-content data-reverse="1">
+      <div style="flex:1;">
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Natural language search across all case data</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Interactive dashboards with drill-down analytics</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Trend analysis by handler, segment, product &amp; time</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#374151;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#FFF4F1; border:1.5px solid #FF5539; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#FF5539" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>AI monitoring — detect accuracy drift &amp; trigger reviews</li>
+        </ul>
+      </div>
+      <div style="flex:1;">
+        <!-- NEEDS-APPROVAL: product screenshot feature-04-analytics-chat -->
+        <button type="button" onClick="{{ openAnalytics }}" aria-label="Enlarge: Analytics Data Assistant with natural language queries" style="position:relative; display:block; width:100%; padding:0; border:none; background:none; border-radius:14px; overflow:hidden; cursor:zoom-in; box-shadow:0 20px 50px -28px rgba(0,40,112,0.4);">
+          <img src="assets/screenshots/feature-04-analytics-chat.png" alt="Analytics Data Assistant with natural language queries" style="display:block; width:100%;">
+          <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(15,23,42,0.30); opacity:0; transition:opacity .2s ease;" style-hover="opacity:1"><span style="width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,0.95); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.28);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="#002870" stroke-width="2"/><path d="M15.5 15.5L21 21" stroke="#002870" stroke-width="2" stroke-linecap="round"/><path d="M10.5 7.5v6M7.5 10.5h6" stroke="#002870" stroke-width="2" stroke-linecap="round"/></svg></span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 — FULL CLAIM CORE SYSTEM (warm) ===================== -->
+<a id="claim-core"></a>
+<section style="padding:80px 40px; background:#FFE4DF;">
+  <div style="max-width:1140px; margin:0 auto;" data-reveal>
+    <div style="display:flow-root; margin-bottom:64px;">
+      <span style="float:left; font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(80px,12vw,140px); line-height:0.85; color:#FF5539; margin-right:20px; margin-bottom:8px;">05</span>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(24px,3vw,36px); color:#002870; margin:0 0 16px; overflow:hidden;">Full Claim Core System</h2>
+      <p style="font:400 16px/1.6 'Roboto',sans-serif; color:#3a2a26; overflow:hidden; margin:0; max-width:760px;">The platform acts as a full claim management core, securely storing claim data and all processing actions. Complete audit trails, activity logging, and role-based access control ensure compliance and transparency. Enterprise-grade security standards protect all data and system access.</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:48px;" data-feat-content data-reverse="0">
+      <div style="flex:1;">
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Enterprise-grade security &amp; encryption</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Complete audit trails &amp; activity logging</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Role-based access control (RBAC)</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Compliance-ready architecture</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Parent-child claim relationships with traceable state history</li>
+          <li style="display:flex; gap:12px; font-size:15px; color:#3a2a26;"><span style="flex:none; width:20px; height:20px; border-radius:50%; background:#fff; border:1.5px solid #002870; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#002870" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Access-controlled sharing of common case information across linked workstreams</li>
+        </ul>
+        <!-- NEEDS-APPROVAL: security / compliance / GDPR / DORA / EU AI Act claims — pending legal sign-off -->
+      </div>
+      <div style="flex:1;">
+        <!-- NEEDS-APPROVAL: feature-05 audit trail. CONTENT-FLAG: 2nd screen "Document extraction and field matching records" (feature-05-b) not yet supplied — carousel shows available screen(s). -->
+        <button type="button" onClick="{{ openCoreGallery }}" aria-label="View audit trail screens" style="position:relative; display:block; width:100%; padding:0; border:none; background:none; border-radius:14px; overflow:hidden; cursor:zoom-in; box-shadow:0 20px 50px -28px rgba(0,40,112,0.4);">
+          <img src="assets/screenshots/feature-05-claim-history-audit-trail.png" alt="Full linear history with complete audit trail" style="display:block; width:100%;">
+          <span style="position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:flex-end; padding:14px; opacity:0; transition:opacity .2s ease;" style-hover="opacity:1; background:linear-gradient(transparent 55%, rgba(0,40,112,0.55))"><span style="background:rgba(0,40,112,0.85); color:#fff; font:500 12px 'Roboto',sans-serif; padding:6px 12px; border-radius:20px;">Click to enlarge</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA (single conversion point) ===================== -->
+<a id="demo"></a>
+<section style="padding:80px 32px; background:#ffffff;">
+  <div style="max-width:680px; margin:0 auto; text-align:center;" data-reveal>
+    <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,44px); line-height:1.08; margin:0 0 18px; color:#002870;">See ClaimSense on your own claims</h2>
+    <p style="font-size:18px; line-height:1.6; color:#4a4340; margin:0 0 32px;">Book a 30-minute call and see the platform running on scenarios that mirror your workflow — ready to use, not ready to build.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center;">
+      <a href="ClaimSense%20Homepage.dc.html#demo" style="background:#FF5539; color:#fff; border-radius:10px; padding:16px 32px; font:600 18px 'Roboto',sans-serif; box-shadow:0 4px 16px rgba(255,85,57,0.3);" style-hover="background:#e8472d;">Book a Demo</a>
+      <a href="ClaimSense%20Architecture.dc.html" style="display:inline-flex; align-items:center; gap:8px; font:500 16px 'Roboto',sans-serif; color:#002870; border-bottom:2px solid #002870; padding-bottom:2px;">Explore the architecture <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTINUE EXPLORING PRODUCT ===================== -->
+<section style="background:#FFE4DF; padding:0;">
+  <p style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:22px; color:#002870; padding:48px 40px 24px; margin:0;">Continue exploring product</p>
+  <a href="ClaimSense%20Architecture.dc.html" style="display:block; background:#002870; border-radius:16px; padding:36px 40px; margin:0 40px 16px;">
+    <span style="font:700 11px 'Roboto',sans-serif; letter-spacing:0.12em; text-transform:uppercase; color:#7788F9; margin-bottom:8px; display:block;">Architecture</span>
+    <p style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:20px; color:#fff; margin:0 0 8px;">European Data Sovereignty</p>
+    <p style="font:400 15px/1.5 'Roboto',sans-serif; color:rgba(255,255,255,0.75); margin:0; max-width:560px;">ClaimSense is deployed into your selected cloud or on-prem environment and designed for enterprise governance, traceability and AI transparency. Built by DataSentics, part of the Bull group.</p>
+    <span style="display:inline-block; margin-top:24px; background:#FF5539; color:#fff; font:700 15px 'Roboto',sans-serif; padding:14px 28px; border-radius:8px;" style-hover="background:#FF7761;">Explore the architecture →</span>
+  </a>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:0 40px 48px;" data-explore-sec>
+    <a href="ClaimSense%20Use%20Cases.dc.html" style="background:#fff; border-radius:12px; padding:28px 24px; border-left:4px solid transparent; display:block;" style-hover="border-left-color:#FF5539; box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+      <p style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:18px; color:#002870; margin:0 0 8px;">Use Cases</p>
+      <p style="font:400 14px/1.5 'Roboto',sans-serif; color:#333333; margin:0 0 16px;">Real-world scenarios across insurance lines — motor, property, liability and beyond.</p>
+      <span style="font:500 14px 'Roboto',sans-serif; color:#FF5539;">See use cases →</span>
+    </a>
+    <a href="ClaimSense%20Implementation.dc.html" style="background:#fff; border-radius:12px; padding:28px 24px; border-left:4px solid transparent; display:block;" style-hover="border-left-color:#FF5539; box-shadow:0 4px 16px rgba(0,0,0,0.08)">
+      <p style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:18px; color:#002870; margin:0 0 8px;">Implementation</p>
+      <p style="font:400 14px/1.5 'Roboto',sans-serif; color:#333333; margin:0 0 16px;">From kickoff to go-live. Understand what deployment looks like in your environment.</p>
+      <span style="font:500 14px 'Roboto',sans-serif; color:#FF5539;">See implementation →</span>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== STRIPPED FOOTER ===================== -->
+<footer style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; padding:24px 40px; border-top:1px solid #E5E5E5; background:#ffffff;">
+  <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:28px; width:auto;">
+  <p style="font:400 13px 'Roboto',sans-serif; color:#666666; margin:0;">© 2026 DataSentics, a Bull company · <a href="#" style="color:#666666; text-decoration:underline;">Privacy Policy</a></p>
+</footer>
+
+<!-- ===================== LIGHTBOX (gallery + single) ===================== -->
+<sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ lbClose }}" style="position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.82); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 24px 24px;">
+    <button type="button" onClick="{{ lbClose }}" aria-label="Close" style="position:fixed; top:20px; right:24px; background:transparent; border:none; color:rgba(255,255,255,0.7); font-size:24px; cursor:pointer; z-index:1002;" style-hover="color:#FF5539;">✕</button>
+    <sc-if value="{{ lbMulti }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ lbPrev }}" aria-label="Previous" style="position:fixed; top:50%; left:20px; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.12); border:1.5px solid rgba(255,255,255,0.25); color:#fff; font-size:28px; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:1002;" style-hover="background:rgba(255,85,57,0.6); border-color:#FF5539;">‹</button>
+      <button type="button" onClick="{{ lbNext }}" aria-label="Next" style="position:fixed; top:50%; right:20px; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.12); border:1.5px solid rgba(255,255,255,0.25); color:#fff; font-size:28px; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:1002;" style-hover="background:rgba(255,85,57,0.6); border-color:#FF5539;">›</button>
+    </sc-if>
+    <div onClick="{{ lbStop }}" style="max-width:980px; width:100%; text-align:center;">
+      {{ lbImgEl }}
+      <p style="font:400 15px 'Roboto',sans-serif; color:rgba(255,255,255,0.8); margin:16px 0 0;">{{ lbCaption }}</p>
+    </div>
+    <sc-if value="{{ lbMulti }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ lbStop }}" style="display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:18px;">
+        <span style="font:400 13px 'Roboto',sans-serif; color:rgba(255,255,255,0.5); letter-spacing:0.05em;">{{ lbCounter }}</span>
+        <div style="display:flex; gap:8px;">
+          <sc-for list="{{ lbDots }}" as="d" hint-placeholder-count="5">
+            <button type="button" onClick="{{ d.go }}" aria-label="Go to image" style="{{ d.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      productOpen: false,
+      lb: { open: false, images: [], index: 0 }
+    };
+    // Named galleries
+    this._galleries = {
+      'master-claims': [
+        { src: 'assets/screenshots/feature-02-a-workflow-definitions.png',           cap: 'Workflow definitions with version history' },
+        { src: 'assets/screenshots/feature-02-b-workflow-configuration.png',          cap: 'Workflow configuration context and naming' },
+        { src: 'assets/screenshots/feature-02-c-workflow-states-configuration.png',   cap: 'Workflow states configuration' },
+        { src: 'assets/screenshots/feature-02-d-workflow-resolution-templates.png',   cap: 'Workflow resolution templates' },
+        { src: 'assets/screenshots/feature-02-e-workflow-state-transition-rules.png', cap: 'Workflow state transition rules' }
+      ],
+      // CONTENT-FLAG: 2nd screen (feature-05-b document extraction) not yet supplied
+      'claim-core': [
+        { src: 'assets/screenshots/feature-05-claim-history-audit-trail.png', cap: 'Full linear history with complete audit trail' }
+      ]
+    };
+  }
+
+  componentDidMount() {
+    this._applyResponsive();
+    this._onResize = () => this._applyResponsive();
+    window.addEventListener('resize', this._onResize);
+    this._setupReveal();
+    this._onKey = (e) => {
+      if (!this.state.lb.open) return;
+      if (e.key === 'Escape') this._lbClose();
+      else if (this.state.lb.images.length > 1) {
+        if (e.key === 'ArrowLeft') this._lbStep(-1);
+        if (e.key === 'ArrowRight') this._lbStep(1);
+      }
+    };
+    window.addEventListener('keydown', this._onKey);
+  }
+
+  _setupReveal() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (reduce || !els.length) return;
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.__shown = true; };
+    const belowFold = (el) => { const r = el.getBoundingClientRect(); return r.top > (window.innerHeight || 768) * 0.92; };
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        el.style.transition = 'opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)';
+        if (belowFold(el)) { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; }
+        else { el.__shown = true; }
+      });
+      const check = () => els.forEach((el) => { if (!el.__shown && !belowFold(el)) reveal(el); });
+      this._onScroll = check;
+      window.addEventListener('scroll', check, { passive: true });
+      this._revealSafety = setTimeout(() => els.forEach((el) => { if (!el.__shown) reveal(el); }), 2200);
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }); }, { threshold: 0.04 });
+        els.forEach((el) => { if (!el.__shown) io.observe(el); });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._revealSafety);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
+    if (this._onKey) window.removeEventListener('keydown', this._onKey);
+  }
+
+  _applyResponsive() {
+    const w = window.innerWidth;
+    Array.prototype.slice.call(document.querySelectorAll('[data-feat-content]')).forEach((c) => {
+      const rev = c.getAttribute('data-reverse') === '1';
+      c.style.flexDirection = w >= 860 ? (rev ? 'row-reverse' : 'row') : 'column';
+      c.style.alignItems = w >= 860 ? 'center' : 'stretch';
+    });
+    const sec = document.querySelector('[data-explore-sec]');
+    if (sec) sec.style.gridTemplateColumns = w >= 720 ? '1fr 1fr' : '1fr';
+    const nav = document.querySelector('[data-nav]');
+    if (nav) nav.style.display = w >= 900 ? 'flex' : 'none';
+    const badge = document.querySelector('[data-trust-badge]');
+    const divider = document.querySelector('[data-nav-divider]');
+    if (badge) badge.style.display = w >= 1040 ? 'flex' : 'none';
+    if (divider) divider.style.display = w >= 1040 ? 'block' : 'none';
+  }
+
+  _scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) { const y = el.getBoundingClientRect().top + window.pageYOffset - 72; window.scrollTo({ top: y, behavior: 'smooth' }); }
+  }
+
+  _lbOpenSingle(src, caption) { this.setState({ lb: { open: true, images: [{ src: src, cap: caption }], index: 0 } }); }
+  _lbOpenGallery(key) { const imgs = this._galleries[key] || []; this.setState({ lb: { open: true, images: imgs, index: 0 } }); }
+  _lbStep(d) { this.setState((s) => { const n = s.lb.images.length || 1; return { lb: Object.assign({}, s.lb, { index: (s.lb.index + d + n) % n }) }; }); }
+  _lbGoTo(i) { this.setState((s) => ({ lb: Object.assign({}, s.lb, { index: i }) })); }
+  _lbClose() { this.setState((s) => ({ lb: Object.assign({}, s.lb, { open: false }) })); }
+
+  renderVals() {
+    const lb = this.state.lb;
+    const cur = lb.images[lb.index] || { src: '', cap: '' };
+    const multi = lb.images.length > 1;
+    return {
+      // header
+      scrollToDemo: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('demo'); },
+      productOpen: this.state.productOpen,
+      chevronRotate: this.state.productOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      openProduct: () => this.setState({ productOpen: true }),
+      closeProduct: () => this.setState({ productOpen: false }),
+      toggleProduct: () => this.setState((s) => ({ productOpen: !s.productOpen })),
+      // pill nav
+      navAI: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('ai-preprocessing'); },
+      navMaster: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('master-claims'); },
+      navF03: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('feature-03'); },
+      navAnalytics: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('analytics-chat'); },
+      navCore: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('claim-core'); },
+      // thumbs
+      openAI: () => this._lbOpenSingle('assets/screenshots/feature-01-preprocessing-dashboard.png', 'Claims dashboard with AI-proposed case statuses'),
+      openAnalytics: () => this._lbOpenSingle('assets/screenshots/feature-04-analytics-chat.png', 'Analytics Data Assistant with natural language queries'),
+      openMasterGallery: () => this._lbOpenGallery('master-claims'),
+      openCoreGallery: () => this._lbOpenGallery('claim-core'),
+      // lightbox
+      lbOpen: lb.open,
+      lbMulti: multi,
+      lbImgEl: cur.src ? React.createElement('img', { src: cur.src, alt: cur.cap, style: { maxHeight: '64vh', width: '100%', objectFit: 'contain', borderRadius: '12px', boxShadow: '0 24px 64px rgba(0,0,0,0.5)', background: '#fff' } }) : null,
+      lbCaption: cur.cap,
+      lbCounter: multi ? ((lb.index + 1) + ' / ' + lb.images.length) : '',
+      lbDots: (multi ? lb.images : []).map((g, i) => ({
+        go: () => this._lbGoTo(i),
+        style: 'width:10px; height:10px; border-radius:50%; border:none; cursor:pointer; padding:0; transition:background .15s, transform .15s; background:' + (i === lb.index ? '#FF5539' : 'rgba(255,255,255,0.3)') + '; transform:scale(' + (i === lb.index ? '1.3' : '1') + ');'
+      })),
+      lbPrev: () => this._lbStep(-1),
+      lbNext: () => this._lbStep(1),
+      lbClose: () => this._lbClose(),
+      lbStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); }
+    };
+  }
+}
+</script>
+<script>
+(async () => {
+  if (!document.title || !document.title.trim()) document.title = "ClaimSense Features";
+  // Prepend so page-supplied @page / break rules (deck-stage's margin:0,
+  // author CSS) keep source-order precedence over the baseline.
+  const baseCss = document.createElement('style');
+  baseCss.textContent = "@media print {\n  figure, table { break-inside: avoid; }\n  *, *::before, *::after {\n    print-color-adjust: exact; -webkit-print-color-adjust: exact;\n    backdrop-filter: none !important; -webkit-backdrop-filter: none !important;\n    animation-delay: -99s !important; animation-duration: .001s !important;\n    animation-iteration-count: 1 !important; animation-fill-mode: both !important;\n    animation-play-state: running !important; transition-duration: 0s !important;\n  }\n}";
+  document.head.prepend(baseCss);
+  if (document.readyState === 'loading') {
+    await new Promise((r) => document.addEventListener('DOMContentLoaded', r, { once: true }));
+  }
+  let ds = document.querySelector('deck-stage');
+  // whenDefined never resolves when nothing registers the element, so only
+  // await it when a <deck-stage> tag exists (and race a timeout regardless).
+  if (ds && !customElements.get('deck-stage')) {
+    try {
+      await Promise.race([
+        customElements.whenDefined('deck-stage'),
+        new Promise((r) => setTimeout(r, 3000)),
+      ]);
+    } catch (e) {}
+    ds = document.querySelector('deck-stage');
+  }
+  // dc-runtime assigns window.DCLogic at init and mounts into #dc-root on
+  // DOMContentLoaded; settle on that subtree so React has rendered before
+  // print(). Non-DC pages fall through to weighing body.
+  const isDc = !ds && 'DCLogic' in window;
+  const settleRoot = ds || (isDc ? document.getElementById('dc-root') : null) || document.body;
+  if (settleRoot) {
+    // Weigh only content children — skip script/style/template so inline
+    // Babel/CSS doesn't register as stable "content" before the framework
+    // has mounted anything.
+    const MEDIA = 'img,svg,canvas,video,picture,iframe,embed,object';
+    const weigh = () => {
+      let text = 0, media = 0;
+      for (const c of settleRoot.children) {
+        const t = c.tagName;
+        if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+        text += (c.textContent || '').trim().length;
+        media += c.querySelectorAll(MEDIA).length + (c.matches(MEDIA) ? 1 : 0);
+      }
+      return text + media * 100;
+    };
+    // "Non-zero and stable" alone is not sufficient to mean rendered: generic
+    // body can carry a static shell while async main content is pending, and
+    // #dc-root can carry the root DC's static text while child refs are still
+    // .sc-placeholder boxes. Gate generic on readyState 'complete', and never
+    // accept stability while a dc-runtime placeholder is present.
+    const isGeneric = settleRoot === document.body;
+    const deadline = Date.now() + 15000;
+    let last = -1, stable = 0;
+    while (Date.now() < deadline) {
+      const n = weigh();
+      const ready =
+        (!isGeneric || document.readyState === 'complete') &&
+        !settleRoot.querySelector('.sc-placeholder');
+      if (n > 0 && n === last && ready) { if (++stable >= 2) break; } else { stable = 0; }
+      last = n;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+  }
+  // Project support.js may predate runtime default-seeding; push via bridge.
+  if (isDc && window.__dcSetProps && window.__dcRootName) {
+    try {
+      const dpEl = document.querySelector('script[data-dc-script]');
+      const meta = JSON.parse((dpEl && dpEl.getAttribute('data-props')) || '{}');
+      const bag = {};
+      for (const k in meta)
+        if (k[0] !== '$' && meta[k] && meta[k].default !== undefined)
+          bag[k] = meta[k].default;
+      if (Object.keys(bag).length) {
+        window.__dcSetProps(window.__dcRootName(), bag);
+        await new Promise((r) => setTimeout(r, 50));
+      }
+    } catch (e) {}
+  }
+  // Reveal content gated on scroll or visibility before printing. Lazy <img>,
+  // IntersectionObserver fade-ins, and collapsed <details> don't render while
+  // off-screen, so a long page would print with them blank or closed. Open
+  // every <details>, force native-lazy images eager, and scroll the document
+  // through its full height to trip lazy-load + IO; then wait (bounded) for the
+  // newly-triggered images. Inert for deck-stage (slides aren't scroll-gated).
+  try {
+    for (const d of document.querySelectorAll('details')) d.open = true;
+    for (const img of document.querySelectorAll('img[loading="lazy"]'))
+      img.loading = 'eager';
+    const scroller = document.scrollingElement || document.documentElement;
+    const full = Math.max(scroller.scrollHeight, document.body.scrollHeight);
+    const step = window.innerHeight || 800;
+    for (let y = 0; y <= full; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => requestAnimationFrame(r));
+    }
+    window.scrollTo(0, 0);
+    await Promise.race([
+      Promise.all(
+        [...document.images].map((img) =>
+          img.complete
+            ? null
+            : new Promise((res) => {
+                img.addEventListener('load', res, { once: true });
+                img.addEventListener('error', res, { once: true });
+              })
+        )
+      ),
+      new Promise((r) => setTimeout(r, 4000)),
+    ]);
+  } catch (e) {}
+  try { await document.fonts.ready; } catch (e) {}
+  // Jump every animation to its end state so print() never captures a slide
+  // mid-entrance. Ordering matters: the 0s-transition style must be live
+  // BEFORE data-deck-active is set so attribute-keyed transitions don't
+  // start a (now-0s) run from the pre-active base.
+  const st = document.createElement('style');
+  st.textContent = '*,*::before,*::after{animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;animation-play-state:running !important;transition-duration:0s !important}';
+  document.head.appendChild(st);
+  for (const d of document.querySelectorAll('deck-stage')) {
+    for (const c of d.children) {
+      const t = c.tagName;
+      if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+      c.setAttribute('data-deck-active', '');
+    }
+  }
+  // Re-append deck-stage's @page last so no author @page can add a margin and
+  // spill each full-bleed slide onto two sheets. Backstop for old copies.
+  if (ds) {
+    let pg = document.getElementById('deck-stage-print-page');
+    if (!pg) {
+      pg = document.createElement('style');
+      pg.textContent = '@page{size:' + (+ds.getAttribute('width') || 1920) +
+        'px ' + (+ds.getAttribute('height') || 1080) + 'px;margin:0}';
+    }
+    document.body.appendChild(pg);
+  }
+  try {
+    const sweep = () => {
+      for (const a of document.getAnimations()) {
+        try { a.finish(); } catch (e) {
+          try { a.currentTime = (a.effect && a.effect.getComputedTiming().duration) || 0; a.pause(); } catch (e2) {}
+        }
+      }
+    };
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+  } catch (e) {}
+  // Size the PDF page to the rendered design unless the file opted into
+  // standard paper via @page{size:letter|A4|…}. Decks own their own @page.
+  // Wrappers (body, …) lose padding+margin so the frame sits at (0,0); the
+  // frame itself loses only margin — its padding is INSIDE the measured
+  // rect and must stay, or content shifts and leaves a gap at bottom/right.
+  var __m = null;
+  try { __m = (() => {
+  var docEl = document.documentElement;
+  var doc = { width: docEl.scrollWidth, height: docEl.scrollHeight };
+
+  var ds = document.querySelector('deck-stage');
+  if (ds) {
+    var dw = Number(ds.getAttribute('width')) || 1920;
+    var dh = Number(ds.getAttribute('height')) || 1080;
+    var n = typeof ds.length === 'number' ? ds.length : ds.children.length;
+    var idx = typeof ds.index === 'number' ? ds.index : 0;
+    var frames = [];
+    for (var i = 0; i < n; i++) frames.push({ left: 0, top: 0, width: dw, height: dh });
+    return { kind: 'deck', doc: doc, frames: frames,
+      authored: frames.map(function(){return{width:true,height:true}}),
+      deck: { width: dw, height: dh, slideCount: n, index: idx },
+      signals: { paperPage: false, pxPage: false } };
+  }
+
+  var paperPage = false, pxPage = false;
+  var eachRule = function (fn) {
+    for (var s = 0; s < document.styleSheets.length; s++) {
+      var rs; try { rs = document.styleSheets[s].cssRules; } catch (e) { continue; }
+      for (var r = 0; r < rs.length; r++) {
+        fn(rs[r]);
+        if (rs[r].cssRules) for (var n = 0; n < rs[r].cssRules.length; n++) fn(rs[r].cssRules[n]);
+      }
+    }
+  };
+  eachRule(function (r) {
+    if (r.type !== 6) return;
+    var m = /\bsize\s*:\s*([^;}]+)/i.exec(r.cssText || '');
+    if (!m) return;
+    if (/\b(letter|a[3-5]|legal|ledger)\b/i.test(m[1])) paperPage = true;
+    if (/\d+(?:\.\d+)?px\b/i.test(m[1])) pxPage = true;
+  });
+  var signals = { paperPage: paperPage, pxPage: pxPage };
+
+  var pxVal = function (v) {
+    var m = /^(\d+(?:\.\d+)?)px$/.exec(v || ''); return m ? +m[1] : 0;
+  };
+  var authoredPx = function (el, prop) {
+    if (pxVal(el.style[prop])) return true;
+    var attr = el.getAttribute(prop);
+    if (attr && /^\d+$/.test(attr)) return true;
+    var hit = false;
+    eachRule(function (r) {
+      if (hit || r.type !== 1 || !r.style) return;
+      try { if (el.matches(r.selectorText) && pxVal(r.style[prop])) hit = true; } catch (e) {}
+    });
+    return hit;
+  };
+
+  var el = document.body, rootPxW = false;
+  for (;;) {
+    var kids = [];
+    for (var c = 0; c < el.children.length; c++) {
+      var t = el.children[c].tagName;
+      if (t !== 'SCRIPT' && t !== 'STYLE' && t !== 'TEMPLATE') kids.push(el.children[c]);
+    }
+    if (kids.length !== 1 || !(kids[0] instanceof HTMLElement)) break;
+    el.setAttribute('data-om-frame-wrap', '');
+    el = kids[0];
+    rootPxW = authoredPx(el, 'width');
+    if (rootPxW) break;
+  }
+  if (!rootPxW) rootPxW = authoredPx(el, 'width');
+
+  // @page{size:letter} alone is a flowing doc; with a px-width root it's a
+  // fixed sheet pretending to be paper — fall through and size to render.
+  if (paperPage && !rootPxW) {
+    return { kind: 'paper-doc', doc: doc, signals: signals,
+      frames: [{ left: 0, top: 0, width: doc.width, height: doc.height }],
+      authored: [{ width: false, height: false }] };
+  }
+
+  var sx = window.scrollX || 0, sy = window.scrollY || 0;
+  var rectOf = function (e) {
+    var r = e.getBoundingClientRect();
+    var oy; try { oy = getComputedStyle(e).overflowY; } catch (err) {}
+    var h = oy === 'visible' ? Math.max(r.height, e.scrollHeight || 0) : r.height;
+    return { left: r.left + sx, top: r.top + sy, width: r.width, height: h };
+  };
+
+  // Multi-frame: ≥2 visible non-fixed children, each with authored px width
+  // AND height, all within ±2px of each other. Off unless the page opts in
+  // via data-om-multi-frame on the stop element — guards against card grids
+  // and pricing tables that match the geometry but aren't separate canvases.
+  if (el.hasAttribute('data-om-multi-frame')) {
+    var cands = [];
+    for (var k = 0; k < el.children.length; k++) {
+      var ch = el.children[k];
+      var cs; try { cs = getComputedStyle(ch); } catch (e) { continue; }
+      if (cs.display === 'none' || cs.visibility === 'hidden' || cs.position === 'fixed') continue;
+      var rc = rectOf(ch);
+      if (rc.width < 2 || rc.height < 2) continue;
+      if (!authoredPx(ch, 'width') || !authoredPx(ch, 'height')) continue;
+      cands.push(rc);
+    }
+    if (cands.length >= 2) {
+      var w0 = cands[0].width, h0 = cands[0].height, ok = true;
+      for (var q = 1; q < cands.length; q++)
+        if (Math.abs(cands[q].width - w0) > 2 || Math.abs(cands[q].height - h0) > 2) ok = false;
+      if (ok) return { kind: 'multi-frame', doc: doc, signals: signals,
+        frames: cands, authored: cands.map(function(){return{width:true,height:true}}) };
+    }
+  }
+
+  el.setAttribute('data-om-frame', '');
+  return { kind: 'single-canvas', doc: doc, signals: signals,
+    frames: [rectOf(el)],
+    authored: [{ width: rootPxW, height: authoredPx(el, 'height') }] };
+})(); } catch (e) {}
+  var frame = null;
+  if (__m && __m.kind === 'single-canvas') {
+    var f = __m.frames && __m.frames[0];
+    if (f && f.width >= 200 && f.height >= 200) {
+      frame = f;
+      var fst = document.createElement('style');
+      fst.textContent = '@media print{@page{size:' + Math.ceil(f.width) + 'px ' +
+        Math.ceil(f.height) + 'px;margin:0}' +
+        'html,body,[data-om-frame-wrap]{padding:0!important;margin:0!important;background:none!important}' +
+        '[data-om-frame]{margin:0!important}}';
+      document.body.appendChild(fst);
+    }
+  }
+  // Relax break-inside on oversized elements. An element taller than a
+  // printable page can't honor break-inside: avoid — browsers either overflow
+  // it or push it whole to the next page, leaving a blank gap, then break it
+  // anyway at an arbitrary point. After the final layout (content revealed,
+  // animations jumped), find elements taller than a page that still compute
+  // break-inside: avoid and reset them to auto, so the browser breaks them at
+  // their children's boundaries instead (children keep their own avoid). PAGE_PX
+  // is a conservative portrait estimate at 96 CSS px/in — Letter/A4 usable
+  // height minus our 0.5in margins — so only clearly-oversized elements are
+  // touched and under-page elements still stay whole. Skipped for decks (slides
+  // are sized to the page) and for fixed-size canvases (frame set, or an author
+  // px-based @page) — runs as before for flowing docs on letter/A4.
+  try {
+    if (!ds && !frame && !(__m && __m.signals && __m.signals.pxPage)) {
+      const PAGE_PX = 1024;
+      // Our print defaults add a real @page margin only when the source has
+      // no @page of its own; computed style can't tell us (it reports screen
+      // media), so read the injected rule directly.
+      const defaults = document.querySelector('style[data-omelette-print-defaults]');
+      const pageInset = /@page\s*\{[^}]*margin/.test(defaults ? defaults.textContent || '' : '');
+      const SEL = 'section,article,figure,table,pre,blockquote,[class~="card" i],[class~="page" i],[class~="sheet" i]';
+      for (const el of document.body.querySelectorAll(SEL)) {
+        if (el instanceof HTMLElement && el.offsetHeight > PAGE_PX) {
+          el.setAttribute('data-om-oversized', '');
+          // Fake-paged docs simulate sheets with over-tall break-after:page
+          // boxes; honoring the break spills half-blank pages and ends a
+          // colored box mid-sheet. Flow them, and (only when we own the page
+          // inset) drop the redundant padding/background via the rule below.
+          const cs = getComputedStyle(el);
+          if (cs.breakAfter === 'page' || cs.pageBreakAfter === 'always') {
+            el.setAttribute('data-om-fakepage', '');
+          }
+        }
+      }
+      const ost = document.createElement('style');
+      ost.textContent = '@media print{' +
+        '[data-om-oversized]{break-inside:auto !important;page-break-inside:auto !important}' +
+        '[data-om-fakepage]{break-after:auto !important;page-break-after:auto !important}' +
+        (pageInset ? '[data-om-fakepage]{padding:0 !important;background:none !important}' : '') +
+        '}';
+      document.head.appendChild(ost);
+    }
+  } catch (e) {}
+  // macOS Preview renders Skia-PDF Luminosity soft-masks as opaque grey boxes;
+  // swap the CSS that triggers them for Preview-safe forms.
+  try {
+    for (const el of document.body.querySelectorAll('*')) {
+      const cs = getComputedStyle(el);
+
+      if (cs.boxShadow !== 'none' && cs.filter === 'none') {
+        const outs = [], kept = [];
+        for (const s of cs.boxShadow.split(/,(?![^(]*[)])/)) {
+          const t = s.trim();
+          const m = t.match(/^(rgba?[(][^)]+[)]) (-?[0-9.]+px) (-?[0-9.]+px) ([0-9.]+px) -?[0-9.]+px$/);
+          if (m && parseFloat(m[4]) > 0) outs.push('drop-shadow(' + m[2] + ' ' + m[3] + ' ' + m[4] + ' ' + m[1] + ')');
+          else kept.push(t);
+        }
+        if (outs.length) {
+          el.style.setProperty('filter', outs.join(' '), 'important');
+          el.style.setProperty('box-shadow', kept.join(', ') || 'none', 'important');
+        }
+      }
+
+      const mask = cs.maskImage && cs.maskImage !== 'none' ? cs.maskImage : cs.webkitMaskImage;
+      if (mask && mask !== 'none' && cs.filter === 'none') el.style.setProperty('filter', 'opacity(1)', 'important');
+    }
+  } catch (e) {}
+  setTimeout(() => { try { window.print(); } catch (e) {} }, 200);
+})();
+</script>
+</body>
+</html>

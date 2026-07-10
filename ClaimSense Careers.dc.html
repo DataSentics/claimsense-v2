@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Careers at ClaimSense. AI engineers, product, data science. Work on enterprise claims automation. Part of DataSentics and Bull innovation.">
+<title>Careers – ClaimSense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Black.woff2') format('woff2'); font-weight:900; font-display:swap; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Roboto',sans-serif; font-weight:400; color:#1a1a1a; line-height:1.6; -webkit-font-smoothing:antialiased; background:#ffffff; }
+::selection { background:#FFADA0; }
+a { text-decoration:none; color:inherit; }
+input, textarea, select, button { font-family:inherit; }
+
+
+
+/* ── CTA & Nav hover system v3 (Bull brand, all 7 fixes) ───────────────── */
+header a:not([data-nav-cta]), header button { outline:none !important; box-shadow:none !important; border:none !important; }
+header a:not([data-nav-cta]) { border:none !important; }
+footer a { border:none !important; outline:none !important; }
+header a:not([data-nav-cta]):hover { color:#FF5539 !important; transition:color .2s ease; }
+header a[style*="padding:10px"]:hover { background:#f5f0ee !important; color:#FF5539 !important; }
+[data-nav-cta] { transition:background .2s ease, color .2s ease; cursor:pointer; }
+[data-nav-cta]:hover { background:#ffffff !important; color:#000000 !important; border:3px solid #FF5539 !important; }
+[data-cta="primary"] { border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="primary"]:hover { background:#ffffff !important; color:#000000 !important; box-shadow:none !important; }
+[data-cta="secondary"] { border:3px solid #002870 !important; transition:border-color .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="secondary"]:hover { border-color:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+[data-cta="pricing"] { border:3px solid #002870 !important; transition:border-color .2s ease, background .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="pricing"]:hover { border-color:#FF5539 !important; box-shadow:none !important; }
+[data-cta="quickstart"] { background:#ffffff; color:#FF5539; border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="quickstart"]:hover { background:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+[data-pill]:hover [data-pill-badge] { background-color:#FF5539 !important; color:#ffffff !important; }
+[data-footer-active] { color:#FF5539 !important; }
+footer a:hover { color:#FF5539 !important; transition:color .2s ease; }
+
+/* Decorative monogram: shrink + fade on tablet/mobile so it stays a quiet texture, contained in-section (section already has overflow:hidden) */
+@media (max-width:768px){ img[src*="Bull_symbol"]{ width:120px !important; opacity:0.07 !important; } }
+
+/* Mobile header: shrink CTA + tighten nav padding so nothing clips on narrow phones */
+@media (max-width:600px){
+  header nav{ padding:12px 16px !important; gap:12px !important; }
+  [data-nav-cta]{ margin-left:0 !important; padding:9px 15px !important; font-size:13px !important; border-width:2px !important; }
+  header nav > a img[alt="ClaimSense"]{ height:28px !important; }
+}
+
+/* Mobile: fit-to-screen — no page-level horizontal scroll, so the sticky header (hamburger) is always fully visible. overflow-x:clip is sticky-safe (unlike hidden). */
+@media (max-width:900px){
+  html, body { overflow-x:clip !important; max-width:100% !important; }
+  /* Tighter header padding on mobile so logo + “built by Bull” + hamburger all fit. */
+  header > nav { padding-left:14px !important; padding-right:14px !important; }
+  header > nav > div:first-child { gap:8px !important; }
+  /* Card grids: auto-fit minmax() forces a fixed min column (280–340px) that overflows the
+     narrow mobile content area and gets clipped. Collapse to one shrinkable column so headings
+     and cards always fit the viewport. */
+  [style*="repeat(auto-fit,minmax"],
+  [style*="repeat(auto-fit, minmax"],
+  [style*="repeat(auto-fill,minmax"],
+  [style*="repeat(auto-fill, minmax"] { grid-template-columns:1fr !important; }
+}
+</style>
+</helmet>
+
+<!-- ================================================================ -->
+<!-- ClaimSense Careers page — /careers/                               -->
+<!-- Content preserved verbatim from content/pages/content_careers.md  -->
+<!-- status: needs-functional-spec                                     -->
+<!-- approval_required: open roles, employment conditions, recruitment privacy, application workflow -->
+<!-- primary_conversion: Submit Application                            -->
+<!-- ================================================================ -->
+
+<!-- ===================== HEADER (shared chrome) ===================== -->
+<header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(14px); border-bottom:1px solid #f0e6e3;">
+  <nav style="max-width:1280px; margin:0 auto; padding:14px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <div style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
+      <a href="ClaimSense%20Homepage.dc.html" style="display:flex; align-items:center;">
+        <img src="assets/logos/ClaimSense_logo_black.svg" alt="ClaimSense" style="height:32px; width:auto; transform:translateY(1.1px);">
+      </a>
+      <span data-mobile-badge="" style="display:none; align-items:center; gap:6px; padding-left:8px; border-left:1px solid #e5e7eb;">
+        <span style="font:400 10px/1.2 'Tosh A',sans-serif; color:#8a827d; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:22px; width:auto; transform:translateY(-0.5px);">
+      </span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:34px; flex:1 1 auto;" data-nav>
+      <a href="ClaimSense%20Homepage.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Home</a>
+      <div style="position:relative;" onMouseEnter="{{ openProduct }}" onMouseLeave="{{ closeProduct }}">
+        <button onClick="{{ toggleProduct }}" aria-haspopup="true" aria-expanded="{{ productOpen }}" style="display:inline-flex; align-items:center; gap:6px; background:none; cursor:pointer; font:500 14px 'Tosh A',sans-serif; color:#33302e; padding:0;" style-hover="color:#FF5539;">
+          Product
+          <svg width="11" height="7" viewBox="0 0 11 7" aria-hidden="true" style="transition:transform .2s; transform:{{ chevronRotate }};"><path d="M1 1L5.5 5.5L10 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <sc-if value="{{ productOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; z-index:60;">
+            <div style="background:#fff; border:1px solid #ece3df; border-radius:12px; padding:8px; min-width:220px;">
+              <a href="ClaimSense%20Features.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+              <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+              <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+              <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <a href="ClaimSense%20Our%20Story.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Our story</a>
+      <a href="ClaimSense%20Pricing.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Pricing</a>
+      <a href="ClaimSense%20Business%20Case.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Business case</a>
+    </div>
+    <div style="display:flex; align-items:center; flex:0 0 auto;" data-nav-right>
+      <span style="display:flex; align-items:center; gap:8px;" data-trust-badge>
+        <span style="font:400 14px/1.2 'Tosh A',sans-serif; color:#6b7280; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:26px; width:auto;">
+      </span>
+      <span style="width:1px; align-self:stretch; min-height:26px; background:#e5e7eb; margin-left:24px;" data-nav-divider></span>
+      <button onClick="{{ scrollToForm }}" style="margin-left:24px; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:8px; padding:11px 22px; font:500 15px 'Roboto',sans-serif; cursor:pointer; white-space:nowrap;" data-nav-cta="">View open roles</button>
+      <button data-nav-burger="" type="button" aria-label="Open menu" aria-expanded="false" style="display:none; align-items:center; justify-content:center; width:44px; height:44px; padding:0; background:none; border:none; cursor:pointer; color:#0d0d0d; margin-left:12px;">
+        <svg data-burger-icon="" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </div>
+  </nav>
+  <div data-mobile-menu="" style="display:none; position:absolute; top:100%; right:16px; margin-top:8px; width:min(300px,calc(100vw - 32px)); background:#fff; border:1px solid #ece3df; border-radius:14px; box-shadow:0 24px 60px -18px rgba(0,40,112,0.3); padding:10px; z-index:70;">
+    <a href="ClaimSense%20Homepage.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Home</a>
+    <div style="font:600 11px 'Roboto',sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#a89f9a; padding:10px 12px 4px;">Product</div>
+    <a href="ClaimSense%20Features.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+    <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+    <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+    <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+    <div style="height:1px; background:#f0e6e3; margin:8px 6px;"></div>
+    <a href="ClaimSense%20Our%20Story.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Our story</a>
+    <a href="ClaimSense%20Pricing.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Pricing</a>
+    <a href="ClaimSense%20Business%20Case.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Business case</a>
+    <a href="ClaimSense%20Homepage.dc.html#demo" style="display:block; text-align:center; margin-top:10px; background:#FF5539; color:#000; border:2px solid #FF5539; border-radius:9px; padding:13px; font:500 15px 'Roboto',sans-serif; text-decoration:none;">Book a walkthrough</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section style="background:linear-gradient(180deg,#FFF7F5 0%,#ffffff 65%); padding:80px 32px 56px; position:relative; overflow:hidden;">
+  <div style="max-width:1140px; margin:0 auto; position:relative;">
+    <div style="max-width:740px;" data-reveal>
+      <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF5539; margin-bottom:18px;">We're Hiring</div>
+      <h1 style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(36px,5vw,62px); line-height:1.03; letter-spacing:-0.02em; margin:0 0 22px; color:#0d0d0d;">Join our growing team</h1>
+      <p style="font-size:20px; line-height:1.55; color:#4a4340; max-width:640px; margin:0 0 16px;">We're scaling rapidly across Europe and looking for talented individuals who are passionate about transforming the insurance industry with AI.</p>
+      <p style="font-size:18px; line-height:1.55; color:#5a514d; max-width:620px; margin:0 0 36px;">Our team welcomes domain experts in claims and consultant roles who want to make a real impact.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
+        <button onClick="{{ scrollToRoles }}" style="background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:10px; padding:16px 32px; font:600 18px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">View open positions</button>
+        <a href="#apply" onClick="{{ navApply }}" style="display:inline-flex; align-items:center; gap:8px; font:500 16px 'Roboto',sans-serif; color:#002870; border-bottom:2px solid #002870; padding-bottom:2px;">Submit an open application <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY JOIN ===================== -->
+<section style="padding:72px 32px; background:#ffffff;">
+  <div style="max-width:1140px; margin:0 auto;">
+    <div style="max-width:640px; margin:0 0 40px;" data-reveal>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(26px,3.2vw,38px); margin:0 0 8px; color:#0d0d0d;">Why join ClaimSense?</h2>
+      <p style="font-size:18px; color:#5a514d; margin:0;">Be part of something transformational</p>
+    </div>
+    <div style="display:grid; gap:22px;" data-why-grid data-reveal>
+      <article style="background:#FAFAF9; border:1px solid #f1efed; border-radius:16px; padding:28px;">
+        <div style="width:44px; height:44px; border-radius:11px; background:#FFE4DF; display:flex; align-items:center; justify-content:center; margin-bottom:16px;"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8" fill="none" stroke="#FF5539" stroke-width="1.6"/><path d="M3 11h16M11 3c2.5 2.5 2.5 13 0 16M11 3c-2.5 2.5-2.5 13 0 16" fill="none" stroke="#FF5539" stroke-width="1.3"/></svg></div>
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:19px; margin:0 0 8px; color:#0d0d0d;">EU-Wide Growth</h3>
+        <p style="font-size:15px; line-height:1.55; color:#54504d; margin:0;">Join a rapidly scaling team with opportunities across Europe.</p>
+      </article>
+      <article style="background:#FAFAF9; border:1px solid #f1efed; border-radius:16px; padding:28px;">
+        <div style="width:44px; height:44px; border-radius:11px; background:#eef0fe; display:flex; align-items:center; justify-content:center; margin-bottom:16px;"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="3" fill="#7788F9"/><circle cx="11" cy="11" r="8" fill="none" stroke="#7788F9" stroke-width="1.4"/></svg></div>
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:19px; margin:0 0 8px; color:#0d0d0d;">Cutting-Edge AI</h3>
+        <p style="font-size:15px; line-height:1.55; color:#54504d; margin:0;">Work with the latest AI and LLM technologies in insurance.</p>
+      </article>
+      <article style="background:#FAFAF9; border:1px solid #f1efed; border-radius:16px; padding:28px;">
+        <div style="width:44px; height:44px; border-radius:11px; background:#dcf5ee; display:flex; align-items:center; justify-content:center; margin-bottom:16px;"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M11 3l2.3 4.7 5.2.8-3.7 3.6.9 5.1L11 14.8 6.3 17.3l.9-5.1L3.5 8.5l5.2-.8z" fill="none" stroke="#00B290" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:19px; margin:0 0 8px; color:#0d0d0d;">Real Impact</h3>
+        <p style="font-size:15px; line-height:1.55; color:#54504d; margin:0;">Help transform how enterprises handle millions of claims.</p>
+      </article>
+      <article style="background:#FAFAF9; border:1px solid #f1efed; border-radius:16px; padding:28px;">
+        <div style="width:44px; height:44px; border-radius:11px; background:#fff3d6; display:flex; align-items:center; justify-content:center; margin-bottom:16px;"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 16l5-5 3 3 7-7" fill="none" stroke="#9a6a00" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7h4v4" fill="none" stroke="#9a6a00" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:19px; margin:0 0 8px; color:#0d0d0d;">Career Growth</h3>
+        <p style="font-size:15px; line-height:1.55; color:#54504d; margin:0;">Fast-track your career in a high-growth environment.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OPEN POSITIONS ===================== -->
+<a id="roles"></a>
+<section style="padding:72px 32px; background:#FFF7F5;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <div style="max-width:640px; margin:0 0 36px;" data-reveal>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(26px,3.2vw,38px); margin:0 0 8px; color:#0d0d0d;">Open positions</h2>
+      <p style="font-size:18px; color:#5a514d; margin:0;">Find your role in our growing team</p>
+    </div>
+    <!-- NEEDS-APPROVAL: confirm all listed roles are still open; employment terms -->
+    <div style="display:flex; flex-direction:column; gap:18px;" data-reveal>
+      <sc-for list="{{ roles }}" as="r" hint-placeholder-count="3">
+        <article style="background:#fff; border:1px solid #ecdcd6; border-radius:16px; padding:28px; display:flex; flex-wrap:wrap; align-items:center; gap:20px;">
+          <div style="flex:1 1 360px;">
+            <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:21px; margin:0 0 8px; color:#0d0d0d;">{{ r.title }}</h3>
+            <p style="font-size:15px; line-height:1.55; color:#54504d; margin:0 0 12px;">{{ r.desc }}</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <span style="font:500 12px 'Roboto',sans-serif; color:#002870; background:#eef0fe; border-radius:20px; padding:5px 12px;">Full-time</span>
+              <span style="font:500 12px 'Roboto',sans-serif; color:#00765f; background:#dcf5ee; border-radius:20px; padding:5px 12px;">Remote (EU)</span>
+            </div>
+          </div>
+          <button onClick="{{ r.apply }}" style="flex:0 0 auto; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:9px; padding:13px 26px; font:600 15px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Apply now</button>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APPLY (form) ===================== -->
+<a id="apply"></a>
+<section style="padding:80px 32px; background:#0a1b3d; color:#fff; position:relative; overflow:hidden;">
+  <img src="assets/bull/Bull_symbol_white.svg" alt="" aria-hidden="true" style="position:absolute; right:40px; bottom:40px; width:240px; opacity:0.12; pointer-events:none;">
+  <div style="max-width:760px; margin:0 auto; position:relative;">
+    <div style="text-align:center; margin-bottom:36px;" data-reveal>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(26px,3.2vw,40px); margin:0 0 12px;">Apply to join us</h2>
+      <p style="font-size:18px; line-height:1.55; color:#c3cbe0; margin:0;">Submit your application for our first hiring round. We'll review your profile and get back to you.</p>
+    </div>
+    <!-- Career application form — per content/global/forms.md (Career application form) -->
+    <!-- FUNCTIONAL-SPEC NEEDED: recruitment data owner, retention policy, privacy notice target, CV/upload policy, notification workflow, success/error states -->
+    <div data-reveal style="background:#fff; border-radius:18px; padding:34px; color:#1a1a1a;">
+      <sc-if value="{{ formDone }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center; padding:40px 10px;">
+          <div style="width:56px; height:56px; border-radius:50%; background:#dcf5ee; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 13L11 19L21 7" fill="none" stroke="#00B290" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:22px; margin:0 0 8px; color:#0d0d0d;">Thank you.</h3>
+          <p style="font-size:14px; color:#7a716d; margin:0;">We'll be in touch.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submitForm }}" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="bb676465-962f-4e10-a53b-5d2145f13460">
+          <input type="hidden" name="subject" value="New job application — ClaimSense Careers">
+          <input type="hidden" name="from_name" value="ClaimSense Website">
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none;">
+          <div style="display:grid; gap:14px;" data-form-grid>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">First Name *</span><input type="text" name="first_name" required placeholder="Jane" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Last Name *</span><input type="text" name="last_name" required placeholder="Doe" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Email *</span><input type="email" name="email" required placeholder="jane@email.com" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Phone</span><input type="text" name="phone" placeholder="+420 …" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">LinkedIn Profile</span><input type="text" name="linkedin" placeholder="linkedin.com/in/…" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px;"></label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Role of Interest *</span>
+              <select name="role" required value="{{ selectedRole }}" onChange="{{ onRoleChange }}" style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px; background:#fff;">
+                <option value="">Select a role</option>
+                <option>Claims Domain Expert</option>
+                <option>Insurance Consultant</option>
+                <option>Implementation Consultant</option>
+                <option>Other / Open Application</option>
+              </select>
+            </label>
+            <label style="display:block;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Years of Experience in Insurance/Claims *</span>
+              <select name="experience" required style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px; background:#fff;">
+                <option value="">Select experience</option>
+                <option>0-2 years</option>
+                <option>3-5 years</option>
+                <option>6-10 years</option>
+                <option>10+ years</option>
+              </select>
+            </label>
+          </div>
+          <label style="display:block; margin-top:14px;"><span style="font:500 13px 'Roboto',sans-serif; color:#54504d;">Tell us about yourself *</span><textarea name="message" rows="4" required style="margin-top:6px; width:100%; padding:11px 13px; border:1px solid #e0d6d1; border-radius:8px; font-size:15px; resize:vertical;"></textarea></label>
+          <p data-form-error style="display:none; font:500 13px 'Roboto',sans-serif; color:#c02617; background:#fdecea; border:1px solid #f5c6c0; border-radius:8px; padding:10px 12px; margin:16px 0 0;"></p>
+          <button type="submit" style="margin-top:18px; width:100%; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:9px; padding:14px; font:600 16px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Submit application</button>
+          <p style="font-size:12px; line-height:1.5; color:#9a908b; margin:14px 0 0;">By submitting, you agree to our privacy policy and consent to being contacted about opportunities.</p>
+        </form>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#06122b; color:#c3cbe0; padding:64px 32px 36px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="display:grid; gap:40px;" data-footer-grid>
+      <div>
+        <img src="assets/logos/ClaimSense_logo_white.svg" alt="ClaimSense" style="height:26px; width:auto; margin-bottom:18px;">
+        <p style="font-size:14px; line-height:1.6; color:#9aa6c8; margin:0 0 22px; max-width:280px;">AI-first workflow for your claim team. Transform complex claims processing with intelligent automation.</p>
+        <div style="display:flex; align-items:center; gap:12px; padding-top:18px; border-top:1px solid #1a2c54;">
+          <img src="assets/bull/BULL_LOGO_WHITE_RGB.png" alt="Bull" style="height:26px; width:auto;">
+        </div>
+        <p style="font-size:12px; color:#7e8ab0; margin:12px 0 0;">ClaimSense is built by DataSentics, <br>part of the Bull.</p>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Product</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Features.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Features</a></li>
+          <li><a href="ClaimSense%20Pricing.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Pricing</a></li>
+          <li><a href="ClaimSense%20Use%20Cases.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Use cases</a></li>
+          <li><a href="ClaimSense%20Implementation.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Implementation</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Company</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Our%20Story.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Our story</a></li>
+          <li><a href="ClaimSense%20Partners.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Partners</a></li>
+          <li><a href="https://careers.datasentics.com/?utm_source=slaimsense&amp;utm_medium=webfooter&amp;utm_campaign=1" target="_blank" rel="noopener noreferrer" style="color:#FF5539;">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Resources</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20FAQ.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">FAQ</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Help Center</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Documentation</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">API Reference</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-top:48px; padding-top:24px; border-top:1px solid #1a2c54; font-size:13px; color:#7e8ab0;">
+      <div style="display:flex; gap:22px; align-items:center;">
+        <a href="ClaimSense%20Privacy.dc.html" style="color:#9aa6c8;">Privacy Policy</a>
+        <a href="javascript: Cookiebot.renew()" style="color:#9aa6c8;">Cookie consent</a>
+        <span>© 2026 ClaimSense. All rights reserved.</span>
+      </div>
+      <span>Built with ❤ for claims teams worldwide</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { productOpen: false, formDone: false, selectedRole: '' };
+    this._roles = [
+      { title:'Claims Domain Expert', desc:'Bring your deep claims expertise to help shape our AI platform and guide enterprise implementations.' },
+      { title:'Insurance Consultant', desc:'Work directly with enterprise clients to understand their needs and deliver transformational solutions.' },
+      { title:'Implementation Consultant', desc:'Lead end-to-end platform deployments and help clients achieve operational excellence.' }
+    ];
+  }
+
+  componentDidMount() {
+    this._applyResponsive();
+    this._onResize = () => this._applyResponsive();
+    window.addEventListener('resize', this._onResize);
+    this._setupReveal();
+  }
+
+  _setupReveal() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (reduce || !els.length) return;
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.__shown = true; };
+    const belowFold = (el) => { const r = el.getBoundingClientRect(); return r.top > (window.innerHeight || 768) * 0.92; };
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        el.style.transition = 'opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)';
+        if (belowFold(el)) { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; }
+        else { el.__shown = true; }
+      });
+      const check = () => els.forEach((el) => { if (!el.__shown && !belowFold(el)) reveal(el); });
+      this._onScroll = check;
+      window.addEventListener('scroll', check, { passive: true });
+      this._revealSafety = setTimeout(() => els.forEach((el) => { if (!el.__shown) reveal(el); }), 2200);
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }); }, { threshold: 0.04 });
+        els.forEach((el) => { if (!el.__shown) io.observe(el); });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._revealSafety);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
+  }
+
+  _setupMobileMenu() {
+    if (this._mmInit) return;
+    const burger = document.querySelector('[data-nav-burger]');
+    const menu = document.querySelector('[data-mobile-menu]');
+    if (!burger || !menu) return;
+    this._mmInit = true;
+    const icon = burger.querySelector('[data-burger-icon] path');
+    const PATH_OPEN = 'M3 6h18M3 12h18M3 18h18';
+    const PATH_CLOSE = 'M5 5l14 14M19 5L5 19';
+    const setOpen = (open) => {
+      menu.style.display = open ? 'block' : 'none';
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (icon) icon.setAttribute('d', open ? PATH_CLOSE : PATH_OPEN);
+    };
+    burger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(menu.style.display !== 'block'); });
+    menu.addEventListener('click', (e) => e.stopPropagation());
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  _applyResponsive() {
+    const w = window.innerWidth;
+    const wg = document.querySelector('[data-why-grid]');
+    if (wg) wg.style.gridTemplateColumns = w >= 880 ? '1fr 1fr 1fr 1fr' : (w >= 520 ? '1fr 1fr' : '1fr');
+    const fmg = document.querySelector('[data-form-grid]');
+    if (fmg) fmg.style.gridTemplateColumns = w >= 560 ? '1fr 1fr' : '1fr';
+    const fg = document.querySelector('[data-footer-grid]');
+    if (fg) fg.style.gridTemplateColumns = w >= 860 ? '1.5fr 1fr 1fr 1fr' : (w >= 560 ? '1fr 1fr' : '1fr');
+    const nav = document.querySelector('[data-nav]');
+    if (nav) nav.style.display = w >= 900 ? 'flex' : 'none';
+    const badge = document.querySelector('[data-trust-badge]');
+    const divider = document.querySelector('[data-nav-divider]');
+    if (badge) badge.style.display = w >= 1040 ? 'flex' : 'none';
+    if (divider) divider.style.display = w >= 1040 ? 'block' : 'none';
+    const burger = document.querySelector('[data-nav-burger]');
+    const navCta = document.querySelector('[data-nav-cta]');
+    const mobileNav = w < 900;
+    if (burger) burger.style.display = mobileNav ? 'flex' : 'none';
+    if (navCta) navCta.style.display = mobileNav ? 'none' : '';
+    const mobileBadge = document.querySelector('[data-mobile-badge]');
+    if (mobileBadge) mobileBadge.style.display = (mobileNav && w >= 340) ? 'flex' : 'none';
+    if (!mobileNav) { const mm = document.querySelector('[data-mobile-menu]'); if (mm) mm.style.display = 'none'; if (burger) burger.setAttribute('aria-expanded', 'false'); }
+    this._setupMobileMenu();
+  }
+
+  _scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) { const y = el.getBoundingClientRect().top + window.pageYOffset - 72; window.scrollTo({ top: y, behavior: 'smooth' }); }
+  }
+
+  applyForRole(title) {
+    // ENHANCEMENT: pre-select the role in the application form (per source "pre-select the application field")
+    this.setState({ selectedRole: title });
+    this._scrollTo('apply');
+  }
+
+  submitForm(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const form = e.target;
+    if (this._submitting) return;
+    const btn = form.querySelector('button[type="submit"]');
+    const errEl = form.querySelector('[data-form-error]');
+    this._submitting = true;
+    const label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; btn.style.cursor = 'wait'; btn.textContent = 'Sending…'; }
+    if (errEl) errEl.style.display = 'none';
+    const restore = (msg) => {
+      this._submitting = false;
+      if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = 'pointer'; btn.textContent = label; }
+      if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+    };
+    // Web3Forms client-side POST — works from any static host (Cloudflare Pages), no backend.
+    fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+      .then((r) => r.json())
+      .then((json) => {
+        if (json && json.success) { this._submitting = false; this.setState({ formDone: true }); }
+        else { restore((json && json.message) || 'Something went wrong. Please try again.'); }
+      })
+      .catch(() => restore('Network error — please check your connection and try again.'));
+  }
+
+  renderVals() {
+    const roles = this._roles.map((r) => ({ title: r.title, desc: r.desc, apply: () => this.applyForRole(r.title) }));
+    return {
+      roles: roles,
+      selectedRole: this.state.selectedRole,
+      onRoleChange: (e) => this.setState({ selectedRole: e.target.value }),
+      scrollToRoles: () => this._scrollTo('roles'),
+      scrollToForm: () => this._scrollTo('roles'),
+      navApply: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('apply'); },
+      formOpen: !this.state.formDone,
+      formDone: this.state.formDone,
+      submitForm: (e) => this.submitForm(e),
+      productOpen: this.state.productOpen,
+      chevronRotate: this.state.productOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      openProduct: () => this.setState({ productOpen: true }),
+      closeProduct: () => this.setState({ productOpen: false }),
+      toggleProduct: () => this.setState((s) => ({ productOpen: !s.productOpen }))
+    };
+  }
+}
+</script>
+</body>
+</html>

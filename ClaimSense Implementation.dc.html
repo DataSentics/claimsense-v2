@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="4-phase AI implementation roadmap. Shadow run validates accuracy. Staged migration minimizes risk. Guaranteed value delivery per phase.">
+<title>Implementation – ClaimSense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Black.woff2') format('woff2'); font-weight:900; font-display:swap; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Roboto',sans-serif; font-weight:400; color:#1a1a1a; line-height:1.6; -webkit-font-smoothing:antialiased; background:#ffffff; }
+::selection { background:#FFADA0; }
+a { text-decoration:none; color:inherit; }
+input, textarea, select, button { font-family:inherit; }
+
+/* ── CTA & Nav hover system v3 (Bull brand, all 7 fixes) ───────────────── */
+/* Fix 7: no border/outline on nav/footer links */
+header a:not([data-nav-cta]), header button { outline:none !important; box-shadow:none !important; border:none !important; }
+header a:not([data-nav-cta]) { border:none !important; }
+footer a { border:none !important; outline:none !important; }
+/* Fix 5: nav link hover */
+header a:not([data-nav-cta]):hover { color:#FF5539 !important; transition:color .2s ease; }
+/* Fix 5b: dropdown items hover */
+header a[style*="padding:10px"]:hover { background:#f5f0ee !important; color:#FF5539 !important; }
+/* Fix 4: nav CTA "Book a walkthrough" */
+[data-nav-cta] { transition:background .2s ease, color .2s ease; cursor:pointer; }
+[data-nav-cta]:hover { background:#ffffff !important; color:#000000 !important; border:3px solid #FF5539 !important; }
+/* Primary CTA: orange bg → white on hover */
+[data-cta="primary"] { border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="primary"]:hover { background:#ffffff !important; color:#000000 !important; box-shadow:none !important; }
+/* Secondary CTA: white bg + navy border → orange border on hover */
+[data-cta="secondary"] { border:3px solid #002870 !important; transition:border-color .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="secondary"]:hover { border-color:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+/* Pricing navy button */
+[data-cta="pricing"] { border:3px solid #002870 !important; transition:border-color .2s ease, background .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="pricing"]:hover { border-color:#FF5539 !important; box-shadow:none !important; }
+/* Fix 1: Quick Start "Get started" — outline style, inverse hover */
+[data-cta="quickstart"] { background:#ffffff; color:#FF5539; border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="quickstart"]:hover { background:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+/* Feature pills badge hover */
+[data-pill]:hover [data-pill-badge] { background-color:#FF5539 !important; color:#ffffff !important; }
+/* Fix 6: footer active link */
+[data-footer-active] { color:#FF5539 !important; }
+footer a:hover { color:#FF5539 !important; transition:color .2s ease; }
+
+/* Decorative monogram: shrink + fade on tablet/mobile so it stays a quiet texture, contained in-section (section already has overflow:hidden) */
+@media (max-width:768px){ img[src*="Bull_symbol"]{ width:120px !important; opacity:0.07 !important; } }
+
+/* Mobile header: shrink CTA + tighten nav padding so nothing clips on narrow phones */
+@media (max-width:600px){
+  header nav{ padding:12px 16px !important; gap:12px !important; }
+  [data-nav-cta]{ margin-left:0 !important; padding:9px 15px !important; font-size:13px !important; border-width:2px !important; }
+  header nav > a img[alt="ClaimSense"]{ height:28px !important; }
+}
+
+/* Mobile: fit-to-screen — no page-level horizontal scroll, so the sticky header (hamburger) is always fully visible. overflow-x:clip is sticky-safe (unlike hidden). */
+@media (max-width:900px){
+  html, body { overflow-x:clip !important; max-width:100% !important; }
+  /* Tighter header padding on mobile so logo + “built by Bull” + hamburger all fit. */
+  header > nav { padding-left:14px !important; padding-right:14px !important; }
+  header > nav > div:first-child { gap:8px !important; }
+  /* Card grids: auto-fit minmax() forces a fixed min column (280–340px) that overflows the
+     narrow mobile content area and gets clipped. Collapse to one shrinkable column so headings
+     and cards always fit the viewport. */
+  [style*="repeat(auto-fit,minmax"],
+  [style*="repeat(auto-fit, minmax"],
+  [style*="repeat(auto-fill,minmax"],
+  [style*="repeat(auto-fill, minmax"] { grid-template-columns:1fr !important; }
+}
+</style>
+</helmet>
+
+<!-- ================================================================ -->
+<!-- ClaimSense Implementation page — /implementation/                 -->
+<!-- Content preserved verbatim from content/pages/content_implementation.md -->
+<!-- status: content-ready | approval_required: timing and delivery commitments -->
+<!-- primary_conversion: Book a Consultation                          -->
+<!-- ================================================================ -->
+
+<!-- ===================== HEADER (shared chrome) ===================== -->
+<header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(14px); border-bottom:1px solid #f0e6e3;">
+  <nav style="max-width:1280px; margin:0 auto; padding:14px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <div style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
+      <a href="ClaimSense%20Homepage.dc.html" style="display:flex; align-items:center;">
+        <img src="assets/logos/ClaimSense_logo_black.svg" alt="ClaimSense" style="height:32px; width:auto; transform:translateY(1.1px);">
+      </a>
+      <span data-mobile-badge="" style="display:none; align-items:center; gap:6px; padding-left:8px; border-left:1px solid #e5e7eb;">
+        <span style="font:400 10px/1.2 'Tosh A',sans-serif; color:#8a827d; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:22px; width:auto; transform:translateY(-0.5px);">
+      </span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:34px; flex:1 1 auto;" data-nav>
+      <a href="ClaimSense%20Homepage.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Home</a>
+      <!-- Product dropdown — Implementation active -->
+      <div style="position:relative;" onMouseEnter="{{ openProduct }}" onMouseLeave="{{ closeProduct }}">
+        <button onClick="{{ toggleProduct }}" aria-haspopup="true" aria-expanded="{{ productOpen }}" style="display:inline-flex; align-items:center; gap:6px; background:none; cursor:pointer; font:500 14px 'Tosh A',sans-serif; color:#FF5539; border:none; border-bottom:2px solid #FF5539; padding:0 0 2px;">
+          Product
+          <svg width="11" height="7" viewBox="0 0 11 7" aria-hidden="true" style="transition:transform .2s; transform:{{ chevronRotate }};"><path d="M1 1L5.5 5.5L10 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <sc-if value="{{ productOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; z-index:60;">
+            <div style="background:#fff; border:1px solid #ece3df; border-radius:12px; padding:8px; min-width:220px;">
+              <a href="ClaimSense%20Features.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+              <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+              <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+              <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#FF5539; background:#FFF4F1;">Implementation</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <a href="ClaimSense%20Our%20Story.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Our story</a>
+      <a href="ClaimSense%20Pricing.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Pricing</a>
+      <a href="ClaimSense%20Business%20Case.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Business case</a>
+    </div>
+    <div style="display:flex; align-items:center; flex:0 0 auto;" data-nav-right>
+      <span style="display:flex; align-items:center; gap:8px;" data-trust-badge>
+        <span style="font:400 14px/1.2 'Tosh A',sans-serif; color:#6b7280; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:26px; width:auto;">
+      </span>
+      <span style="width:1px; align-self:stretch; min-height:26px; background:#e5e7eb; margin-left:24px;" data-nav-divider></span>
+      <a href="ClaimSense%20Homepage.dc.html#demo" style="margin-left:24px; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:8px; padding:11px 22px; font:500 15px 'Roboto',sans-serif; cursor:pointer; white-space:nowrap;" data-nav-cta="">Book a walkthrough</a>
+      <button data-nav-burger="" type="button" aria-label="Open menu" aria-expanded="false" style="display:none; align-items:center; justify-content:center; width:44px; height:44px; padding:0; background:none; border:none; cursor:pointer; color:#0d0d0d; margin-left:12px;">
+        <svg data-burger-icon="" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </div>
+  </nav>
+  <div data-mobile-menu="" style="display:none; position:absolute; top:100%; right:16px; margin-top:8px; width:min(300px,calc(100vw - 32px)); background:#fff; border:1px solid #ece3df; border-radius:14px; box-shadow:0 24px 60px -18px rgba(0,40,112,0.3); padding:10px; z-index:70;">
+    <a href="ClaimSense%20Homepage.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Home</a>
+    <div style="font:600 11px 'Roboto',sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#a89f9a; padding:10px 12px 4px;">Product</div>
+    <a href="ClaimSense%20Features.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+    <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+    <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+    <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+    <div style="height:1px; background:#f0e6e3; margin:8px 6px;"></div>
+    <a href="ClaimSense%20Our%20Story.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Our story</a>
+    <a href="ClaimSense%20Pricing.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Pricing</a>
+    <a href="ClaimSense%20Business%20Case.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Business case</a>
+    <a href="ClaimSense%20Homepage.dc.html#demo" style="display:block; text-align:center; margin-top:10px; background:#FF5539; color:#000; border:2px solid #FF5539; border-radius:9px; padding:13px; font:500 15px 'Roboto',sans-serif; text-decoration:none;">Book a walkthrough</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section style="background:linear-gradient(180deg,#FFF7F5 0%,#ffffff 65%); padding:80px 32px 56px; position:relative; overflow:hidden;">
+  <div style="max-width:1140px; margin:0 auto; position:relative;">
+    <div style="max-width:760px;" data-reveal>
+      <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF5539; margin-bottom:18px;">AI Claims Processing Platform Deployment</div>
+      <h1 style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(36px,5vw,62px); line-height:1.03; letter-spacing:-0.02em; margin:0 0 22px; color:#0d0d0d;">Implementation project plan</h1>
+      <p style="font-size:20px; line-height:1.55; color:#4a4340; max-width:660px; margin:0 0 36px;">The implementation is delivered in four clear phases to ensure controlled adoption, operational stability, and measurable value delivery. Each phase includes defined deliverables so you clearly understand what is achieved.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
+        <a href="ClaimSense%20Homepage.dc.html#demo" style="background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:10px; padding:16px 32px; font:600 18px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Book a consultation</a>
+      </div>
+    </div>
+
+    <!-- 4-phase overview stepper -->
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:48px;" data-phase-stepper data-reveal>
+      <a href="#phase-1" onClick="{{ navP1 }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#002870; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#002870; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;" data-pill=""><span style="width:26px; height:26px; border-radius:6px; background:#002870; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;" data-pill-badge="">1</span>Initial setup</a>
+      <a href="#phase-2" onClick="{{ navP2 }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#002870; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#002870; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;" data-pill=""><span style="width:26px; height:26px; border-radius:6px; background:#002870; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;" data-pill-badge="">2</span>Shadow run</a>
+      <a href="#phase-3" onClick="{{ navP3 }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#002870; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#002870; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;" data-pill=""><span style="width:26px; height:26px; border-radius:6px; background:#002870; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;" data-pill-badge="">3</span>Operational migration</a>
+      <a href="#phase-4" onClick="{{ navP4 }}" style="display:inline-flex; align-items:center; gap:10px; border-width:1.5px; border-style:solid; border-color:#002870; border-radius:9999px; padding:10px 20px; font:500 15px 'Roboto',sans-serif; color:#002870; background:transparent;" style-hover="border-color:#FF5539; color:#FF5539;" data-pill=""><span style="width:26px; height:26px; border-radius:6px; background:#002870; color:#fff; font:700 13px 'Roboto',sans-serif; display:flex; align-items:center; justify-content:center; flex:none;" data-pill-badge="">4</span>Full migration</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOUR PHASES (timeline) ===================== -->
+<a id="phases"></a>
+<section style="padding:72px 32px 40px; background:#ffffff;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <sc-for list="{{ phases }}" as="ph" hint-placeholder-count="4">
+      <article id="{{ ph.anchor }}" style="position:relative; margin-bottom:32px;" data-reveal>
+        <div style="background:#fff; border:1px solid #ecdcd6; border-radius:18px; padding:34px;">
+          <!-- Phase header -->
+          <div style="display:flex; align-items:flex-start; gap:18px; margin-bottom:8px;">
+            <span style="flex:none; width:52px; height:52px; border-radius:13px; background:{{ ph.badgeBg }}; color:#fff; font-family:'Tosh A',sans-serif; font-weight:900; font-size:24px; display:flex; align-items:center; justify-content:center;">{{ ph.num }}</span>
+            <div style="flex:1;">
+              <div style="font:600 11px/1 'Roboto',sans-serif; letter-spacing:0.12em; text-transform:uppercase; color:{{ ph.accent }}; margin-bottom:7px;">Phase {{ ph.num }}</div>
+              <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(22px,2.6vw,30px); line-height:1.1; margin:0 0 10px; color:#0d0d0d;">{{ ph.title }}</h2>
+              <p style="font-size:16px; line-height:1.55; color:#54504d; margin:0;">{{ ph.desc }}</p>
+              <sc-if value="{{ ph.note }}" hint-placeholder-val="{{ false }}">
+                <p style="font-size:14px; line-height:1.5; color:#7a716d; margin:10px 0 0; font-style:italic;">{{ ph.note }}</p>
+              </sc-if>
+            </div>
+          </div>
+
+          <!-- Activities + Deliverables -->
+          <div style="display:grid; gap:24px; margin-top:24px;" data-phase-cols>
+            <div style="background:#FAFAF9; border:1px solid #f1efed; border-radius:12px; padding:22px;">
+              <div style="font:600 12px/1 'Roboto',sans-serif; letter-spacing:0.08em; text-transform:uppercase; color:{{ ph.accent }}; margin-bottom:14px;">Key Activities</div>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+                <sc-for list="{{ ph.activities }}" as="a" hint-placeholder-count="5">
+                  <li style="display:flex; gap:10px; font-size:14px; line-height:1.45; color:#374151;"><span style="flex:none; color:{{ ph.accent }}; font-weight:700;">›</span>{{ a }}</li>
+                </sc-for>
+              </ul>
+            </div>
+            <div style="background:#fff; border:1px solid #ecdcd6; border-radius:12px; padding:22px;">
+              <div style="font:600 12px/1 'Roboto',sans-serif; letter-spacing:0.08em; text-transform:uppercase; color:#00765f; margin-bottom:6px;">Deliverables</div>
+              <p style="font:400 12px 'Roboto',sans-serif; color:#9ca3af; margin:0 0 14px;">Buyer receives:</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+                <sc-for list="{{ ph.deliverables }}" as="d" hint-placeholder-count="5">
+                  <li style="display:flex; gap:10px; font-size:14px; line-height:1.45; color:#374151;"><span style="flex:none; width:18px; height:18px; border-radius:50%; background:#dcf5ee; display:flex; align-items:center; justify-content:center;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2L4.2 7.5L8 2.5" fill="none" stroke="#00B290" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>{{ d }}</li>
+                </sc-for>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Outcome -->
+          <div style="margin-top:22px; display:flex; align-items:center; gap:12px; background:{{ ph.outcomeBg }}; border:1px solid {{ ph.outcomeBorder }}; border-radius:10px; padding:14px 18px;">
+            <span style="flex:none; font:600 11px 'Roboto',sans-serif; letter-spacing:0.08em; text-transform:uppercase; color:{{ ph.accent }};">Outcome</span>
+            <span style="font:500 15px 'Roboto',sans-serif; color:#0d0d0d;">{{ ph.outcome }}</span>
+          </div>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<!-- ===================== IMPLEMENTATION RESULT ===================== -->
+<section style="padding:80px 32px; background:#0a1b3d; color:#fff; position:relative; overflow:hidden;">
+  <img src="assets/bull/Bull_symbol_white.svg" alt="" aria-hidden="true" style="position:absolute; right:40px; bottom:40px; width:240px; opacity:0.12; pointer-events:none;">
+  <div style="max-width:1000px; margin:0 auto; position:relative;" data-reveal>
+    <div style="text-align:center; max-width:640px; margin:0 auto 44px;">
+      <div style="font:600 10px/1 'Roboto',sans-serif; letter-spacing:0.18em; text-transform:uppercase; color:#A4AFFB; margin-bottom:14px;">Implementation Result</div>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(26px,3.2vw,40px); line-height:1.1; margin:0;">At project completion, you operate:</h2>
+    </div>
+    <div style="display:grid; gap:16px;" data-result-grid>
+      <div style="display:flex; gap:13px; background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.22); border-radius:12px; padding:18px 20px;"><span style="flex:none; color:#00B290; font-size:18px;">✓</span><span style="font:500 15px 'Roboto',sans-serif; color:#dfe4f0;">Fully deployed AI-supported claims workflow</span></div>
+      <div style="display:flex; gap:13px; background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.22); border-radius:12px; padding:18px 20px;"><span style="flex:none; color:#00B290; font-size:18px;">✓</span><span style="font:500 15px 'Roboto',sans-serif; color:#dfe4f0;">Claims team working in optimized processing environment</span></div>
+      <div style="display:flex; gap:13px; background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.22); border-radius:12px; padding:18px 20px;"><span style="flex:none; color:#00B290; font-size:18px;">✓</span><span style="font:500 15px 'Roboto',sans-serif; color:#dfe4f0;">Claims data fully searchable and analyzable</span></div>
+      <div style="display:flex; gap:13px; background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.22); border-radius:12px; padding:18px 20px;"><span style="flex:none; color:#00B290; font-size:18px;">✓</span><span style="font:500 15px 'Roboto',sans-serif; color:#dfe4f0;">Improved productivity and scalability</span></div>
+      <div style="display:flex; gap:13px; background:rgba(255,255,255,0.05); border:1px solid rgba(124,150,230,0.22); border-radius:12px; padding:18px 20px;"><span style="flex:none; color:#00B290; font-size:18px;">✓</span><span style="font:500 15px 'Roboto',sans-serif; color:#dfe4f0;">Operational visibility and management control</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<a id="cta"></a>
+<section style="padding:80px 32px; background:#FFF7F5; position:relative; overflow:hidden;">
+  <div style="max-width:760px; margin:0 auto; text-align:center; position:relative;" data-reveal>
+    <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,44px); line-height:1.08; margin:0 0 18px; color:#0d0d0d;">Ready to start your implementation?</h2>
+    <p style="font-size:18px; line-height:1.6; color:#5a514d; margin:0 0 32px;">Let's discuss your specific requirements and create a tailored implementation plan for your organization.</p>
+    <!-- NEEDS-APPROVAL: timing and delivery commitments (phase durations, % figures) per page front-matter -->
+    <!-- FUNCTIONAL-SPEC NEEDED: "Book a Consultation" routing -->
+    <a href="ClaimSense%20Homepage.dc.html#demo" style="display:inline-flex; align-items:center; gap:11px; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:10px; padding:16px 34px; font:600 18px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Book a consultation <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#06122b; color:#c3cbe0; padding:64px 32px 36px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="display:grid; gap:40px;" data-footer-grid>
+      <div>
+        <img src="assets/logos/ClaimSense_logo_white.svg" alt="ClaimSense" style="height:26px; width:auto; margin-bottom:18px;">
+        <p style="font-size:14px; line-height:1.6; color:#9aa6c8; margin:0 0 22px; max-width:280px;">AI-first workflow for your claim team. Transform complex claims processing with intelligent automation.</p>
+        <div style="display:flex; align-items:center; gap:12px; padding-top:18px; border-top:1px solid #1a2c54;">
+          <img src="assets/bull/BULL_LOGO_WHITE_RGB.png" alt="Bull" style="height:26px; width:auto;">
+        </div>
+        <p style="font-size:12px; color:#7e8ab0; margin:12px 0 0;">ClaimSense is built by DataSentics, <br>part of the Bull.</p>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Product</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Features.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Features</a></li>
+          <li><a href="ClaimSense%20Architecture.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Architecture</a></li>
+          <li><a href="ClaimSense%20Use%20Cases.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Use cases</a></li>
+          <li><a href="ClaimSense%20Implementation.dc.html" style="color:#FF5539;">Implementation</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Company</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Our%20Story.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Our story</a></li>
+          <li><a href="ClaimSense%20Partners.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Partners</a></li>
+          <li><a href="https://careers.datasentics.com/?utm_source=slaimsense&amp;utm_medium=webfooter&amp;utm_campaign=1" target="_blank" rel="noopener noreferrer" style="color:#9aa6c8;" style-hover="color:#FF7761;">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Resources</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20FAQ.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">FAQ</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Help Center</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Documentation</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">API Reference</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-top:48px; padding-top:24px; border-top:1px solid #1a2c54; font-size:13px; color:#7e8ab0;">
+      <div style="display:flex; gap:22px; align-items:center;">
+        <a href="ClaimSense%20Privacy.dc.html" style="color:#9aa6c8;">Privacy Policy</a>
+        <a href="javascript: Cookiebot.renew()" style="color:#9aa6c8;">Cookie consent</a>
+        <span>© 2026 ClaimSense. All rights reserved.</span>
+      </div>
+      <span>Built with ❤ for claims teams worldwide</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { productOpen: false };
+
+    this._phases = [
+      {
+        num:'1', anchor:'phase-1', title:'Initial setup & integration',
+        accent:'#FF5539', badgeBg:'#FF5539', outcomeBg:'#FFF4F1', outcomeBorder:'#ffd9d0',
+        desc:'Prepare technical environment and integrate data flows required for platform operation.', note:'',
+        activities:['Agreement on deployment model and infrastructure setup','Definition of data integration architecture','Secure environment configuration','Initial data import and system configuration','Setup of access rights and security policies','Integration with claim data sources','Initial AI configuration','Definition of master-claim hierarchy, specialist workstreams, ownership and access rules','Mapping of end-to-end tasks and process-subtask dependencies'],
+        deliverables:['Operational cloud environment ready for use','Data integration pipeline established','Historical claim data imported','User access and security configuration completed','Initial system configuration aligned with client processes','Platform ready for pilot usage'],
+        outcome:'System technically ready for operational testing.'
+      },
+      {
+        num:'2', anchor:'phase-2', title:'Shadow run & AI calibration',
+        accent:'#002870', badgeBg:'#002870', outcomeBg:'#eef0fe', outcomeBorder:'#d4d9fb',
+        desc:'Validate system output while current processes continue unchanged.', note:'The claims team uses the platform in parallel with the existing workflow.',
+        activities:['Claims handlers review AI outputs during normal processing','Edge cases and process deviations identified','AI calibration and tuning workshops conducted','Workflow adjustments based on user feedback','Continuous quality validation','Validation of handoffs, shared-context rules and escalation paths for complex claims'],
+        deliverables:['AI calibrated to match client claims practices','Edge cases and process gaps addressed','Claims handler feedback incorporated','Initial productivity improvements observed','Team familiarity with the platform established'],
+        outcome:'Platform proven in real operations without operational risk.'
+      },
+      {
+        num:'3', anchor:'phase-3', title:'Operational migration',
+        accent:'#002870', badgeBg:'#002870', outcomeBg:'#eef0fe', outcomeBorder:'#d4d9fb',
+        desc:'Move primary claims handling workflow into the new platform.', note:'Approximately 80% of claims are processed through the new workflow.',
+        activities:['Migration of teams to new workflow','User training sessions','Operational support and stabilization','Performance monitoring and workflow optimization','Continuous feedback collection'],
+        deliverables:['Majority of claims processed via the new system','Teams trained and operational in new workflow','Stabilized operational performance','Measurable productivity improvements','Operational reporting active'],
+        outcome:'Platform becomes primary processing environment.'
+      },
+      {
+        num:'4', anchor:'phase-4', title:'Full migration & legacy decommissioning',
+        accent:'#00765f', badgeBg:'#00B290', outcomeBg:'#dcf5ee', outcomeBorder:'#b8ebdd',
+        desc:'Complete migration and retire legacy workflows.', note:'Remaining complex or edge-case claims are migrated to the new platform.',
+        activities:['Migration of remaining claim types','Process adjustments for special cases','Legacy system usage reduction','Support for decommissioning legacy workflows'],
+        deliverables:['Full claims processing running on new platform','Legacy process dependency minimized or removed','Stable end-state operations','Full operational and analytical visibility'],
+        outcome:'Single modern claims processing environment in production.'
+      }
+    ];
+  }
+
+  componentDidMount() {
+    this._applyResponsive();
+    this._onResize = () => this._applyResponsive();
+    window.addEventListener('resize', this._onResize);
+    this._setupReveal();
+  }
+
+  _setupReveal() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (reduce || !els.length) return;
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.__shown = true; };
+    const belowFold = (el) => { const r = el.getBoundingClientRect(); return r.top > (window.innerHeight || 768) * 0.92; };
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        el.style.transition = 'opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)';
+        if (belowFold(el)) { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; }
+        else { el.__shown = true; }
+      });
+      const check = () => els.forEach((el) => { if (!el.__shown && !belowFold(el)) reveal(el); });
+      this._onScroll = check;
+      window.addEventListener('scroll', check, { passive: true });
+      this._revealSafety = setTimeout(() => els.forEach((el) => { if (!el.__shown) reveal(el); }), 2200);
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }); }, { threshold: 0.04 });
+        els.forEach((el) => { if (!el.__shown) io.observe(el); });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._revealSafety);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
+  }
+
+  _applyResponsive() {
+    const w = window.innerWidth;
+    Array.prototype.slice.call(document.querySelectorAll('[data-phase-cols]')).forEach((g) => {
+      g.style.gridTemplateColumns = w >= 760 ? '1fr 1fr' : '1fr';
+    });
+    const rg = document.querySelector('[data-result-grid]');
+    if (rg) rg.style.gridTemplateColumns = w >= 760 ? '1fr 1fr' : '1fr';
+    const ps = document.querySelector('[data-phase-stepper]');
+    if (ps) ps.style.gridTemplateColumns = w >= 760 ? '1fr 1fr 1fr 1fr' : (w >= 480 ? '1fr 1fr' : '1fr');
+    const fg = document.querySelector('[data-footer-grid]');
+    if (fg) fg.style.gridTemplateColumns = w >= 860 ? '1.5fr 1fr 1fr 1fr' : (w >= 560 ? '1fr 1fr' : '1fr');
+    const nav = document.querySelector('[data-nav]');
+    if (nav) nav.style.display = w >= 900 ? 'flex' : 'none';
+    const badge = document.querySelector('[data-trust-badge]');
+    const divider = document.querySelector('[data-nav-divider]');
+    if (badge) badge.style.display = w >= 1040 ? 'flex' : 'none';
+    if (divider) divider.style.display = w >= 1040 ? 'block' : 'none';
+    const burger = document.querySelector('[data-nav-burger]');
+    const navCta = document.querySelector('[data-nav-cta]');
+    const mobileNav = w < 900;
+    if (burger) burger.style.display = mobileNav ? 'flex' : 'none';
+    if (navCta) navCta.style.display = mobileNav ? 'none' : '';
+    const mobileBadge = document.querySelector('[data-mobile-badge]');
+    if (mobileBadge) mobileBadge.style.display = (mobileNav && w >= 340) ? 'flex' : 'none';
+    if (!mobileNav) { const mm = document.querySelector('[data-mobile-menu]'); if (mm) mm.style.display = 'none'; if (burger) burger.setAttribute('aria-expanded', 'false'); }
+    this._setupMobileMenu();
+  }
+
+  _setupMobileMenu() {
+    if (this._mmInit) return;
+    const burger = document.querySelector('[data-nav-burger]');
+    const menu = document.querySelector('[data-mobile-menu]');
+    if (!burger || !menu) return;
+    this._mmInit = true;
+    const icon = burger.querySelector('[data-burger-icon] path');
+    const PATH_OPEN = 'M3 6h18M3 12h18M3 18h18';
+    const PATH_CLOSE = 'M5 5l14 14M19 5L5 19';
+    const setOpen = (open) => {
+      menu.style.display = open ? 'block' : 'none';
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (icon) icon.setAttribute('d', open ? PATH_CLOSE : PATH_OPEN);
+    };
+    burger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(menu.style.display !== 'block'); });
+    menu.addEventListener('click', (e) => e.stopPropagation());
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  _scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) { const y = el.getBoundingClientRect().top + window.pageYOffset - 72; window.scrollTo({ top: y, behavior: 'smooth' }); }
+  }
+
+  renderVals() {
+    return {
+      phases: this._phases.map((p) => Object.assign({}, p)),
+      scrollToCta: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('cta'); },
+      navPhases: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('phases'); },
+      navP1: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('phase-1'); },
+      navP2: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('phase-2'); },
+      navP3: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('phase-3'); },
+      navP4: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('phase-4'); },
+      productOpen: this.state.productOpen,
+      chevronRotate: this.state.productOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      openProduct: () => this.setState({ productOpen: true }),
+      closeProduct: () => this.setState({ productOpen: false }),
+      toggleProduct: () => this.setState((s) => ({ productOpen: !s.productOpen }))
+    };
+  }
+}
+</script>
+</body>
+</html>

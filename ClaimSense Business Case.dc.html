@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ROI calculator for claims automation. Adjust parameters. Cases per year, cost per claim, FTE savings. Visualize cost reductions instantly.">
+<title>Business Case & ROI Calculator – ClaimSense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Tosh A'; src:url('assets/fonts/ToshA-Black.woff2') format('woff2'); font-weight:900; font-display:swap; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Roboto',sans-serif; font-weight:400; color:#1a1a1a; line-height:1.6; -webkit-font-smoothing:antialiased; background:#ffffff; }
+::selection { background:#FFADA0; }
+a { text-decoration:none; color:inherit; }
+input, textarea, select, button { font-family:inherit; }
+input[type=range] { accent-color:#FF5539; }
+
+
+/* ── CTA & Nav hover system v3 (Bull brand, all 7 fixes) ───────────────── */
+/* Fix 7: no border/outline on nav/footer links */
+header a:not([data-nav-cta]), header button { outline:none !important; box-shadow:none !important; border:none !important; }
+header a:not([data-nav-cta]) { border:none !important; }
+footer a { border:none !important; outline:none !important; }
+/* Fix 5: nav link hover */
+header a:not([data-nav-cta]):hover { color:#FF5539 !important; transition:color .2s ease; }
+/* Fix 5b: dropdown items hover */
+header a[style*="padding:10px"]:hover { background:#f5f0ee !important; color:#FF5539 !important; }
+/* Fix 4: nav CTA "Book a walkthrough" */
+[data-nav-cta] { transition:background .2s ease, color .2s ease; cursor:pointer; }
+[data-nav-cta]:hover { background:#ffffff !important; color:#000000 !important; border:3px solid #FF5539 !important; }
+/* Primary CTA: orange bg → white on hover */
+[data-cta="primary"] { border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="primary"]:hover { background:#ffffff !important; color:#000000 !important; box-shadow:none !important; }
+/* Secondary CTA: white bg + navy border → orange border on hover */
+[data-cta="secondary"] { border:3px solid #002870 !important; transition:border-color .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="secondary"]:hover { border-color:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+/* Pricing navy button */
+[data-cta="pricing"] { border:3px solid #002870 !important; transition:border-color .2s ease, background .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="pricing"]:hover { border-color:#FF5539 !important; box-shadow:none !important; }
+/* Fix 1: Quick Start "Get started" — outline style, inverse hover */
+[data-cta="quickstart"] { background:#ffffff; color:#FF5539; border:3px solid #FF5539 !important; transition:background .2s ease, color .2s ease; cursor:pointer; box-shadow:none !important; }
+[data-cta="quickstart"]:hover { background:#FF5539 !important; color:#000000 !important; box-shadow:none !important; }
+/* Feature pills badge hover */
+[data-pill]:hover [data-pill-badge] { background-color:#FF5539 !important; color:#ffffff !important; }
+/* Fix 6: footer active link */
+[data-footer-active] { color:#FF5539 !important; }
+footer a:hover { color:#FF5539 !important; transition:color .2s ease; }
+
+/* Decorative monogram: shrink + fade on tablet/mobile so it stays a quiet texture, contained in-section (section already has overflow:hidden) */
+@media (max-width:768px){ img[src*="Bull_symbol"]{ width:120px !important; opacity:0.07 !important; } }
+
+/* Mobile header: shrink CTA + tighten nav padding so nothing clips on narrow phones */
+@media (max-width:600px){
+  header nav{ padding:12px 16px !important; gap:12px !important; }
+  [data-nav-cta]{ margin-left:0 !important; padding:9px 15px !important; font-size:13px !important; border-width:2px !important; }
+  header nav > a img[alt="ClaimSense"]{ height:28px !important; }
+}
+
+/* Mobile: fit-to-screen — no page-level horizontal scroll, so the sticky header (hamburger) is always fully visible. overflow-x:clip is sticky-safe (unlike hidden). */
+@media (max-width:900px){
+  html, body { overflow-x:clip !important; max-width:100% !important; }
+  /* Tighter header padding on mobile so logo + “built by Bull” + hamburger all fit. */
+  header > nav { padding-left:14px !important; padding-right:14px !important; }
+  header > nav > div:first-child { gap:8px !important; }
+  /* Card grids: auto-fit minmax() forces a fixed min column (280–340px) that overflows the
+     narrow mobile content area and gets clipped. Collapse to one shrinkable column so headings
+     and cards always fit the viewport. */
+  [style*="repeat(auto-fit,minmax"],
+  [style*="repeat(auto-fit, minmax"],
+  [style*="repeat(auto-fill,minmax"],
+  [style*="repeat(auto-fill, minmax"] { grid-template-columns:1fr !important; }
+  /* Business Case ROI calculator: keep the savings tiles 2-up but smaller so they fit; wrap the
+     cost/benefit chart to 2 bars per row instead of 4 spilling off-screen. */
+  [data-savings-grid] { grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important; gap:12px !important; }
+  [data-savings-grid] > div { padding:16px !important; }
+  [data-savings-grid] > div > div:first-child { font-size:20px !important; }
+  [data-chart-grid] { grid-template-columns:1fr 1fr !important; row-gap:26px !important; }
+}
+</style>
+</helmet>
+
+<!-- ================================================================ -->
+<!-- ClaimSense Business case page — /business-case/                   -->
+<!-- Content preserved verbatim from content/pages/content_business-case.md -->
+<!-- status: needs-functional-spec (P0 calculator)                     -->
+<!-- approval_required: calculator formula, license assumptions, ranges, defaults, ROI wording, chart -->
+<!-- ================================================================ -->
+<!-- ▶▶ CALCULATOR LOGIC IS A PLACEHOLDER (inferred formula). The exact -->
+<!--    formula, defaults, slider steps, €3-vs-€5 rule, negative-value -->
+<!--    handling and rounding are ALL isolated in the logic class:      -->
+<!--    `this._calcConfig` (inputs/defaults/ranges + licensePerClaim)   -->
+<!--    and `_calculate(inputs)` (the formula). Swap those two only.    -->
+<!-- ================================================================ -->
+
+<!-- ===================== HEADER (shared chrome) ===================== -->
+<header style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(14px); border-bottom:1px solid #f0e6e3;">
+  <nav style="max-width:1280px; margin:0 auto; padding:14px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <div style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
+      <a href="ClaimSense%20Homepage.dc.html" style="display:flex; align-items:center;">
+        <img src="assets/logos/ClaimSense_logo_black.svg" alt="ClaimSense" style="height:32px; width:auto; transform:translateY(1.1px);">
+      </a>
+      <span data-mobile-badge="" style="display:none; align-items:center; gap:6px; padding-left:8px; border-left:1px solid #e5e7eb;">
+        <span style="font:400 10px/1.2 'Tosh A',sans-serif; color:#8a827d; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:22px; width:auto; transform:translateY(-0.5px);">
+      </span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:34px; flex:1 1 auto;" data-nav>
+      <a href="ClaimSense%20Homepage.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Home</a>
+      <div style="position:relative;" onMouseEnter="{{ openProduct }}" onMouseLeave="{{ closeProduct }}">
+        <button onClick="{{ toggleProduct }}" aria-haspopup="true" aria-expanded="{{ productOpen }}" style="display:inline-flex; align-items:center; gap:6px; background:none; cursor:pointer; font:500 14px 'Tosh A',sans-serif; color:#33302e; padding:0;" style-hover="color:#FF5539;">
+          Product
+          <svg width="11" height="7" viewBox="0 0 11 7" aria-hidden="true" style="transition:transform .2s; transform:{{ chevronRotate }};"><path d="M1 1L5.5 5.5L10 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <sc-if value="{{ productOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; top:100%; left:50%; transform:translateX(-50%); padding-top:14px; z-index:60;">
+            <div style="background:#fff; border:1px solid #ece3df; border-radius:12px; padding:8px; min-width:220px;">
+              <a href="ClaimSense%20Features.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+              <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+              <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+              <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:10px 14px; border-radius:8px; font:500 15px 'Tosh A',sans-serif; color:#33302e;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <a href="ClaimSense%20Our%20Story.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Our story</a>
+      <a href="ClaimSense%20Pricing.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#33302e;" style-hover="color:#FF5539;">Pricing</a>
+      <a href="ClaimSense%20Business%20Case.dc.html" style="font:500 14px 'Tosh A',sans-serif; color:#FF5539; border-bottom:2px solid #FF5539; padding-bottom:2px;">Business case</a>
+    </div>
+    <div style="display:flex; align-items:center; flex:0 0 auto;" data-nav-right>
+      <span style="display:flex; align-items:center; gap:8px;" data-trust-badge>
+        <span style="font:400 14px/1.2 'Tosh A',sans-serif; color:#6b7280; white-space:nowrap;">built by</span>
+        <img src="assets/bull/BULL_LOGO_COLOR_RGB.svg" alt="Bull" style="height:26px; width:auto;">
+      </span>
+      <span style="width:1px; align-self:stretch; min-height:26px; background:#e5e7eb; margin-left:24px;" data-nav-divider></span>
+      <button onClick="{{ scrollToDemo }}" style="margin-left:24px; background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:8px; padding:11px 22px; font:500 15px 'Roboto',sans-serif; cursor:pointer; white-space:nowrap;" data-nav-cta="">Book a walkthrough</button>
+      <button data-nav-burger="" type="button" aria-label="Open menu" aria-expanded="false" style="display:none; align-items:center; justify-content:center; width:44px; height:44px; padding:0; background:none; border:none; cursor:pointer; color:#0d0d0d; margin-left:12px;">
+        <svg data-burger-icon="" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </div>
+  </nav>
+  <div data-mobile-menu="" style="display:none; position:absolute; top:100%; right:16px; margin-top:8px; width:min(300px,calc(100vw - 32px)); background:#fff; border:1px solid #ece3df; border-radius:14px; box-shadow:0 24px 60px -18px rgba(0,40,112,0.3); padding:10px; z-index:70;">
+    <a href="ClaimSense%20Homepage.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Home</a>
+    <div style="font:600 11px 'Roboto',sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#a89f9a; padding:10px 12px 4px;">Product</div>
+    <a href="ClaimSense%20Features.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Features</a>
+    <a href="ClaimSense%20Architecture.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Architecture</a>
+    <a href="ClaimSense%20Use%20Cases.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Use cases</a>
+    <a href="ClaimSense%20Implementation.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Implementation</a>
+    <div style="height:1px; background:#f0e6e3; margin:8px 6px;"></div>
+    <a href="ClaimSense%20Our%20Story.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Our story</a>
+    <a href="ClaimSense%20Pricing.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Pricing</a>
+    <a href="ClaimSense%20Business%20Case.dc.html" style="display:block; padding:11px 12px; border-radius:9px; font:500 15px 'Tosh A',sans-serif; color:#33302e; text-decoration:none;" style-hover="background:#f5f0ee; color:#FF5539;">Business case</a>
+    <a href="ClaimSense%20Homepage.dc.html#demo" style="display:block; text-align:center; margin-top:10px; background:#FF5539; color:#000; border:2px solid #FF5539; border-radius:9px; padding:13px; font:500 15px 'Roboto',sans-serif; text-decoration:none;">Book a walkthrough</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section style="background:linear-gradient(180deg,#FFF7F5 0%,#ffffff 60%); padding:80px 32px 40px; position:relative; overflow:hidden;">
+  <div style="max-width:900px; margin:0 auto; text-align:center; position:relative;" data-reveal>
+    <div style="font:500 13px/1 'Roboto',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#FF5539; margin-bottom:18px;">Business case Calculator</div>
+    <h1 style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:clamp(34px,4.8vw,58px); line-height:1.04; letter-spacing:-0.02em; margin:0 0 20px; color:#0d0d0d;">Calculate your ROI with ClaimSense</h1>
+    <p style="font-size:20px; line-height:1.55; color:#4a4340; max-width:660px; margin:0 auto;">See exactly how much your organization can save by automating claim processing. Adjust the parameters below and watch the savings add up.</p>
+  </div>
+</section>
+
+<!-- ===================== CALCULATOR ===================== -->
+<section style="padding:32px 32px 80px; background:#ffffff;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; gap:28px; align-items:start;" data-calc-grid data-reveal>
+
+    <!-- LEFT: Your Parameters -->
+    <div style="background:#fff; border:1px solid #ecdcd6; border-radius:18px; padding:32px;">
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:24px; margin:0 0 6px; color:#0d0d0d;">Your parameters</h2>
+      <!-- NEEDS-APPROVAL: input ranges/defaults/steps — confirm from source -->
+      <p style="font-size:14px; color:#9ca3af; margin:0 0 28px;">Adjust to match your operation.</p>
+
+      <!-- Cases Processed Per Year -->
+      <div style="margin-bottom:30px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:4px;">
+          <label for="cs-cases" style="font:500 15px 'Roboto',sans-serif; color:#0d0d0d;">Cases processed per year</label>
+          <span style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:22px; color:#FF5539;">{{ casesDisplay }}</span>
+        </div>
+        <p style="font-size:13px; color:#7a716d; margin:0 0 12px;">Total number of insurance claims handled annually</p>
+        <input id="cs-cases" type="range" min="{{ casesMin }}" max="{{ casesMax }}" step="{{ casesStep }}" value="{{ casesVal }}" onInput="{{ onCases }}" style="width:100%; cursor:pointer;">
+        <div style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; font-size:12px; color:#a9a09b; margin-top:4px;"><span style="justify-self:start; white-space:nowrap;">500</span><span style="justify-self:center; white-space:nowrap;">cases / year</span><span style="justify-self:end; white-space:nowrap;">1,000,000</span></div>
+      </div>
+
+      <!-- Cost of Processing 1 Case -->
+      <div style="margin-bottom:30px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:4px;">
+          <label for="cs-cost" style="font:500 15px 'Roboto',sans-serif; color:#0d0d0d;">Cost of processing 1 case</label>
+          <span style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:22px; color:#FF5539;">{{ costDisplay }}</span>
+        </div>
+        <p style="font-size:13px; color:#7a716d; margin:0 0 12px;">FTE costs divided by number of cases (avg. cost per claim)</p>
+        <input id="cs-cost" type="range" min="{{ costMin }}" max="{{ costMax }}" step="{{ costStep }}" value="{{ costVal }}" onInput="{{ onCost }}" style="width:100%; cursor:pointer;">
+        <div style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; font-size:12px; color:#a9a09b; margin-top:4px;"><span style="justify-self:start; white-space:nowrap;">€5</span><span style="justify-self:center; white-space:nowrap;">EUR / case</span><span style="justify-self:end; white-space:nowrap;">€200</span></div>
+        <!-- FUNCTIONAL-SPEC NEEDED: "Not sure? Click here to calculate it" — confirm what this opens (modal / explainer / sales contact) -->
+        <button onClick="{{ scrollToHelp }}" style="margin-top:12px; background:none; border:none; padding:0; cursor:pointer; font:500 13px 'Roboto',sans-serif; color:#002870; text-decoration:underline;">Not sure? click here to calculate it</button>
+      </div>
+
+      <!-- Expected Time Reduction per Case -->
+      <div>
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:4px;">
+          <label for="cs-red" style="font:500 15px 'Roboto',sans-serif; color:#0d0d0d;">Expected time reduction per case</label>
+          <span style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:22px; color:#FF5539;">{{ redDisplay }}</span>
+        </div>
+        <p style="font-size:13px; color:#7a716d; margin:0 0 12px;">How much faster each case is processed with ClaimSense</p>
+        <input id="cs-red" type="range" min="{{ redMin }}" max="{{ redMax }}" step="{{ redStep }}" value="{{ redVal }}" onInput="{{ onRed }}" style="width:100%; cursor:pointer;">
+        <div style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; font-size:12px; color:#a9a09b; margin-top:4px;"><span style="justify-self:start; white-space:nowrap;">5%</span><span style="justify-self:center; white-space:nowrap;">% time saved</span><span style="justify-self:end; white-space:nowrap;">90%</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Your Savings -->
+    <div>
+      <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:24px; margin:0 0 18px; color:#0d0d0d;">Your savings</h2>
+      <!-- NEEDS-APPROVAL: all calculated outputs depend on the unconfirmed formula -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;" data-savings-grid>
+        <div style="background:#0a1b3d; border-radius:14px; padding:22px;">
+          <div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:30px; line-height:1; color:{{ netColor }};">{{ netResultValue }}</div>
+          <div style="font:500 14px 'Roboto',sans-serif; color:#fff; margin:8px 0 2px;">{{ netResultLabel }}</div>
+          <div style="font-size:12px; color:#9aa6c8;">After ClaimSense costs</div>
+        </div>
+        <div style="background:#FFF4F1; border:1px solid #ffd9d0; border-radius:14px; padding:22px;">
+          <div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:30px; line-height:1; color:{{ roiColor }};">{{ roi }}</div>
+          <div style="font:500 14px 'Roboto',sans-serif; color:#0d0d0d; margin:8px 0 2px;">Return on investment</div>
+          <div style="font-size:12px; color:#7a716d;">Savings / ClaimSense cost</div>
+        </div>
+        <div style="background:#FAFAF9; border:1px solid #f1efed; border-radius:14px; padding:22px;">
+          <div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:30px; line-height:1; color:#00B290;">{{ efficiency }}</div>
+          <div style="font:500 14px 'Roboto',sans-serif; color:#0d0d0d; margin:8px 0 2px;">Efficiency gain</div>
+          <div style="font-size:12px; color:#7a716d;">{{ redDisplay }} productivity boost</div>
+        </div>
+        <div style="background:#FAFAF9; border:1px solid #f1efed; border-radius:14px; padding:22px;">
+          <div style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:30px; line-height:1; color:#002870;">{{ claimsenseCost }}</div>
+          <div style="font:500 14px 'Roboto',sans-serif; color:#0d0d0d; margin:8px 0 2px;">ClaimSense cost</div>
+          <div style="font-size:12px; color:#7a716d;">{{ claimsenseCostFormula }}</div>
+        </div>
+      </div>
+
+      <!-- Detailed Breakdown -->
+      <div style="background:#fff; border:1px solid #ecdcd6; border-radius:14px; padding:24px; margin-bottom:24px;">
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:18px; margin:0 0 16px; color:#0d0d0d;">Detailed breakdown</h3>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid #f1ebe8; font-size:14px;"><span style="color:#54504d;">Current annual processing cost</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; color:#0d0d0d;">{{ currentCost }}</span></div>
+          <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid #f1ebe8; font-size:14px;"><span style="color:#54504d;">Productivity gain ({{ redDisplay }} time reduction)</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; color:#00B290;">- {{ efficiency }}</span></div>
+          <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid #f1ebe8; font-size:14px;"><span style="color:#54504d;">Reduced annual FTE cost</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; color:#0d0d0d;">{{ reducedCost }}</span></div>
+          <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid #f1ebe8; font-size:14px;"><span style="color:#54504d;">ClaimSense cost ({{ claimsenseCostFormula }})</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; color:#002870;">+ {{ claimsenseCost }}</span></div>
+          <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid #f1ebe8; font-size:14px;"><span style="color:#54504d;">Total cost with ClaimSense</span><span style="font-family:'Tosh A',sans-serif; font-weight:500; color:#0d0d0d;">{{ costWith }}</span></div>
+          <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0 2px; font-size:15px;"><span style="font-weight:500; color:#0d0d0d;">{{ netResultLabel }}</span><span style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:18px; color:{{ netColorDark }};">{{ netSavingsSigned }}</span></div>
+        </div>
+      </div>
+
+      <!-- Cost vs Benefit chart -->
+      <div style="background:#fff; border:1px solid #ecdcd6; border-radius:14px; padding:24px;">
+        <h3 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:18px; margin:0 0 4px; color:#0d0d0d;">Cost vs. benefit analysis</h3>
+        <p style="font-size:13px; color:#7a716d; margin:0 0 22px;">Annual cost comparison</p>
+        <!-- FUNCTIONAL-SPEC NEEDED: confirm chart behaviour/animation + keyboard/SR accessibility -->
+        <div data-chart-grid role="img" aria-label="Cost comparison chart" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px 12px; align-items:end; border-bottom:1px solid #f1ebe8; padding:24px 0 14px;">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:150px;">
+              <div style="font:500 12px 'Roboto',sans-serif; color:#54504d; margin-bottom:6px; white-space:nowrap;">{{ currentCost }}</div>
+              <div style="width:100%; max-width:64px; background:#002870; border-radius:7px 7px 0 0; transition:height .4s ease; height:{{ barCurrent }};"></div>
+            </div>
+            <div style="text-align:center; font-size:11px; color:#7a716d; margin-top:10px;">Current FTE cost</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:150px;">
+              <div style="font:500 12px 'Roboto',sans-serif; color:#54504d; margin-bottom:6px; white-space:nowrap;">{{ reducedCost }}</div>
+              <div style="width:100%; max-width:64px; background:#7788F9; border-radius:7px 7px 0 0; transition:height .4s ease; height:{{ barReduced }};"></div>
+            </div>
+            <div style="text-align:center; font-size:11px; color:#7a716d; margin-top:10px;">Reduced FTE cost</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:150px;">
+              <div style="font:500 12px 'Roboto',sans-serif; color:#54504d; margin-bottom:6px; white-space:nowrap;">{{ claimsenseCost }}</div>
+              <div style="width:100%; max-width:64px; background:#FFB600; border-radius:7px 7px 0 0; transition:height .4s ease; height:{{ barLicense }};"></div>
+            </div>
+            <div style="text-align:center; font-size:11px; color:#7a716d; margin-top:10px;">ClaimSense license</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:150px;">
+              <div style="font:500 12px 'Roboto',sans-serif; color:{{ chartNetValueColor }}; margin-bottom:6px; white-space:nowrap;">{{ chartNetValue }}</div>
+              <div style="width:100%; max-width:64px; background:{{ chartNetBarColor }}; border-radius:7px 7px 0 0; transition:height .4s ease; height:{{ barNet }};"></div>
+            </div>
+            <div style="text-align:center; font-size:11px; color:#7a716d; margin-top:10px;">{{ chartNetColLabel }}</div>
+          </div>
+        </div>
+        <div role="status" aria-label="{{ bannerAria }}" style="margin-top:18px; text-align:center; background:{{ bannerBg }}; border-radius:10px; padding:14px;"><span style="font-family:'Tosh A',sans-serif; font-weight:900; font-size:20px; color:{{ bannerColor }};">{{ bannerMain }}</span> <span style="font-size:14px; color:{{ bannerColor }};">{{ bannerSuffix }}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ESTIMATE ASSISTANCE ===================== -->
+<a id="help"></a>
+<section style="padding:72px 32px; background:#0a1b3d; color:#fff; position:relative; overflow:hidden;">
+  <img src="assets/bull/Bull_symbol_white.svg" alt="" aria-hidden="true" style="position:absolute; right:40px; bottom:40px; width:240px; opacity:0.12; pointer-events:none;">
+  <div style="max-width:820px; margin:0 auto; position:relative;" data-reveal>
+    <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(24px,3vw,36px); line-height:1.12; margin:0 0 16px;">Struggling to estimate your efficiency gains?</h2>
+    <p style="font-size:18px; line-height:1.6; color:#c3cbe0; margin:0 0 26px;">You're not alone. Calculating the right cost per case or predicting the realistic % of time reduction is tricky without benchmarks. Let's meet and help you build a qualified estimate based on what we've seen with similar insurance companies.</p>
+    <ul style="list-style:none; padding:0; margin:0 0 30px; display:flex; flex-direction:column; gap:13px;">
+      <li style="display:flex; gap:12px; font-size:15px; color:#dfe4f0;"><span style="flex:none; color:#00B290; font-size:17px;">✓</span>We'll benchmark your numbers against similar-sized insurers</li>
+      <li style="display:flex; gap:12px; font-size:15px; color:#dfe4f0;"><span style="flex:none; color:#00B290; font-size:17px;">✓</span>Get a realistic efficiency % based on your claim types</li>
+      <li style="display:flex; gap:12px; font-size:15px; color:#dfe4f0;"><span style="flex:none; color:#00B290; font-size:17px;">✓</span>Walk away with a board-ready business case in days, not weeks</li>
+    </ul>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:18px;">
+      <!-- FUNCTIONAL-SPEC NEEDED: "Let's Build Your Business case" routing (scheduler / form) -->
+      <button onClick="{{ scrollToDemo }}" style="background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:10px; padding:16px 32px; font:600 17px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Let's build your business case</button>
+      <span style="font-size:14px; color:#9aa6c8;">Free Consultation · 30-min call with our team</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<a id="demo"></a>
+<section style="padding:80px 32px; background:#FFF7F5; position:relative; overflow:hidden;">
+  <div style="max-width:680px; margin:0 auto; text-align:center; position:relative;" data-reveal>
+    <h2 style="font-family:'Tosh A',sans-serif; font-weight:500; font-size:clamp(28px,3.4vw,44px); line-height:1.08; margin:0 0 18px; color:#0d0d0d;">Ready to realize these savings?</h2>
+    <p style="font-size:18px; line-height:1.6; color:#5a514d; margin:0 0 32px;">Book a demo and let us show you how ClaimSense can transform your claims processing efficiency.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+      <button onClick="{{ scrollToDemo }}" style="background:#FF5539; color:#000; border:3px solid #FF5539; border-radius:10px; padding:16px 32px; font:600 17px 'Roboto',sans-serif; cursor:pointer;" data-cta="primary">Book a walkthrough</button>
+      <a href="ClaimSense%20Pricing.dc.html" data-cta="secondary" style="display:inline-flex; align-items:center; gap:9px; background:#fff; color:#002870; border:3px solid #d9cfca; border-radius:10px; padding:15px 30px; font:600 17px 'Roboto',sans-serif;" style-hover="border-color:#FF5539; color:#000000;">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#06122b; color:#c3cbe0; padding:64px 32px 36px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="display:grid; gap:40px;" data-footer-grid>
+      <div>
+        <img src="assets/logos/ClaimSense_logo_white.svg" alt="ClaimSense" style="height:26px; width:auto; margin-bottom:18px;">
+        <p style="font-size:14px; line-height:1.6; color:#9aa6c8; margin:0 0 22px; max-width:280px;">AI-first workflow for your claim team. Transform complex claims processing with intelligent automation.</p>
+        <div style="display:flex; align-items:center; gap:12px; padding-top:18px; border-top:1px solid #1a2c54;">
+          <img src="assets/bull/BULL_LOGO_WHITE_RGB.png" alt="Bull" style="height:26px; width:auto;">
+        </div>
+        <p style="font-size:12px; color:#7e8ab0; margin:12px 0 0;">ClaimSense is built by DataSentics, <br>part of the Bull.</p>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Product</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Features.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Features</a></li>
+          <li><a href="ClaimSense%20Pricing.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Pricing</a></li>
+          <li><a href="ClaimSense%20Use%20Cases.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Use cases</a></li>
+          <li><a href="ClaimSense%20Implementation.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Implementation</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Company</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20Our%20Story.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Our story</a></li>
+          <li><a href="ClaimSense%20Partners.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Partners</a></li>
+          <li><a href="https://careers.datasentics.com/?utm_source=slaimsense&amp;utm_medium=webfooter&amp;utm_campaign=1" target="_blank" rel="noopener noreferrer" style="color:#9aa6c8;" style-hover="color:#FF7761;">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font:500 13px 'Roboto',sans-serif; letter-spacing:0.06em; text-transform:uppercase; color:#fff; margin-bottom:16px;">Resources</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <li><a href="ClaimSense%20FAQ.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">FAQ</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Help Center</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">Documentation</a></li>
+          <li><a href="ClaimSense%20Help.dc.html" style="color:#9aa6c8;" style-hover="color:#FF7761;">API Reference</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-top:48px; padding-top:24px; border-top:1px solid #1a2c54; font-size:13px; color:#7e8ab0;">
+      <div style="display:flex; gap:22px; align-items:center;">
+        <a href="ClaimSense%20Privacy.dc.html" style="color:#9aa6c8;">Privacy Policy</a>
+        <a href="javascript: Cookiebot.renew()" style="color:#9aa6c8;">Cookie consent</a>
+        <span>© 2026 ClaimSense. All rights reserved.</span>
+      </div>
+      <span>Built with ❤ for claims teams worldwide</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+
+    // ================================================================
+    // ▶▶ CALCULATOR CONFIG — REPLACE WITH CONFIRMED VALUES FROM SOURCE
+    //    (defaults, slider ranges/steps, and licence price per claim)
+    //    Ranges are from content_business-case.md "Visible range".
+    //    Defaults/steps + €5 are INFERRED — confirm before production.
+    // ================================================================
+    this._calcConfig = {
+      annualCases:   { default: 10000, min: 500, max: 1000000, step: 500 },
+      costPerCase:   { default: 50,    min: 5,   max: 200,     step: 1 },
+      timeReduction: { default: 30,    min: 5,   max: 90,      step: 1 },
+      licensePerClaim: 5   // ▶▶ CONFIRM: fixed €5, or €3-vs-€5 by package/volume?
+    };
+
+    this.state = {
+      annualCases:   this._calcConfig.annualCases.default,
+      costPerCase:   this._calcConfig.costPerCase.default,
+      timeReduction: this._calcConfig.timeReduction.default,
+      productOpen: false
+    };
+  }
+
+  // ================================================================
+  // ▶▶ CALCULATOR FORMULA — REPLACE BODY WITH CONFIRMED LOGIC
+  //    Currently the inferred formula documented in the content file.
+  //    Returns the raw numbers; formatting/clamping handled separately.
+  // ================================================================
+  _calculate(inp) {
+    const lic = this._calcConfig.licensePerClaim;
+    const currentCost   = inp.annualCases * inp.costPerCase;
+    const efficiency    = currentCost * (inp.timeReduction / 100); // productivity gain
+    const reducedCost   = currentCost - efficiency;
+    const claimsenseCost = inp.annualCases * lic;
+    const costWith      = reducedCost + claimsenseCost;
+    const netSavings    = currentCost - costWith;
+    const roiPercent    = claimsenseCost > 0 ? (netSavings / claimsenseCost) * 100 : 0;
+    return { currentCost, efficiency, reducedCost, claimsenseCost, costWith, netSavings, roiPercent };
+  }
+
+  // ---- formatting helpers (▶▶ confirm rounding/decimals with source) ----
+  _eur(n) {
+    const r = Math.round(n);
+    const sign = r < 0 ? '-' : '';
+    return sign + '€' + Math.abs(r).toLocaleString('en-US');
+  }
+  _int(n) { return Math.round(n).toLocaleString('en-US'); }
+
+  componentDidMount() {
+    this._applyResponsive();
+    this._onResize = () => this._applyResponsive();
+    window.addEventListener('resize', this._onResize);
+    this._setupReveal();
+  }
+
+  _setupReveal() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (reduce || !els.length) return;
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.__shown = true; };
+    const belowFold = (el) => { const r = el.getBoundingClientRect(); return r.top > (window.innerHeight || 768) * 0.92; };
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        el.style.transition = 'opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)';
+        if (belowFold(el)) { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; }
+        else { el.__shown = true; }
+      });
+      const check = () => els.forEach((el) => { if (!el.__shown && !belowFold(el)) reveal(el); });
+      this._onScroll = check;
+      window.addEventListener('scroll', check, { passive: true });
+      this._revealSafety = setTimeout(() => els.forEach((el) => { if (!el.__shown) reveal(el); }), 2200);
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }); }, { threshold: 0.04 });
+        els.forEach((el) => { if (!el.__shown) io.observe(el); });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._revealSafety);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
+  }
+
+  _setupMobileMenu() {
+    if (this._mmInit) return;
+    const burger = document.querySelector('[data-nav-burger]');
+    const menu = document.querySelector('[data-mobile-menu]');
+    if (!burger || !menu) return;
+    this._mmInit = true;
+    const icon = burger.querySelector('[data-burger-icon] path');
+    const PATH_OPEN = 'M3 6h18M3 12h18M3 18h18';
+    const PATH_CLOSE = 'M5 5l14 14M19 5L5 19';
+    const setOpen = (open) => {
+      menu.style.display = open ? 'block' : 'none';
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (icon) icon.setAttribute('d', open ? PATH_CLOSE : PATH_OPEN);
+    };
+    burger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(menu.style.display !== 'block'); });
+    menu.addEventListener('click', (e) => e.stopPropagation());
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  _applyResponsive() {
+    const w = window.innerWidth;
+    const cg = document.querySelector('[data-calc-grid]');
+    if (cg) cg.style.gridTemplateColumns = w >= 940 ? '0.9fr 1.1fr' : 'minmax(0,1fr)';
+    const fg = document.querySelector('[data-footer-grid]');
+    if (fg) fg.style.gridTemplateColumns = w >= 860 ? '1.5fr 1fr 1fr 1fr' : (w >= 560 ? '1fr 1fr' : 'minmax(0,1fr)');
+    const nav = document.querySelector('[data-nav]');
+    if (nav) nav.style.display = w >= 900 ? 'flex' : 'none';
+    const badge = document.querySelector('[data-trust-badge]');
+    const divider = document.querySelector('[data-nav-divider]');
+    if (badge) badge.style.display = w >= 1040 ? 'flex' : 'none';
+    if (divider) divider.style.display = w >= 1040 ? 'block' : 'none';
+    const burger = document.querySelector('[data-nav-burger]');
+    const navCta = document.querySelector('[data-nav-cta]');
+    const mobileNav = w < 900;
+    if (burger) burger.style.display = mobileNav ? 'flex' : 'none';
+    if (navCta) navCta.style.display = mobileNav ? 'none' : '';
+    const mobileBadge = document.querySelector('[data-mobile-badge]');
+    if (mobileBadge) mobileBadge.style.display = (mobileNav && w >= 340) ? 'flex' : 'none';
+    if (!mobileNav) { const mm = document.querySelector('[data-mobile-menu]'); if (mm) mm.style.display = 'none'; if (burger) burger.setAttribute('aria-expanded', 'false'); }
+    this._setupMobileMenu();
+  }
+
+  _scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) { const y = el.getBoundingClientRect().top + window.pageYOffset - 72; window.scrollTo({ top: y, behavior: 'smooth' }); }
+  }
+
+  renderVals() {
+    const cfg = this._calcConfig;
+    const inp = { annualCases: this.state.annualCases, costPerCase: this.state.costPerCase, timeReduction: this.state.timeReduction };
+    const r = this._calculate(inp);
+
+    // Chart bar heights relative to the largest positive magnitude
+    const maxBar = Math.max(r.currentCost, r.reducedCost, r.claimsenseCost, Math.abs(r.netSavings), 1);
+    const h = (v) => Math.max(2, (Math.max(v, 0) / maxBar) * 100) + '%';
+    const hMag = (v) => Math.max(2, (Math.abs(v) / maxBar) * 100) + '%';
+
+    // Shared financial UI state derived from netAnnualSavings
+    const fin = r.netSavings > 0 ? 'profit' : (r.netSavings < 0 ? 'loss' : 'breakEven');
+    const absNetStr = this._eur(Math.abs(r.netSavings));
+    const roiRounded = Math.round(r.roiPercent);
+
+    return {
+      // input range attrs
+      casesMin: cfg.annualCases.min, casesMax: cfg.annualCases.max, casesStep: cfg.annualCases.step, casesVal: this.state.annualCases,
+      costMin: cfg.costPerCase.min, costMax: cfg.costPerCase.max, costStep: cfg.costPerCase.step, costVal: this.state.costPerCase,
+      redMin: cfg.timeReduction.min, redMax: cfg.timeReduction.max, redStep: cfg.timeReduction.step, redVal: this.state.timeReduction,
+      // input displays
+      casesDisplay: this._int(this.state.annualCases),
+      costDisplay: '€' + this._int(this.state.costPerCase),
+      redDisplay: this.state.timeReduction + '%',
+      // handlers
+      onCases: (e) => this.setState({ annualCases: Number(e.target.value) }),
+      onCost: (e) => this.setState({ costPerCase: Number(e.target.value) }),
+      onRed: (e) => this.setState({ timeReduction: Number(e.target.value) }),
+      // outputs
+      // Net result — absolute value + state-aware label for summary cards/banner
+      netSavings: this._eur(r.netSavings),
+      netSavingsSigned: this._eur(r.netSavings),
+      netResultValue: fin === 'breakEven' ? '€0' : absNetStr,
+      netResultLabel: fin === 'profit' ? 'Net annual savings' : (fin === 'loss' ? 'Net annual loss' : 'Break-even'),
+      netColor: fin === 'profit' ? '#00B290' : (fin === 'loss' ? '#FF9280' : '#c9d2e8'),
+      netColorDark: fin === 'profit' ? '#00765f' : (fin === 'loss' ? '#c0392b' : '#54504d'),
+      // ROI — +/- sign + green/red/neutral
+      roi: roiRounded > 0 ? ('+' + roiRounded + '%') : (roiRounded + '%'),
+      roiColor: roiRounded > 0 ? '#00B290' : (roiRounded < 0 ? '#c0392b' : '#54504d'),
+      // Cost-vs-benefit chart net bar (magnitude-based, state-aware)
+      chartNetBarColor: fin === 'profit' ? '#00B290' : (fin === 'loss' ? '#c0392b' : '#9aa6c8'),
+      chartNetValueColor: fin === 'profit' ? '#00B290' : (fin === 'loss' ? '#c0392b' : '#7a716d'),
+      chartNetValue: fin === 'profit' ? absNetStr : (fin === 'loss' ? (absNetStr + ' loss') : 'Break-even'),
+      chartNetColLabel: fin === 'profit' ? 'Net savings' : (fin === 'loss' ? 'Net loss' : 'Break-even'),
+      // Bottom summary banner
+      bannerBg: fin === 'profit' ? '#dcf5ee' : (fin === 'loss' ? '#fdecea' : '#eef1f6'),
+      bannerColor: fin === 'profit' ? '#00765f' : (fin === 'loss' ? '#c0392b' : '#3a4a68'),
+      bannerMain: fin === 'breakEven' ? '€0' : absNetStr,
+      bannerSuffix: fin === 'profit' ? 'saved' : (fin === 'loss' ? 'Net loss' : 'net impact'),
+      bannerAria: fin === 'profit' ? ('Financial result: ' + absNetStr + ' saved') : (fin === 'loss' ? ('Financial result: ' + absNetStr + ' net loss') : 'Financial result: break-even'),
+      efficiency: this._eur(r.efficiency),
+      claimsenseCost: this._eur(r.claimsenseCost),
+      claimsenseCostFormula: this._int(this.state.annualCases) + ' cases × €' + cfg.licensePerClaim,
+      currentCost: this._eur(r.currentCost),
+      reducedCost: this._eur(r.reducedCost),
+      costWith: this._eur(r.costWith),
+      // chart bars
+      barCurrent: h(r.currentCost), barReduced: h(r.reducedCost), barLicense: h(r.claimsenseCost), barNet: hMag(r.netSavings),
+      // nav / scroll
+      scrollToDemo: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('demo'); },
+      scrollToHelp: (e) => { if (e && e.preventDefault) e.preventDefault(); this._scrollTo('help'); },
+      productOpen: this.state.productOpen,
+      chevronRotate: this.state.productOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      openProduct: () => this.setState({ productOpen: true }),
+      closeProduct: () => this.setState({ productOpen: false }),
+      toggleProduct: () => this.setState((s) => ({ productOpen: !s.productOpen }))
+    };
+  }
+}
+</script>
+</body>
+</html>
